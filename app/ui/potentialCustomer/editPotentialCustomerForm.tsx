@@ -106,7 +106,7 @@ export default function EditPotentialCustomerForm({
         <div className="flex flex-col gap-2">
           <div className="w-full">
             <input
-              className="w-full border border-gray-200 rounded-md"
+              className="w-full border border-gray-200 rounded-md text-ellipsis"
               onChange={handleClientNameChange}
               value={createClient?.name}
             />
