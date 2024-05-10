@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+//@ts-nocheck
+import { Clients, Customer } from "./definitions";
+
 export const formatCurrency = (amount: number) => {
   return amount.toLocaleString("es-VE", {
     style: "currency",
@@ -59,57 +63,31 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   ];
 };
 
-export function getBsPrice(buyPriceDollar: number, currentDollarPrice: number) {
-  return buyPriceDollar * currentDollarPrice;
-}
-export function getDollarPrice(pvp: number, currentDollarPrice: number) {
-  const amount = pvp / currentDollarPrice;
-  const format = formatDollarCurrency(amount);
-  return format;
-}
-
-export function getPvpPrice(
-  buyPriceDollar: number,
-  currentDollarPrice: number,
-  quantity: number
-) {
-  // const pvp = Number(
-  //   ((buyPriceDollar * currentDollarPrice) / quantity).toFixed(2)
-  // );
-  // const format = formatCurrency(pvp);
-  return Number(((buyPriceDollar * currentDollarPrice) / quantity).toFixed(2));
-}
-
-export function getSellPrice(
-  buyPriceDollar: number,
-  currentDollarPrice: number,
-  quantity: number,
-  revenue: number
-) {
-  const pvp = getPvpPrice(buyPriceDollar, currentDollarPrice, quantity);
-  const revenueAmount = pvp * revenue;
-  const total = Number((revenueAmount + pvp).toFixed(2));
-  // const format = formatCurrency(total);
-  // console.log(format);
-  // console.log(revenueAmount);
-  // console.log(pvp);
-  // console.log((buyPriceDollar * currentDollarPrice) / quantity);
-  return total;
-}
-
 export function ramdomSecureId() {
   const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
   return uint32.toString(16);
 }
 
-// export function debounce(func: Function, delay: number) {
-//   let timeoutId: NodeJS.Timeout;
+export function sumSubTotalPotentialCustomer(array: Customer[]) {
+  const amount = array.reduce(
+    (acc, curr) => {
+      if (curr.paid_type === "monthly") {
+        acc.monthly += Number(curr.paid_amount);
+      } else {
+        acc.punctual += Number(curr.paid_amount);
+      }
+      return acc;
+    },
+    { monthly: 0, punctual: 0 }
+  );
+  console.log(array);
+  console.log(amount);
+  return amount;
+}
 
-//   return function (...args: any[]) {
-//     clearTimeout(timeoutId);
-
-//     timeoutId = setTimeout(() => {
-//       func.apply(this, args);
-//     }, delay);
-//   };
-// }
+export function sumSubTotalClients(client: Clients, agencyName: string) {
+  const amount = client[agencyName].reduce((acc, curr) => {
+    return acc + Number(curr.monthly_payment);
+  }, 0);
+  return amount;
+}

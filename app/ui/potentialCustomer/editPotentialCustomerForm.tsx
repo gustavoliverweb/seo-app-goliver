@@ -30,8 +30,7 @@ export default function EditPotentialCustomerForm({
     punctual: "Puntual",
   };
 
-  const { isSendForm, setSendForm, setCustomersTotal, customersTotal } =
-    useStore();
+  const { isSendForm, setSendForm, setCustomers, customersData } = useStore();
 
   const [createClient, setCreateClient] = useState(customers);
 
@@ -71,15 +70,10 @@ export default function EditPotentialCustomerForm({
   };
 
   const handleDeletePotentialCustomer = () => {
-    console.log("Delete potential customer edit form");
-    // setCustomers(createClient);
-    // console.log(customers);
+    console.log("Delete potential customer edit form", customers);
     setShowModal(true);
     setPotentialCustomerId(customers.id);
   };
-  // useEffect(() => {
-  //   setCustomersTotal(createClient);
-  // }, []);
 
   useEffect(() => {
     if (isSendForm) {
@@ -88,11 +82,19 @@ export default function EditPotentialCustomerForm({
         setSendForm(false);
         createPotentialCustomer(createClient);
         setCreateClient(createClient);
-        // const isObjectExist = customersTotal.find(
-        //   (data) => data.id === createClient.id
-        // );
-        // console.log(isObjectExist);
-        setCustomersTotal(createClient);
+        const isObjectExist = customersData.find(
+          (data) => data.id === createClient.id
+        );
+        console.log(isObjectExist);
+        const newCustomersData = customersData.map((customer) => {
+          if (customer.id === isObjectExist?.id) {
+            return createClient;
+          } else {
+            return customer;
+          }
+        });
+        console.log(newCustomersData);
+        setCustomers(newCustomersData);
       }, 500);
       return () => clearTimeout(delaySendData);
     }

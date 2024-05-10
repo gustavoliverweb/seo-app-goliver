@@ -1,13 +1,31 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
+//@ts-nocheck
 "use client";
 import { useEffect, useState } from "react";
 import { ClientsCard } from "./clientsCard";
 import { Clients } from "@/app/lib/definitions";
-// import { useFormState } from "react-dom";
 import { deleteClient } from "@/app/lib/actions";
 import { useSearchParams, useRouter } from "next/navigation";
 import ConfirmModal from "../confirmModal";
+import { sumSubTotalClients } from "@/app/lib/utils";
+
+interface Client {
+  id: string;
+  agency_name: string;
+  name: string;
+  monthly_payment: string;
+  color_card: string;
+  agency_id: string;
+  logo_url: string;
+}
+
+interface Agency {
+  [agencyName: string]: Client[]; // Key is the agency name, value is an array of clients
+}
+
+type Data = {
+  [agencyName: string]: Agency; // Key is the agency name, value is an agency object
+};
 
 export default function ClientsWrapper({
   clients = [],
@@ -40,7 +58,7 @@ export default function ClientsWrapper({
 
   useEffect(() => {
     const transformData = () => {
-      const newData = clients.reduce((acc, curr) => {
+      const newData: Data = clients.reduce((acc, curr) => {
         const { agency_name } = curr;
         if (!acc[agency_name]) {
           acc[agency_name] = [];
@@ -48,11 +66,13 @@ export default function ClientsWrapper({
         acc[agency_name].push(curr);
         return acc;
       }, {});
+      console.log(newData);
       const arrayOfObjects = Object.entries(newData).map(([key, value]) => {
         return {
           [key]: value,
         };
       });
+      console.log(arrayOfObjects);
       const totalClientPerPage = clientsPerPage(currentPage, arrayOfObjects);
       console.log(totalClientPerPage);
       setTotalClients(arrayOfObjects);
@@ -61,12 +81,12 @@ export default function ClientsWrapper({
     transformData();
   }, [currentPage, query]);
 
-  const clientsPerPage = (page, array) => {
+  const clientsPerPage = (page: number, array) => {
     const starIndex = (page - 1) * 3;
     const endIndex = page * 3;
     return array.slice(starIndex, endIndex);
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(clientData);
     const result = await deleteClientWithId();
@@ -96,7 +116,7 @@ export default function ClientsWrapper({
                 <div className="flex justify-between">
                   <h3 className="font-semibold text-[20px]">{agencyName}</h3>
                   <div className="font-semibold">
-                    {sumSubTotal(client, agencyName)} $
+                    {sumSubTotalClients(client, agencyName)} $
                   </div>
                 </div>
                 <div className="bg-white grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-rows-[auto,_auto] gap-4  mt-6">
@@ -118,7 +138,7 @@ export default function ClientsWrapper({
         <div>
           {totalClients.length > 0 &&
             totalClients.reduce((acc, curr) => {
-              return acc + sumSubTotal(curr, Object.keys(curr)[0]);
+              return acc + sumSubTotalClients(curr, Object.keys(curr)[0]);
             }, 0)}
           $
         </div>
@@ -133,11 +153,4 @@ export default function ClientsWrapper({
       </ConfirmModal>
     </>
   );
-}
-
-function sumSubTotal(client, agencyName) {
-  const amount = client[agencyName].reduce((acc, curr) => {
-    return acc + Number(curr.monthly_payment);
-  }, 0);
-  return amount;
 }

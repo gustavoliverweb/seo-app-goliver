@@ -34,7 +34,7 @@ export default function CreatePotentialCustomerForm() {
     isSendForm,
     setSendForm,
     setShowCreateClient,
-    customerss,
+    customersData,
   } = useStore();
   const [createClient, setCreateClient] = useState(initialState);
 
@@ -84,11 +84,10 @@ export default function CreatePotentialCustomerForm() {
           ...createClient,
           id: ramdomId,
         };
-        console.log("customerData", customerWithIdObject);
         setSendForm(false);
         createPotentialCustomer(customerWithIdObject);
         setShowCreateClient(false);
-        setCustomers([...customerss, customerWithIdObject]);
+        setCustomers([...customersData, customerWithIdObject]);
       }, 500);
       return () => clearTimeout(delaySendData);
     }
@@ -134,11 +133,7 @@ export default function CreatePotentialCustomerForm() {
                 >
                   <option>Estado</option>
                   {stateClient.map((state) => (
-                    <option
-                      key={state.status}
-                      value={state.status}
-                      // selected={state.status === createClient.status}
-                    >
+                    <option key={state.status} value={state.status}>
                       {state.label}
                     </option>
                   ))}
@@ -157,11 +152,7 @@ export default function CreatePotentialCustomerForm() {
                 >
                   <option>Pago</option>
                   {paidTypeClient.map((type) => (
-                    <option
-                      key={type.type}
-                      value={type.type}
-                      // selected={type.type === createClient.paid_type}
-                    >
+                    <option key={type.type} value={type.type}>
                       {type.label}
                     </option>
                   ))}

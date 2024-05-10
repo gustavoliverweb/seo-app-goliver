@@ -14,17 +14,17 @@ export function PotentialCustomerCard({ customers }: { customers: Customer }) {
     null,
     customerId
   );
-  const { setCustomers, customerss } = useStore();
+  const { setCustomers, customersData } = useStore();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const deleteCustomer = customerss.filter(
-    //   (customer) => customer.id !== customerId
-    // );
-
-    console.log(customers);
+    const deleteCustomer = customersData.filter(
+      (customer) => customer.id !== customerId
+    );
+    console.log(deleteCustomer);
+    // console.log(customerId);
     await deletePotentialCustomerWithId();
-    setCustomers([]);
+    setCustomers(deleteCustomer);
 
     setShowModal(false);
   };

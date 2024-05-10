@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-//@ts-nocheck
 "use client";
 import { Customer } from "@/app/lib/definitions";
 import { Button } from "../button";
@@ -7,9 +6,11 @@ import Pagination from "../pagination";
 import { PotentialCustomerCard } from "./potentialCustomerCard";
 import { PotentialCustomerCardDefault } from "./potentialCustomerCardDefault";
 import { create } from "zustand";
+import { useEffect } from "react";
+import { sumSubTotalPotentialCustomer } from "@/app/lib/utils";
 
 type Store = {
-  customerss: Customer[];
+  customersData: Customer[];
   isSendForm: boolean;
   showCreateClient: boolean;
   setSendForm: (sendForm: boolean) => void;
@@ -18,44 +19,18 @@ type Store = {
 };
 
 export const useStore = create<Store>()((set) => ({
-  customerss: [],
-  customersTotal: [],
-  idsToDelete: [],
+  customersData: [],
+  // idsToDelete: [],
   isSendForm: false,
   showCreateClient: false,
   setSendForm: (sendForm) => set({ isSendForm: sendForm }),
   setShowCreateClient: (showCreateClient) =>
     set({ showCreateClient: showCreateClient }),
-  // setCustomersTotal: (customer) =>
-  //   set((state) => {
-  //     const indexCustomerExist = state.customersTotal.findIndex(
-  //       (customerState) => customerState.id === customer.id
-  //     );
-  //     if (indexCustomerExist !== -1) {
-  //       return state.customersTotal.splice(indexCustomerExist, 1, customer);
-  //     } else {
-  //       return { customersTotal: [...state.customersTotal, customer] };
-  //     }
-  //   }),
-  setCustomersTotal: (customer) =>
-    set((state) => {
-      const existingCustomer = state.customersTotal.find(
-        (customerState) => customerState.id === customer.id
-      );
-      return {
-        customersTotal: existingCustomer
-          ? state.customersTotal.map((c) =>
-              c.id === customer.id ? customer : c
-            )
-          : [...state.customersTotal, customer],
-      };
-    }),
-  setCustomers: (customer) => set(() => ({ customerss: customer })),
-  // setCustomersTotal: (customer) => set(() => ({ customersTotal: customer })),
-  setIdsToDelete: (id) =>
-    set((state) => ({ idsToDelete: [...state.idsToDelete, id] })),
-  arrayShow: [],
-  setArrayShow: (array) => set({ arrayShow: array }),
+  setCustomers: (customer) => set(() => ({ customersData: customer })),
+  // setIdsToDelete: (id) =>
+  //   set((state) => ({ idsToDelete: [...state.idsToDelete, id] })),
+  // arrayShow: [],
+  // setArrayShow: (array) => set({ arrayShow: array }),
 }));
 
 export default function PotentialCustomerWrapper({
@@ -67,13 +42,15 @@ export default function PotentialCustomerWrapper({
   pages: number;
   query: string;
 }) {
-  const { showCreateClient, setShowCreateClient, customerss, customersTotal } =
+  const { showCreateClient, setShowCreateClient, customersData, setCustomers } =
     useStore();
-  const uiArray = Object.assign([], customerss);
+  const uiArray = Object.assign([], customersData);
   const reverseArray = uiArray.reverse();
-  const arrayDbToSum = customers;
-  const arrayLocalToSum = customersTotal;
-  console.log(arrayDbToSum, arrayLocalToSum);
+
+  useEffect(() => {
+    console.log(customers);
+    setCustomers(customers);
+  }, []);
 
   if (query && customers.length === 0) {
     return (
@@ -129,22 +106,27 @@ export default function PotentialCustomerWrapper({
         >
           <div className="flex flex-col gap-4">
             {showCreateClient ? <PotentialCustomerCardDefault /> : null}
-            {reverseArray.length > 0
-              ? [...reverseArray, ...customers].map((customer: Customer) => (
-                  <PotentialCustomerCard
-                    key={customer.id}
-                    customers={customer}
-                  />
-                ))
-              : customers.map((customer: Customer) => (
-                  <PotentialCustomerCard
-                    key={customer.id}
-                    customers={customer}
-                  />
-                ))}
+
+            {customersData.length > 0 &&
+              customersData.map((customer: Customer) => (
+                <PotentialCustomerCard key={customer.id} customers={customer} />
+              ))}
           </div>
           <div className="relative h-max overflow-auto mt-6 bg-white p-2  rounded-2xl w-full">
-            {/* <div>Total: {sumSubTotal(arrayToSum)}</div> */}
+            <div className="">
+              <div className="font-semibold text-[24px]">Total:</div>
+              <div className="font-semibold text-[18px] mt-2">
+                Mensual:{" "}
+                {customersData.length > 0 &&
+                  sumSubTotalPotentialCustomer(customersData).monthly}
+                $
+                <br />
+                Puntual:{" "}
+                {customersData.length > 0 &&
+                  sumSubTotalPotentialCustomer(customersData).punctual}
+                $
+              </div>
+            </div>
             <div className="mt-5 flex w-full ">
               <Pagination totalPages={pages} />
             </div>
@@ -155,9 +137,7 @@ export default function PotentialCustomerWrapper({
   );
 }
 
-function sumSubTotal(array) {
-  const amount = array.reduce((acc, curr) => {
-    return acc + Number(curr.paid_amount);
-  }, 0);
-  return amount;
-}
+// const paymentType = {
+//   monthly: 0,
+//   punctual: 0
+// }

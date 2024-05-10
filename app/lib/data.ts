@@ -123,7 +123,7 @@ export async function fetchReportsPages() {
 export async function fetchFilteredReports(query: string, currentPage: number) {
   noStore();
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-  console.log("query", `${`%${query}%`}`);
+  // console.log("query", `${`%${query}%`}`);
   try {
     const reports = await sql<ReportsCardType>`
     SELECT 
@@ -172,7 +172,7 @@ export async function fetchFilteredClients(query: string) {
     agency_client.agency_name ILIKE ${`%${query}%`}
 
     `;
-    console.log(clients.rows);
+    // console.log(clients.rows);
     return clients.rows;
   } catch (error) {
     console.error("Database Error:", error);
@@ -188,7 +188,7 @@ export async function fetchClientsPages(query: string) {
     WHERE
     agency_client.agency_name ILIKE ${`%${query}%`}
   `;
-    console.log(count.rows);
+    // console.log(count.rows);
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
