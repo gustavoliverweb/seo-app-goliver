@@ -17,7 +17,7 @@ export default async function WrapperAgency({
       </div>
     );
   }
-  console.log(agencys);
+  // console.log(agencys);
   return (
     <div className="bg-white grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-rows-[auto,_auto] gap-4 mt-6">
       {agencys &&

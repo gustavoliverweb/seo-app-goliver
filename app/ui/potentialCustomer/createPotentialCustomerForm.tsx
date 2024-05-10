@@ -87,7 +87,7 @@ export default function CreatePotentialCustomerForm() {
         setSendForm(false);
         createPotentialCustomer(customerWithIdObject);
         setShowCreateClient(false);
-        setCustomers([...customersData, customerWithIdObject]);
+        setCustomers([customerWithIdObject, ...customersData]);
       }, 500);
       return () => clearTimeout(delaySendData);
     }

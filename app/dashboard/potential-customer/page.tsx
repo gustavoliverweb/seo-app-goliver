@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+//@ts-nocheck
 import PotentialCustomerWrapper from "@/app/ui/potentialCustomer/potentialCustomerWrapper";
 // import Pagination from "@/app/ui/pagination";
 import {
-  fetchFilteredPotentialCustomers,
+  // fetchFilteredPotentialCustomers,
+  fetchPotentialCustomers,
   fetchPotentialCustomersPages,
 } from "@/app/lib/data";
 //server component
@@ -12,7 +15,7 @@ export default async function Page({
 }) {
   const currentPage = Number(searchParams?.page) || 1;
   const query = searchParams?.query || "";
-  const customers = await fetchFilteredPotentialCustomers(query, currentPage);
+  const customers = await fetchPotentialCustomers();
   const potentialCustomersPages = await fetchPotentialCustomersPages();
   console.log(customers);
   return (
@@ -20,6 +23,7 @@ export default async function Page({
       customers={customers}
       pages={potentialCustomersPages}
       query={query}
+      currentPage={currentPage}
     />
   );
 }

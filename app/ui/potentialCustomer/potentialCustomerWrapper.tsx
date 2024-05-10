@@ -2,12 +2,15 @@
 "use client";
 import { Customer } from "@/app/lib/definitions";
 import { Button } from "../button";
-import Pagination from "../pagination";
+// import Pagination from "../pagination";
 import { PotentialCustomerCard } from "./potentialCustomerCard";
 import { PotentialCustomerCardDefault } from "./potentialCustomerCardDefault";
 import { create } from "zustand";
 import { useEffect } from "react";
-import { sumSubTotalPotentialCustomer } from "@/app/lib/utils";
+import {
+  sumSubTotalPotentialCustomer,
+  sumTotalPotentialCustomer,
+} from "@/app/lib/utils";
 
 type Store = {
   customersData: Customer[];
@@ -35,22 +38,24 @@ export const useStore = create<Store>()((set) => ({
 
 export default function PotentialCustomerWrapper({
   customers = [],
-  pages,
+  // pages,
   query,
+  currentPage,
 }: {
   customers: Customer[];
   pages: number;
   query: string;
+  currentPage: number;
 }) {
   const { showCreateClient, setShowCreateClient, customersData, setCustomers } =
     useStore();
   const uiArray = Object.assign([], customersData);
   const reverseArray = uiArray.reverse();
-
+  console.log(customersData);
   useEffect(() => {
     console.log(customers);
     setCustomers(customers);
-  }, []);
+  }, [currentPage]);
 
   if (query && customers.length === 0) {
     return (
@@ -113,22 +118,29 @@ export default function PotentialCustomerWrapper({
               ))}
           </div>
           <div className="relative h-max overflow-auto mt-6 bg-white p-2  rounded-2xl w-full">
-            <div className="">
-              <div className="font-semibold text-[24px]">Total:</div>
-              <div className="font-semibold text-[18px] mt-2">
-                Mensual:{" "}
-                {customersData.length > 0 &&
-                  sumSubTotalPotentialCustomer(customersData).monthly}
-                $
-                <br />
-                Puntual:{" "}
-                {customersData.length > 0 &&
-                  sumSubTotalPotentialCustomer(customersData).punctual}
-                $
+            <div className="flex justify-between">
+              <div>
+                <div className="font-semibold text-[24px]">Total:</div>
+                <div>
+                  <div className="font-semibold text-[18px] ">
+                    Mensual:{" "}
+                    {customersData.length > 0 &&
+                      sumSubTotalPotentialCustomer(customersData).monthly}
+                    $
+                    <br />
+                    Puntual:{" "}
+                    {customersData.length > 0 &&
+                      sumSubTotalPotentialCustomer(customersData).punctual}
+                    $
+                  </div>
+                </div>
+              </div>
+              <div className="font-semibold text-[24px]">
+                {sumTotalPotentialCustomer(customersData)}$
               </div>
             </div>
             <div className="mt-5 flex w-full ">
-              <Pagination totalPages={pages} />
+              {/* <Pagination totalPages={"pages"} /> */}
             </div>
           </div>
         </div>
@@ -136,8 +148,3 @@ export default function PotentialCustomerWrapper({
     </div>
   );
 }
-
-// const paymentType = {
-//   monthly: 0,
-//   punctual: 0
-// }

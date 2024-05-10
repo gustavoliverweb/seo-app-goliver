@@ -214,7 +214,7 @@ export async function fetchFilteredPotentialCustomers(
     LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
    
     `;
-    // console.log(customers.rows);
+    console.log("items", customers.rows);
     return customers.rows;
   } catch (error) {
     console.error("Database Error:", error);
@@ -230,6 +230,7 @@ export async function fetchPotentialCustomersPages() {
   `;
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    // console.log(totalPages);
     return totalPages;
   } catch (error) {
     console.error("Database Error:", error);
@@ -240,7 +241,7 @@ export async function fetchPotentialCustomersPages() {
 export async function fetchPotentialCustomers() {
   noStore();
   try {
-    const data = await sql`
+    const data = await sql<Customer>`
       SELECT 
        * 
       FROM potential_customer
