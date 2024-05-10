@@ -111,8 +111,10 @@ export default function Page({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     if (data) {
-      console.log("data", data);
-      if (Object.keys(data).length > 0) setIsloading(false);
+      if (Object.keys(data).length > 0) {
+        console.log("data", data);
+        setIsloading(false);
+      }
     }
   }, [data]);
 
