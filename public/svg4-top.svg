@@ -1,0 +1,13 @@
+<Svg width="826" height="479" viewBox="0 0 826 479" fill="none" >
+<G clip-path="url(#clip0_254_181)">
+<Rect width="826" height="479" fill="white"/>
+<Path d="M826 0H0V479H826V0Z" fill="#393938"/>
+<Path d="M413 733C553.28 733 667 619.28 667 479C667 338.72 553.28 225 413 225C272.72 225 159 338.72 159 479C159 619.28 272.72 733 413 733Z" fill="white"/>
+<Path d="M413 579C468.228 579 513 534.228 513 479C513 423.772 468.228 379 413 379C357.772 379 313 423.772 313 479C313 534.228 357.772 579 413 579Z" fill="#393938"/>
+</G>
+<Defs>
+<ClipPath id="clip0_254_181">
+<Rect width="826" height="479" fill="white"/>
+</ClipPath>
+</Defs>
+</Svg>

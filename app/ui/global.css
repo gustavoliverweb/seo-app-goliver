@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.render-pdf {
+  height: calc(100vh - 108px);
+}
+
+.form-input:focus {
+  box-shadow: 0 0 0 0 transparent;
+  outline: none;
+  outline-offset: 0px;
+  outline-width: 0px;
+}
+/* [type="radio"]:not(:checked) {
+  background-color: yellow;
+}
+[type="radio"]:checked {
+  background-color: #794bd8;
+} */
+
+.loader {
+  width: 48px;
+  height: 48px;
+}
+
+.loader-send-mail {
+  width: 32px;
+  height: 32px;
+}
+
+.loader,
+.loader-send-mail {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader-send-mail::after,
+.loader-send-mail::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #794bd8;
+  width: 4px;
+  height: 4px;
+  transform: translate(150%, 150%);
+  border-radius: 50%;
+}
+.loader::after,
+.loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #794bd8;
+  width: 6px;
+  height: 6px;
+  transform: translate(150%, 150%);
+  border-radius: 50%;
+}
+.loader::before,
+.loader-send-mail::before {
+  left: auto;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  transform: translate(-150%, -150%);
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+iframe {
+  width: 100%;
+  height: calc(100vh - 108px);
+}
+
+.empty-avatar {
+  border: 1px solid rgb(229 231 235);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}

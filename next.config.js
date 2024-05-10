@@ -1,0 +1,40 @@
+/** @type {import('next').NextConfig} */
+
+const withPWA = require("@ducanh2912/next-pwa").default({
+  dest: "public",
+  disable: false,
+  cacheOnFrontendNav: true,
+  aggressiveFrontEndNavCaching: true,
+  cacheStartUrl: true,
+  dynamicStartUrl: true,
+  dynamicStartUrlRedirect: true,
+  reloadOnOnline: true,
+  swcMinify: true,
+  workboxOptions: {
+    disableDevLogs: true,
+  },
+});
+
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "v2jutiidzalmp6iu.public.blob.vercel-storage.com",
+        port: "",
+      },
+    ],
+    domains: ["res.cloudinary.com"],
+  },
+  experimental: {
+    // …
+    serverComponentsExternalPackages: ["@react-pdf/renderer"],
+    missingSuspenseWithCSRBailout: false,
+  },
+  env: {
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: "dxjuhqvt6",
+    NEXT_PUBLIC_CLOUDINARY_PRESET_NAME: "im5rh9qa",
+  },
+};
+
+module.exports = nextConfig;
