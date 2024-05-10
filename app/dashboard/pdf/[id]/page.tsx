@@ -60,13 +60,14 @@ export default function Page({ params }: { params: { id: string } }) {
         semrush: [] as string[],
       };
       const reportName = report?.name?.trim().replace(" ", "");
+      const whitespaceRemoved = report?.name?.replace(/\s/g, "");
       const agencyName = report?.select_template?.trim().replace(" ", "");
-      // console.log(reportName, agencyName);
+      console.log(reportName);
       const resLogosImages = await fetch(
         `/api/getLogoImages?agency=${agencyName}`
       );
       const resReportsImages = await fetch(
-        `/api/getAllImages?report=${reportName}`
+        `/api/getAllImages?report=${whitespaceRemoved}`
       );
       const allImages = Promise.all([resLogosImages, resReportsImages]);
       const result = await allImages;

@@ -11,11 +11,11 @@ export function AuditCard({ folderPath }: { folderPath: string }) {
   const [loading, setIsLoading] = useState<boolean>(true);
   const [loadingUploadFile, setIsLoadingUploadFile] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-
+  const whitespaceRemoved = folderPath.replace(/\s/g, "");
   useEffect(() => {
     async function fetchAuditImages() {
       const res = await fetch(
-        `/api/getUploads?report=${folderPath}&type=tecnical`
+        `/api/getUploads?report=${whitespaceRemoved}&type=tecnical`
       );
       const result = await res.json();
       if (result?.resources.length > 0) {
@@ -40,7 +40,7 @@ export function AuditCard({ folderPath }: { folderPath: string }) {
         const formData = new FormData();
         formData.append("file", file);
         const sendFileToConvert = await fetch(
-          `/api/convertPdfToImageTecnical?agency=${folderPath}/tecnical`,
+          `/api/convertPdfToImageTecnical?agency=${whitespaceRemoved}/tecnical`,
           {
             method: "POST",
             body: formData,

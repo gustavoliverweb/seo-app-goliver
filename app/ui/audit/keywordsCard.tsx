@@ -11,11 +11,12 @@ export function KeywordsCard({ folderPath }: { folderPath: string }) {
   const [loading, setIsLoading] = useState<boolean>(true);
   const [loadingUploadFile, setIsLoadingUploadFile] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const whitespaceRemoved = folderPath.replace(/\s/g, "");
 
   useEffect(() => {
     async function fetchAuditImages() {
       const res = await fetch(
-        `/api/getUploads?report=${folderPath}&type=keywords`
+        `/api/getUploads?report=${whitespaceRemoved}&type=keywords`
       );
       const result = await res.json();
       if (result?.resources.length > 0) {
@@ -31,14 +32,14 @@ export function KeywordsCard({ folderPath }: { folderPath: string }) {
   const onFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsLoadingUploadFile(true);
     const fileList = e.target.files;
-    console.log(fileList);
+
     if (fileList) {
       if (fileList?.length > 0) {
         const file = fileList[0];
         const formData = new FormData();
         formData.append("file", file);
         const sendFileToConvert = await fetch(
-          `/api/convertPdfToImageKeywords?agency=${folderPath}/keywords`,
+          `/api/convertPdfToImageKeywords?agency=${whitespaceRemoved}/keywords`,
           {
             method: "POST",
             body: formData,

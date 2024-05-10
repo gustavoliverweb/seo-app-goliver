@@ -10,11 +10,11 @@ export function SemrushCard({ folderPath }) {
   // const [loading, setIsLoading] = useState<boolean>(false);
   const [loadingUploadFile, setIsLoadingUploadFile] = useState<boolean>(false);
   // const [loadingArray, setLoadingArray] = useState([]);
-
+  const whitespaceRemoved = folderPath.replace(/\s/g, "");
   useEffect(() => {
     async function fetchAuditImages() {
       const res = await fetch(
-        `/api/getUploads?report=${folderPath}&type=semrush`
+        `/api/getUploads?report=${whitespaceRemoved}&type=semrush`
       );
       const result = await res.json();
       console.log(result);
@@ -42,6 +42,7 @@ export function SemrushCard({ folderPath }) {
     // if (!file) return;
     // setLoadingArray(array);
     console.log(files.length);
+
     for (const file of e.target.files) {
       const reader = new FileReader();
       // console.log(reader);
@@ -51,7 +52,7 @@ export function SemrushCard({ folderPath }) {
         // formData.append("files", file);
         // console.log(base64String);
         const upLoadImage = await fetch(
-          `/api/uploadSemrush?report=${folderPath}`,
+          `/api/uploadSemrush?report=${whitespaceRemoved}`,
           {
             method: "POST",
             body: JSON.stringify({ files: base64String }),

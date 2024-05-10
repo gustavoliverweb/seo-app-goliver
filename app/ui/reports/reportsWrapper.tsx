@@ -17,7 +17,7 @@ export default function ReportsWrapper({
   const [reportId, setReportId] = useState("");
   const name = reports.find((report) => report.id === reportId)?.name;
   const deleteReportWithId = deleteReport.bind(null, reportId);
-
+  console.log(reports);
   if (query && reports.length === 0) {
     return (
       <div className="flex flex-grow justify-center items-center text-[24px]">
@@ -36,7 +36,8 @@ export default function ReportsWrapper({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Delete report", name);
-    await fetch(`/api/deleteReportAssets?report=${name}`, {
+    const whitespaceRemoved = name?.replace(/\s/g, "");
+    await fetch(`/api/deleteReportAssets?report=${whitespaceRemoved}`, {
       method: "POST",
     });
     await deleteReportWithId();

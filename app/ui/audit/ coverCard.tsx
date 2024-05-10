@@ -9,11 +9,11 @@ export function CoverCard({ folderPath }: { folderPath: string }) {
   const [serverImage, setServerImage] = useState<string | undefined>();
   const [loading, setIsLoading] = useState<boolean>(true);
   const [loadingUploadFile, setIsLoadingUploadFile] = useState<boolean>(false);
-
+  const whitespaceRemoved = folderPath.replace(/\s/g, "");
   useEffect(() => {
     async function fetchAuditImages() {
       const res = await fetch(
-        `/api/getUploads?report=${folderPath}&type=cover`
+        `/api/getUploads?report=${whitespaceRemoved}&type=cover`
       );
       const result = await res.json();
       // setServerImage(result);
@@ -33,12 +33,16 @@ export function CoverCard({ folderPath }: { folderPath: string }) {
     const file = e.target.files?.[0];
     if (!file) return;
     const reader = new FileReader();
+    console.log(whitespaceRemoved);
     reader.onload = async (e: ProgressEvent<FileReader>) => {
       const base64String = e.target?.result as string;
-      const upLoadImage = await fetch(`/api/uploadCover?report=${folderPath}`, {
-        method: "POST",
-        body: JSON.stringify({ files: base64String }),
-      });
+      const upLoadImage = await fetch(
+        `/api/uploadCover?report=${whitespaceRemoved}`,
+        {
+          method: "POST",
+          body: JSON.stringify({ files: base64String }),
+        }
+      );
       const result = await upLoadImage.json();
       console.log(result);
       setIsLoadingUploadFile(false);

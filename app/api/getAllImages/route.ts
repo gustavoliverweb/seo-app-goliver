@@ -15,17 +15,18 @@ cloudinary.config({
 
 export async function GET(request: NextRequest) {
   const folderPath = request.nextUrl.searchParams.get("report");
-  // console.log(folderPath);
+  console.log(folderPath);
   // const { resources } = await cloudinaryV2.api.resources({
   //   type: "upload",
   //   prefix: `${folderPath}`,
   // });
+  console.log(`report-${folderPath}`);
   const { resources } = await cloudinary.search
     .expression(`folder:report-${folderPath}/*`)
     .execute()
     .then((result) => result)
     .catch((err) => console.log(err));
-  // console.log(resources);
+  console.log(resources);
 
   return Response.json({ message: "Data cloudinary", resources });
 }

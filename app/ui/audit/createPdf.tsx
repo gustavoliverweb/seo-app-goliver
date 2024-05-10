@@ -884,13 +884,20 @@ export const MyDocument = ({ report }) => (
     {report?.keywords?.length > 0 &&
       report?.keywords?.map((image) => (
         <Page size="A4" key={image}>
-          <View style={{ width: "100%", height: "100%" }}>
+          <View
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             <Image
               src={image}
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
+              // style={{
+              //   width: "100%",
+              //   height: "100%",
+              // }}
             />
           </View>
         </Page>
