@@ -42,11 +42,12 @@ export async function POST(request: NextRequest) {
     const arrayOfBase64Images = [];
     for (let index = 1; index <= pages; index++) {
       const images = await convertPdfToImages(pdfDocument, index);
-      arrayOfBase64Images.push(images);
+      arrayOfBase64Images.push({ [index]: images });
     }
+    console.log(arrayOfBase64Images);
     console.log("mid tecnical");
 
-    const imagesToUpload = arrayOfBase64Images.map(async (image) => {
+    const imagesToUpload = arrayOfBase64Images.map(async (image, i) => {
       return await cloudinary.uploader.upload(
         `data:image/png;base64,${image}`,
         {
