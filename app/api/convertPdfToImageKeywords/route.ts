@@ -5,6 +5,7 @@ import { v2 as cloudinary } from "cloudinary";
 import Canvas from "canvas";
 import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
 import { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
+export const maxDuration = 60;
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
