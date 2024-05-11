@@ -1,5 +1,4 @@
 const { sql } = require("@vercel/postgres");
-const { agencyTemplate } = require("../app/lib/placeholder-data.js");
 const bcrypt = require("bcrypt");
 
 // const { productsLar } = require("../app/lib/lar-inventario.js");
@@ -144,45 +143,34 @@ async function seedAgencyClientTest() {
       agency_name VARCHAR(255) NOT NULL
     )
     `;
-    console.log(`Created "agency_client" table`);
+    console.log(`Created agency_client_test table`);
     return {
       createTable,
     };
   } catch (error) {
-    console.error("Error seeding agency_client:", error);
+    console.error("Error seeding agency_client_test:", error);
     throw error;
   }
 }
 
-const client_name = [
-  {
-    name: "Cliente 1",
-  },
-  {
-    name: "Cliente 2",
-  },
-  {
-    name: "Cliente 3",
-  },
-];
-
 async function seedClientsTest() {
-  const agency_name = "Agency Test";
-
   try {
     await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
     const createTable = await sql`
     CREATE TABLE IF NOT EXISTS clients_test (
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
+      agency_id UUID NOT NULL,
+      FOREIGN KEY (agency_id) REFERENCES agency_client_test (id)
+      ON DELETE CASCADE
     )
     `;
-    console.log(`Created "clients" table`);
+    console.log(`Created clients_test table`);
     return {
       createTable,
     };
   } catch (error) {
-    console.error("Error seeding clients:", error);
+    console.error("Error seeding clients_test:", error);
     throw error;
   }
 }
@@ -557,5 +545,7 @@ async function dropTable() {
   ///////////
   // await dropUserTable();
   // await createUser();
-  await dropTable();
+  // await dropTable();
+  await seedAgencyClientTest();
+  await seedClientsTest();
 })();
