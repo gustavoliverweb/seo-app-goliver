@@ -47,6 +47,7 @@ export function AuditCard({ folderPath }: { folderPath: string }) {
           }
         );
         const result = await sendFileToConvert.json();
+        console.log(result);
         // console.log(sendFileToConvert);
         // console.log(result);
         if (result.message === "error") {
@@ -70,7 +71,7 @@ export function AuditCard({ folderPath }: { folderPath: string }) {
         } else {
           console.log(result);
           setIsLoadingUploadFile(false);
-          setSrcImage(result.result.secure_url);
+          setSrcImage(result.result);
         }
       }
     }

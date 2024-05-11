@@ -44,22 +44,48 @@ export async function POST(request: NextRequest) {
       const images = await convertPdfToImages(pdfDocument, index);
       arrayOfBase64Images.push({ [index]: images });
     }
-    console.log(arrayOfBase64Images);
+    // console.log(arrayOfBase64Images);
     console.log("mid tecnical");
 
-    const imagesToUpload = arrayOfBase64Images.map(async (image, i) => {
-      return await cloudinary.uploader.upload(
-        `data:image/png;base64,${image}`,
+    // const imagesToUpload = arrayOfBase64Images.map(async (image, index) => {
+    //   // console.log(index);
+    //   // return await cloudinary.uploader.upload(
+    //   //   `data:image/png;base64,${image}`,
+    //   //   {
+    //   //     folder: `report-${reportName}`,
+    //   //     resource_type: "image",
+    //   //   }
+    //   // );
+    //   // await cloudinary.uploader.upload(
+    //   //   `data:image/png;base64,${image[index + 1]}`,
+    //   //   {
+    //   //     folder: `report-${reportName}`,
+    //   //     resource_type: "image",
+    //   //     public_id: `${index + 1}`,
+    //   //   }
+    //   // );
+    // });
+    for (let index = 0; index < arrayOfBase64Images.length; index++) {
+      const element = arrayOfBase64Images[index];
+      // console.log(element);
+      // console.log(`data:image/png;${index};base64,${element[index + 1]}`);
+
+      await cloudinary.uploader.upload(
+        `data:image/png;base64,${element[index + 1]}`,
         {
           folder: `report-${reportName}`,
           resource_type: "image",
+          public_id: `${index + 1}`,
         }
       );
-    });
-    const uploadImages = await Promise.all(imagesToUpload);
+    }
+    // const uploadImages = await Promise.all(imagesToUpload);
     console.log("finish");
     // console.log(uploadImages);
-    return NextResponse.json({ message: "success", result: uploadImages[0] });
+    return NextResponse.json({
+      message: "success",
+      result: `data:image/png;base64,${arrayOfBase64Images[0][1]}`,
+    });
     // return NextResponse.json({ message: "success" });
   } catch (error) {
     console.log(error);

@@ -40,6 +40,7 @@ export default function Page({ params }: { params: { id: string } }) {
   const [loadingSendMail, setLoadingSendMail] = useState<boolean>(false);
   const [showModalSuccess, setShowModalSuccess] = useState<boolean>(false);
   const [showModalError, setShowModalError] = useState<boolean>(false);
+
   useEffect(() => {
     const getReports = async () => {
       const resReport = await fetch(`/api/getReportId?report-id=${params.id}`);
@@ -89,10 +90,10 @@ export default function Page({ params }: { params: { id: string } }) {
             reportData.cover = replaceImageFormat(image.secure_url);
           }
           if (image.folder.includes(wordToSearch.tecnical)) {
-            reportData.tecnical.push(replaceImageFormat(image.secure_url));
+            reportData.tecnical.unshift(replaceImageFormat(image.secure_url));
           }
           if (image.folder.includes(wordToSearch.keywords)) {
-            reportData.keywords.push(replaceImageFormat(image.secure_url));
+            reportData.keywords.unshift(replaceImageFormat(image.secure_url));
           }
           if (image.folder.includes(wordToSearch.semrush)) {
             reportData.semrush.push(replaceImageFormat(image.secure_url));

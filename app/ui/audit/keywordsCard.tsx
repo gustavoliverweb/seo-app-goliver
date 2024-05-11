@@ -68,7 +68,7 @@ export function KeywordsCard({ folderPath }: { folderPath: string }) {
         }
         console.log(result);
         setIsLoadingUploadFile(false);
-        setSrcImage(result.result.secure_url);
+        setSrcImage(result.result);
       }
     }
   };

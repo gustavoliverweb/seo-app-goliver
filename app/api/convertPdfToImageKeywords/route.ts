@@ -43,22 +43,46 @@ export async function POST(request: NextRequest) {
     const arrayOfBase64Images = [];
     for (let index = 1; index <= pages; index++) {
       const images = await convertPdfToImages(pdfDocument, index);
-      arrayOfBase64Images.push(images);
+      arrayOfBase64Images.push({ [index]: images });
     }
     // console.log(arrayOfBase64Images);
     console.log("mid keyword");
 
-    const imagesToUpload = arrayOfBase64Images.map(async (image) => {
-      return await cloudinary.uploader.upload(
-        `data:image/png;base64,${image}`,
+    // const imagesToUpload = arrayOfBase64Images.map(async (image, index) => {
+    //   // return await cloudinary.uploader.upload(
+    //   //   `data:image/png;base64,${image}`,
+    //   //   {
+    //   //     folder: `report-${reportName}`,
+    //   //     resource_type: "image",
+    //   //   }
+    //   // );
+    //   // await cloudinary.uploader.upload(
+    //   //   `data:image/png;base64,${image[index + 1]}`,
+    //   //   {
+    //   //     folder: `report-${reportName}`,
+    //   //     resource_type: "image",
+    //   //     public_id: `${index + 1}`,
+    //   //   }
+    //   // );
+    // });
+    for (let index = 0; index < arrayOfBase64Images.length; index++) {
+      const element = arrayOfBase64Images[index];
+      // console.log(element);
+      // console.log(`data:image/png;${index};base64,${element[index + 1]}`);
+      await cloudinary.uploader.upload(
+        `data:image/png;base64,${element[index + 1]}`,
         {
           folder: `report-${reportName}`,
           resource_type: "image",
+          public_id: `${index + 1}`,
         }
       );
+    }
+    // const uploadImages = await Promise.all(imagesToUpload);
+    return NextResponse.json({
+      message: "success",
+      result: `data:image/png;base64,${arrayOfBase64Images[0][1]}`,
     });
-    const uploadImages = await Promise.all(imagesToUpload);
-    return NextResponse.json({ message: "success", result: uploadImages[0] });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ message: "error", result: error });
