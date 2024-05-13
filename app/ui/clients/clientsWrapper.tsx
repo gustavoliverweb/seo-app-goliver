@@ -121,12 +121,14 @@ export default function ClientsWrapper({
                 </div>
                 <div className="bg-white grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-rows-[auto,_auto] gap-4  mt-6">
                   {client[agencyName].map((client) => (
-                    <ClientsCard
-                      client={client}
-                      showModal={showModal}
-                      setShowModal={setShowModal}
-                      setClientData={setClientData}
-                    />
+                    <div key={client.name}>
+                      <ClientsCard
+                        client={client}
+                        showModal={showModal}
+                        setShowModal={setShowModal}
+                        setClientData={setClientData}
+                      />
+                    </div>
                   ))}
                 </div>
               </div>

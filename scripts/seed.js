@@ -138,7 +138,7 @@ async function seedAgencyClientTest() {
   try {
     await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
     const createTable = await sql`
-    CREATE TABLE IF NOT EXISTS agency_client_test (
+    CREATE TABLE IF NOT EXISTS a_c_test (
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       agency_name VARCHAR(255) NOT NULL
     )
@@ -157,11 +157,11 @@ async function seedClientsTest() {
   try {
     await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
     const createTable = await sql`
-    CREATE TABLE IF NOT EXISTS clients_test (
+    CREATE TABLE IF NOT EXISTS c_test (
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
       agency_id UUID NOT NULL,
-      FOREIGN KEY (agency_id) REFERENCES agency_client_test (id)
+      FOREIGN KEY (agency_id) REFERENCES a_c_test (id)
     )
     `;
     console.log(`Created clients_test table`);
@@ -546,5 +546,5 @@ async function dropTable() {
   // await createUser();
   // await dropTable();
   // await seedAgencyClientTest();
-  // await seedClientsTest();
+  await seedClientsTest();
 })();

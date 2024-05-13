@@ -15,7 +15,7 @@ export default async function Page({
   const query = searchParams?.query || "";
   const clients = await fetchFilteredClients(query);
   const clientsPages = await fetchClientsPages(query);
-  // console.log(clients);
+  // console.log(clientsPages);
   return (
     <div className="pb-6 flex flex-grow ">
       <div className="items-start mt-6 w-full flex flex-col gap-6 px-6">

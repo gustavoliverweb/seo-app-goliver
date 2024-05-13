@@ -114,9 +114,11 @@ export default function EditPotentialCustomerForm({
           <div className="text-[14px] flex gap-2 items-center">
             <span>
               Pago/
-              {accessToPaidTypeObject(
-                createClient.paid_type as "monthly" | "punctual"
-              )}
+              <span className="font-semibold">
+                {accessToPaidTypeObject(
+                  createClient.paid_type as "monthly" | "punctual"
+                )}
+              </span>
               :
             </span>{" "}
             $

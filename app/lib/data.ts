@@ -188,11 +188,11 @@ export async function fetchFilteredClientsTest(query: string) {
     const clients = await sql<Clients>`
     SELECT
     *
-    FROM agency_client_test
-    JOIN clients_test
-    ON agency_client_test.id = clients_test.agency_id
+    FROM a_c_test
+    JOIN c_test
+    ON a_c_test.id = c_test.agency_id
     WHERE
-    agency_client_test.agency_name ILIKE ${`%${query}%`}
+    a_c_test.agency_name ILIKE ${`%${query}%`}
 
     `;
     // console.log(clients.rows);
@@ -210,6 +210,24 @@ export async function fetchClientsPages(query: string) {
     FROM agency_client
     WHERE
     agency_client.agency_name ILIKE ${`%${query}%`}
+  `;
+    // console.log(count.rows);
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch total number of invoices.");
+  }
+}
+
+export async function fetchClientsPagesTest(query: string) {
+  noStore();
+  try {
+    const count = await sql`SELECT COUNT(*)
+    FROM a_c_test
+    WHERE
+    a_c_test.agency_name ILIKE ${`%${query}%`}
   `;
     // console.log(count.rows);
 

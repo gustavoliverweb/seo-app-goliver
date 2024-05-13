@@ -354,20 +354,22 @@ export async function deleteClientTest(
 ) {
   console.log(id, agencyId);
   try {
-    await sql`DELETE FROM clients_test WHERE id = ${id}`;
-    await sql`
-    DELETE FROM agency_client_test
-    WHERE NOT EXISTS (
-    SELECT 1
-    FROM clients_test
-    WHERE agency_client_test.id = ${agencyId}
-    AND NOT EXISTS (
-    SELECT 1
-    FROM clients_test
-    WHERE agency_client_test.id = ${agencyId}
-    );  
+    await sql`DELETE FROM c_test WHERE id = ${id}`;
+    const result = await sql`
+    SELECT * FROM a_c_test
+    WHERE EXISTS (
+      SELECT 1
+      FROM c_test
+      WHERE c_test.agency_id = ${agencyId}
+    );
     `;
-    // console.log(agency);
+    console.log(result.rows);
+    if (result.rows.length === 0) {
+      await sql`
+      DELETE FROM a_c_test
+      WHERE id = ${agencyId}
+    `;
+    }
     console.log("success delete client");
     // revalidatePath(`/dashboard/clients?page=${page}`);
     return { message: "Cliente eliminado con éxito", success: true };

@@ -32,11 +32,11 @@ export function ClientsCard({
         className={`w-full h-auto rounded-lg flex justify-center items-center aspect-square`}
       >
         <Image
-          className="object-scale-down h-full"
+          className="object-scale-down h-full w-full"
           src={client.logo_url}
-          alt=""
+          alt="Logo cliente"
           width={200}
-          height={100}
+          height={200}
         />
       </div>
       <div className="mt-4 flex flex-col gap-2">
