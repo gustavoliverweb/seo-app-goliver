@@ -335,13 +335,38 @@ export async function deleteClient(
   console.log(id, agencyId);
   try {
     await sql`DELETE FROM clients WHERE id = ${id}`;
-    // const agency = await sql`
-    // DELETE FROM agency_client WHERE NOT EXISTS(
-    //   SELECT 1
-    //   FROM clients
-    //   WHERE agency_client.id = ${agencyId}
-    // )
-    // `;
+    // console.log(agency);
+    console.log("success delete client");
+    // revalidatePath(`/dashboard/clients?page=${page}`);
+    return { message: "Cliente eliminado con éxito", success: true };
+  } catch (error) {
+    return {
+      message: "Database Error: Error al eliminar el cliente",
+      success: false,
+    };
+  }
+}
+
+export async function deleteClientTest(
+  id: string,
+  page: string | null,
+  agencyId: string
+) {
+  console.log(id, agencyId);
+  try {
+    await sql`DELETE FROM clients_test WHERE id = ${id}`;
+    await sql`
+    DELETE FROM agency_client_test
+    WHERE NOT EXISTS (
+    SELECT 1
+    FROM clients_test
+    WHERE agency_client_test.id = ${agencyId}
+    AND NOT EXISTS (
+    SELECT 1
+    FROM clients_test
+    WHERE agency_client_test.id = ${agencyId}
+    );  
+    `;
     // console.log(agency);
     console.log("success delete client");
     // revalidatePath(`/dashboard/clients?page=${page}`);

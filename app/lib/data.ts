@@ -180,6 +180,29 @@ export async function fetchFilteredClients(query: string) {
   }
 }
 
+export async function fetchFilteredClientsTest(query: string) {
+  noStore();
+  // const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  // console.log(query, currentPage);
+  try {
+    const clients = await sql<Clients>`
+    SELECT
+    *
+    FROM agency_client_test
+    JOIN clients_test
+    ON agency_client_test.id = clients_test.agency_id
+    WHERE
+    agency_client_test.agency_name ILIKE ${`%${query}%`}
+
+    `;
+    // console.log(clients.rows);
+    return clients.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch clients.");
+  }
+}
+
 export async function fetchClientsPages(query: string) {
   noStore();
   try {

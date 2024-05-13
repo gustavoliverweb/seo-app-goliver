@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-//@ts-nocheck
+
 "use client";
 import { CloudinaryData, ReportObject } from "@/app/lib/definitions";
 import { MyDocument } from "@/app/ui/audit/createPdf";
 import { Button } from "@/app/ui/button";
 import ErrorModal from "@/app/ui/errorModal";
+import PdfLink from "@/app/ui/pdflink";
 import SuccessModal from "@/app/ui/successModal";
-import { PDFDownloadLink, pdf } from "@react-pdf/renderer";
+import { pdf } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
 
 const initialState = {
@@ -32,14 +33,17 @@ const initialState = {
   semrush: [],
 };
 
+const CLOUD_NAME = "dxjuhqvt6";
+const UPLOAD_PRESET = "im5rh9qa";
+
 export default function Page({ params }: { params: { id: string } }) {
   const [report, setReport] = useState<ReportObject>(initialState);
   const [data, setData] = useState<ReportObject>();
   const [isLoading, setIsloading] = useState(true);
-  const [content, setContent] = useState("");
   const [loadingSendMail, setLoadingSendMail] = useState<boolean>(false);
   const [showModalSuccess, setShowModalSuccess] = useState<boolean>(false);
   const [showModalError, setShowModalError] = useState<boolean>(false);
+  const [pdfFile, setPdfFile] = useState<File>();
 
   useEffect(() => {
     const getReports = async () => {
@@ -124,11 +128,14 @@ export default function Page({ params }: { params: { id: string } }) {
       if (!isLoading) {
         const blob = await pdf(<MyDocument report={data} />).toBlob();
         const file = new File([blob], `${data?.select_template}-report.pdf`);
-        const reader = new FileReader();
-        reader.onload = async (r) => {
-          setContent(r.target.result.toString());
-        };
-        reader.readAsDataURL(file);
+        console.log(file);
+        console.log(blob);
+        setPdfFile(file);
+        // const reader = new FileReader();
+        // reader.onload = async (r) => {
+        //   setContent(r.target.result.toString());
+        // };
+        // reader.readAsDataURL(file);
       }
     };
     toBlob();
@@ -137,34 +144,51 @@ export default function Page({ params }: { params: { id: string } }) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoadingSendMail(true);
-    if (!isLoading) {
-      const formData = new FormData(e.target);
-      const base64Content = content.split(",")[1];
-      const dataToSend = {
-        content: base64Content,
-        email: formData.get("email"),
-        subject: formData.get("subject-pdf"),
-        fileName: `Auditoría SEO - ${data?.name}.pdf`,
-        companyName: data?.name,
-      };
-      const sendPdfMail = await fetch("/api/sendPdfMail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
-      if (sendPdfMail.ok) {
-        setShowModalSuccess(true);
-        setTimeout(() => {
-          setShowModalSuccess(false);
-        }, 2000);
-      } else {
+    if (!isLoading && pdfFile) {
+      const formData = new FormData(e.target as HTMLFormElement);
+      formData.append("file", pdfFile);
+      formData.append("cloud_name", CLOUD_NAME);
+      formData.append("upload_preset", UPLOAD_PRESET);
+      formData.append("folder", `report-${data?.name}/pdf-mail`);
+
+      try {
+        const response = await fetch(
+          `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        const data = await response.json();
+        const urlFile = data?.secure_url;
+        console.log(urlFile);
+        const dataToSend = {
+          email: formData.get("email"),
+          subject: formData.get("subject-pdf"),
+          fileName: `Auditoría SEO - ${data?.name}.pdf`,
+          companyName: data?.name,
+          urlFile,
+        };
+        const sendPdfMail = await fetch("/api/sendPdfMail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        });
+        if (sendPdfMail.ok) {
+          setShowModalSuccess(true);
+          setTimeout(() => {
+            setShowModalSuccess(false);
+          }, 2000);
+        }
+      } catch (error) {
         setShowModalError(true);
         setTimeout(() => {
           setShowModalError(false);
         }, 2000);
+        console.log(error);
       }
       setLoadingSendMail(false);
     }
@@ -198,20 +222,7 @@ export default function Page({ params }: { params: { id: string } }) {
         </div>
       ) : (
         <div className="rounded-2xl bg-white w-full h-full flex flex-col justify-center items-center animate-[wiggle_1s_ease-in-out_infinite]">
-          <PDFDownloadLink
-            document={<MyDocument report={data} />}
-            fileName={`${data?.select_template}-report.pdf`}
-            style={{
-              color: "white",
-              padding: "10px",
-              borderRadius: "5px",
-            }}
-            className="bg-primary-button-500 hover:bg-secondary-green-500"
-          >
-            {({ loading }) =>
-              loading ? "Preparando descarga..." : "Descargar PDF"
-            }
-          </PDFDownloadLink>
+          <PdfLink data={data} />
           <form onSubmit={handleSubmit} className="w-full max-w-[600px] mt-6">
             <div className="w-full rounded-md  p-4 md:p-6">
               <div className="mt-6 mb-4">

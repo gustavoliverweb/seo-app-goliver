@@ -7,7 +7,7 @@ export default function SuccessModal({
 }: {
   showModal: boolean;
   children: React.ReactNode;
-  top: string;
+  top?: string;
 }) {
   return (
     <div>

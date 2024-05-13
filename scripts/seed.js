@@ -162,7 +162,6 @@ async function seedClientsTest() {
       name VARCHAR(255) NOT NULL,
       agency_id UUID NOT NULL,
       FOREIGN KEY (agency_id) REFERENCES agency_client_test (id)
-      ON DELETE CASCADE
     )
     `;
     console.log(`Created clients_test table`);
@@ -517,7 +516,7 @@ async function dropPotentialCustomerTable() {
 async function dropTable() {
   try {
     await sql`
-    DROP TABLE users
+    DROP TABLE clients_test
     `;
     console.log("drop table ");
   } catch (error) {
@@ -546,6 +545,6 @@ async function dropTable() {
   // await dropUserTable();
   // await createUser();
   // await dropTable();
-  await seedAgencyClientTest();
-  await seedClientsTest();
+  // await seedAgencyClientTest();
+  // await seedClientsTest();
 })();

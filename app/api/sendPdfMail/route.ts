@@ -7,9 +7,8 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
-  const { content, email, subject, fileName, companyName } =
+  const { email, subject, fileName, companyName, urlFile } =
     await request.json();
-  console.log(companyName);
   try {
     const data = await resend.emails.send({
       from: "Gustavoliver.com <app@gustavoliver.com>",
@@ -22,7 +21,7 @@ export async function POST(request: Request) {
       attachments: [
         {
           filename: fileName,
-          content,
+          path: urlFile,
         },
       ],
     });
