@@ -1,7 +1,8 @@
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { MyDocument } from "./audit/createPdf";
+import { ReportObject } from "../lib/definitions";
 
-export default function PdfLink({ data }) {
+export default function PdfLink({ data }: { data: ReportObject | undefined }) {
   return (
     <PDFDownloadLink
       document={<MyDocument report={data} />}
