@@ -9,7 +9,7 @@ import Image from "next/image";
 
 // import { useFormState } from "react-dom";
 
-const usersRoles = [{ rol: "SEO Manager" }];
+const usersRoles = [{ rol: "SEO Manager" }, { rol: "Admin" }];
 
 export default function CreateUserForm() {
   const initialState = { message: null, errors: {} };
