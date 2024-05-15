@@ -1,9 +1,10 @@
 import Link from "next/link";
 import NavLinks from "@/app/ui/dashboard/nav-links";
 import { GoLogoBlack } from "@/app/ui/lar-logo";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, LinkIcon } from "@heroicons/react/24/outline";
 import { signOut } from "@/auth";
 import { Avatar } from "../avatar";
+import NavLinksDocs from "./nav-links-docs";
 
 export default function SideNav() {
   return (
@@ -24,6 +25,17 @@ export default function SideNav() {
       </div>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />
+        <div>
+          <div
+            className={
+              "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium  md:flex-none md:justify-start md:p-2 md:px-3"
+            }
+          >
+            <LinkIcon className="w-6" />
+            <p className="hidden md:block">Ayuda</p>
+          </div>
+          <NavLinksDocs />
+        </div>
         <div className="hidden  w-full grow rounded-md  md:block"></div>
         <form
           action={async () => {
