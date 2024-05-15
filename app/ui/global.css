@@ -112,3 +112,11 @@ iframe {
   align-items: center;
   font-size: 24px;
 }
+
+.menu-child {
+  display: none;
+}
+
+.parent-menu.active .menu-child {
+  display: block;
+}

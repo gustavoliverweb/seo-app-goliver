@@ -10,7 +10,6 @@ async function getUser(email: string): Promise<UserType | undefined> {
   try {
     const user =
       await sql<UserType>`SELECT * from users_go where email=${email}`;
-    console.log(user.rows[0]);
     return user.rows[0];
   } catch (error) {
     console.error("Failed to fetch user:", error);

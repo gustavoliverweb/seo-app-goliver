@@ -23,7 +23,7 @@ export default function SideNav() {
         </Link>
         <Avatar />
       </div>
-      <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
+      <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2 overflow-auto">
         <NavLinks />
         <div>
           <div
@@ -34,7 +34,9 @@ export default function SideNav() {
             <LinkIcon className="w-6" />
             <p className="hidden md:block">Ayuda</p>
           </div>
-          <NavLinksDocs />
+          <div className="pl-8">
+            <NavLinksDocs />
+          </div>
         </div>
         <div className="hidden  w-full grow rounded-md  md:block"></div>
         <form
