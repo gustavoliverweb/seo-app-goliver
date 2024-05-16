@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
   }
   try {
     const resetToken = jwt.sign({ email }, secretKey, { expiresIn: "1h" });
-    const url = `https://go-seo-app.vercel.app/reset-password/${resetToken}`;
+    const url = `https://app.gustavoliver.com/reset-password/${resetToken}`;
     console.log(resetToken);
     const data = await resend.emails.send({
       from: "Gustavoliver.com <app@gustavoliver.com>",
