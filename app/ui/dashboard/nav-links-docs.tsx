@@ -12,7 +12,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { useState } from "react";
-import { set } from "zod";
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -47,7 +46,7 @@ const links = [
     icon: UserGroupIcon,
     subLinks: [
       { name: "Introduction", href: "/dashboard/help/clients/introduction" },
-      { name: "Crear Informes", href: "/dashboard/help/clients/create" },
+      { name: "Crear Clientes", href: "/dashboard/help/clients/create" },
     ],
   },
   {
@@ -57,11 +56,11 @@ const links = [
     subLinks: [
       {
         name: "Introduction",
-        href: "/dashboard/help/potential-clients/introduction",
+        href: "/dashboard/help/potential-customers/introduction",
       },
       {
-        name: "Crear Informes",
-        href: "/dashboard/help/potential-clients/create",
+        name: "Crear Clientes Potenciales",
+        href: "/dashboard/help/potential-customers/create",
       },
     ],
   },
@@ -75,7 +74,7 @@ const links = [
         href: "/dashboard/help/users/introduction",
       },
       {
-        name: "Crear Informes",
+        name: "Crear Usuarios",
         href: "/dashboard/help/users/create",
       },
     ],
@@ -90,8 +89,10 @@ export default function NavLinksDocs() {
     console.log("click");
     // setOpenSubMenu(!openSubMenu);
     const target = e.target.closest(".parent-menu");
+    const menuChild = e.target.closest(".menu-child");
+    if (menuChild) return;
     target.classList.toggle("active");
-    console.log(target);
+    console.log(menuChild);
   };
 
   return (
