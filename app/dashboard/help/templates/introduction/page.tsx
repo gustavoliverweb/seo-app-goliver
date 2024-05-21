@@ -1,3 +1,6 @@
+import Image from "next/image";
+import templateOver from "@/public/help/templates/template-over 1.png";
+
 export default async function Page({
   searchParams,
 }: {
@@ -11,7 +14,26 @@ export default async function Page({
             Plantillas
           </h3>
         </div>
-        <div className="relative h-max overflow-auto bg-white p-5 rounded-2xl w-full flex-grow flex flex-col justify-between"></div>
+        <div className="relative h-max overflow-auto bg-white p-5 rounded-2xl w-full flex-grow flex flex-col">
+          <div>
+            <h3 className="text-[28px] font-semibold mb-6">Introducción</h3>
+            <p className="text-[18px]">
+              Las plantillas de informes es el punto de partida para comenzar a
+              crear infomes SEO, podrás crear muchos informes a partir de una
+              plantilla previamente creada.
+            </p>
+          </div>
+          <div className=" mt-10">
+            <Image
+              src={templateOver}
+              alt=""
+              width="0"
+              height="0"
+              sizes="100vw"
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
