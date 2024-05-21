@@ -3,11 +3,7 @@ import reportCreateButton from "@/public/help/reports/report-create-button 1.png
 import reportForm from "@/public/help/reports/report-create-form 1.png";
 import createReportSend from "@/public/help/reports/report-create-form-create-send 1.png";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: { page?: string; query?: string };
-}) {
+export default async function Page() {
   return (
     <div className="pb-6 flex flex-grow">
       <div className="items-start mt-6 w-full flex flex-col px-5 gap-6">
@@ -28,7 +24,7 @@ export default async function Page({
           <div className=" mt-10">
             <div className="flex flex-col gap-8">
               <div>
-                <h4 className="text-[24px] mb-2">Como crear informs</h4>
+                <h4 className="text-[24px] mb-2">Como crear informes</h4>
                 <p className="text-[18px] font-semibold mb-6">
                   1. Haz click en el botón Nuevo informe
                 </p>

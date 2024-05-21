@@ -1,8 +1,7 @@
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: { page?: string; query?: string };
-}) {
+import Image from "next/image";
+import usersOver from "@/public/help/users/users-over 1.png";
+
+export default async function Page() {
   return (
     <div className="pb-6 flex flex-grow">
       <div className="items-start mt-6 w-full flex flex-col px-5 gap-6">
@@ -11,7 +10,24 @@ export default async function Page({
             Usuarios
           </h3>
         </div>
-        <div className="relative h-max overflow-auto bg-white p-5 rounded-2xl w-full flex-grow flex flex-col justify-between"></div>
+        <div className="relative h-max overflow-auto bg-white p-5 rounded-2xl w-full flex-grow flex flex-col">
+          <div>
+            <h3 className="text-[28px] font-semibold mb-6">Introducción</h3>
+            <p className="text-[18px]">
+              Gestiona los usuarios con acceso a la plataforma de forma sencilla
+            </p>
+          </div>
+          <div className=" mt-10">
+            <Image
+              src={usersOver}
+              alt=""
+              width="0"
+              height="0"
+              sizes="100vw"
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

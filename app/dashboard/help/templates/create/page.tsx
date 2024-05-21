@@ -2,11 +2,7 @@ import Image from "next/image";
 import templateCreateButton from "@/public/help/templates/template-create-button 1.png";
 import templateCreateForm from "@/public/help/templates/template-create 2.png";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: { page?: string; query?: string };
-}) {
+export default async function Page() {
   return (
     <div className="pb-6 flex flex-grow">
       <div className="items-start mt-6 w-full flex flex-col px-5 gap-6">

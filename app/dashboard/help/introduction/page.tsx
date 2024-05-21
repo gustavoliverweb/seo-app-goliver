@@ -36,11 +36,7 @@ const helpRoutesLabel = [
   },
 ];
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: { page?: string; query?: string };
-}) {
+export default async function Page() {
   return (
     <div className="pb-6 flex flex-grow">
       <div className="items-start mt-6 w-full flex flex-col px-5 gap-6">
