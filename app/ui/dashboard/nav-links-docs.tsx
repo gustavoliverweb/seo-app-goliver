@@ -10,8 +10,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
 const links = [
   {
     name: "Introducción",
@@ -81,21 +79,21 @@ const links = [
 export default function NavLinksDocs() {
   const pathname = usePathname();
 
-  const handleSubMenu = (e) => {
-    console.log("click");
-    // setOpenSubMenu(!openSubMenu);
-    const target = e.target.closest(".parent-menu");
-    const menuChild = e.target.closest(".menu-child");
+  const handleSubMenu = (e: React.MouseEvent<HTMLElement>) => {
+    const target = (e.target as HTMLElement).closest(".parent-menu");
+    const menuChild = (e.target as HTMLElement).closest(".menu-child");
     if (menuChild) return;
-    target.classList.toggle("active");
-    console.log(menuChild);
+    if (target) {
+      target.classList.toggle("active");
+    }
   };
 
   return (
     <>
-      {links.map((link) => (
-        <>
-          {!link.hasOwnProperty("subLinks") ? (
+      {links.map((link) => {
+        const property = "subLinks" in link;
+        {
+          return !property ? (
             <Link
               key={link.name}
               href={link.href}
@@ -106,7 +104,6 @@ export default function NavLinksDocs() {
                 }
               )}
             >
-              {/* <LinkIcon className="w-6" /> */}
               <p className="hidden md:block">{link.name}</p>
             </Link>
           ) : (
@@ -136,16 +133,15 @@ export default function NavLinksDocs() {
                         }
                       )}
                     >
-                      {/* <LinkIcon className="w-6" /> */}
                       <p className="hidden md:block p-2">{sunlinks.name}</p>
                     </Link>
                   ))}
                 </div>
               </div>
             </>
-          )}
-        </>
-      ))}
+          );
+        }
+      })}
     </>
   );
 }
