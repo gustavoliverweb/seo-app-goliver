@@ -1,5 +1,7 @@
 import Image from "next/image";
 import templateOver from "@/public/help/templates/template-over 1.png";
+import Link from "next/link";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 export default async function Page() {
   return (
@@ -28,6 +30,26 @@ export default async function Page() {
               sizes="100vw"
               className="w-full h-auto"
             />
+          </div>
+          <div className="mt-16 flex w-full justify-between">
+            <Link
+              href="/dashboard/help/templates/introduction"
+              className="flex items-center"
+            >
+              <div className="w-4">
+                <ChevronLeftIcon />
+              </div>
+              <div className="text-[18px] font-semibold">Introducción</div>
+            </Link>
+            <Link
+              href="/dashboard/help/templates/create"
+              className="flex items-center"
+            >
+              <div className="text-[18px] font-semibold">Crear Plantillas</div>
+              <div className="w-4">
+                <ChevronRightIcon />
+              </div>{" "}
+            </Link>
           </div>
         </div>
       </div>

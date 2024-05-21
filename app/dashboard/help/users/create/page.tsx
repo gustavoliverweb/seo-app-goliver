@@ -1,6 +1,8 @@
 import Image from "next/image";
 import createUserButton from "@/public/help/users/user-create-button 1.png";
 import createUserForm from "@/public/help/users/user-create-form 1.png";
+import Link from "next/link";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 
 export default async function Page() {
   return (
@@ -62,6 +64,17 @@ export default async function Page() {
                 />
               </div>
             </div>
+          </div>
+          <div className="mt-16 flex w-full justify-start">
+            <Link
+              href="/dashboard/help/users/introduction"
+              className="flex items-center"
+            >
+              <div className="w-4">
+                <ChevronLeftIcon />
+              </div>
+              <div className="text-[18px] font-semibold">Usuarios</div>
+            </Link>
           </div>
         </div>
       </div>

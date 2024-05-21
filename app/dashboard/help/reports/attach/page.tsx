@@ -4,6 +4,8 @@ import attachReportCoverPdfTecnical from "@/public/help/reports/attach-report 3.
 import attachReportSemrushPdfKeyword from "@/public/help/reports/attach-report2 1.png";
 import createPdf from "@/public/help/reports/create-pdf 1.png";
 import downPdf from "@/public/help/reports/down-pdf 1.png";
+import Link from "next/link";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 export default async function Page() {
   return (
@@ -27,7 +29,7 @@ export default async function Page() {
           <div className=" mt-10">
             <div className="flex flex-col gap-8">
               <div>
-                <h4 className="text-[24px] mb-2">Como crear informes</h4>
+                <h4 className="text-[24px] mb-2">Como adjuntar reportes</h4>
                 <p className="text-[18px] font-semibold mb-6">
                   1. Haz click en el botón adjuntar
                 </p>
@@ -103,6 +105,26 @@ export default async function Page() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="mt-16 flex w-full justify-between">
+            <Link
+              href="/dashboard/help/reports/create"
+              className="flex items-center"
+            >
+              <div className="w-4">
+                <ChevronLeftIcon />
+              </div>
+              <div className="text-[18px] font-semibold">Crear Informes</div>
+            </Link>
+            <Link
+              href="/dashboard/help/clients/introduction"
+              className="flex items-center"
+            >
+              <div className="text-[18px] font-semibold">Clientes</div>
+              <div className="w-4">
+                <ChevronRightIcon />
+              </div>{" "}
+            </Link>
           </div>
         </div>
       </div>

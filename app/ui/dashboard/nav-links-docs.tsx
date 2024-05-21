@@ -4,14 +4,11 @@ import {
   HomeIcon,
   ClipboardDocumentListIcon,
   UserGroupIcon,
-  UserIcon,
-  UsersIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { useState } from "react";
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -51,7 +48,7 @@ const links = [
   },
   {
     name: "Clientes Potenciales",
-    href: "/dashboard/help/potential-clients/introduction",
+    href: "",
     icon: UserGroupIcon,
     subLinks: [
       {
@@ -66,7 +63,7 @@ const links = [
   },
   {
     name: "Usuarios",
-    href: "/dashboard/help/users/introduction",
+    href: "",
     icon: UserGroupIcon,
     subLinks: [
       {
@@ -83,7 +80,6 @@ const links = [
 
 export default function NavLinksDocs() {
   const pathname = usePathname();
-  const [openSubMenu, setOpenSubMenu] = useState(false);
 
   const handleSubMenu = (e) => {
     console.log("click");

@@ -2,6 +2,8 @@ import Image from "next/image";
 import reportCreateButton from "@/public/help/reports/report-create-button 1.png";
 import reportForm from "@/public/help/reports/report-create-form 1.png";
 import createReportSend from "@/public/help/reports/report-create-form-create-send 1.png";
+import Link from "next/link";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 export default async function Page() {
   return (
@@ -77,6 +79,26 @@ export default async function Page() {
                 />
               </div>
             </div>
+          </div>
+          <div className="mt-16 flex w-full justify-between">
+            <Link
+              href="/dashboard/help/reports/introduction"
+              className="flex items-center"
+            >
+              <div className="w-4">
+                <ChevronLeftIcon />
+              </div>
+              <div className="text-[18px] font-semibold">Informes</div>
+            </Link>
+            <Link
+              href="/dashboard/help/reports/attach"
+              className="flex items-center"
+            >
+              <div className="text-[18px] font-semibold">Adjuntar Reportes</div>
+              <div className="w-4">
+                <ChevronRightIcon />
+              </div>{" "}
+            </Link>
           </div>
         </div>
       </div>

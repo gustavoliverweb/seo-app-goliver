@@ -1,5 +1,6 @@
 import { IntroductionCard } from "@/app/ui/help/introductionCard";
 import {
+  ChevronRightIcon,
   ClipboardDocumentListIcon,
   RectangleGroupIcon,
   UserGroupIcon,
@@ -68,6 +69,17 @@ export default async function Page() {
                 </Link>
               );
             })}
+          </div>
+          <div className="mt-16 flex w-full justify-end">
+            <Link
+              href="/dashboard/help/templates/introduction"
+              className="flex items-center"
+            >
+              <div className="text-[18px] font-semibold">Plantillas</div>
+              <div className="w-4">
+                <ChevronRightIcon />
+              </div>{" "}
+            </Link>
           </div>
         </div>
       </div>
