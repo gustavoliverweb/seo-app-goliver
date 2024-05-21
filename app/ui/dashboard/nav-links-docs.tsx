@@ -4,18 +4,12 @@ import {
   HomeIcon,
   ClipboardDocumentListIcon,
   UserGroupIcon,
-  UserIcon,
-  UsersIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { useState } from "react";
-import { set } from "zod";
 
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
 const links = [
   {
     name: "Introducción",
@@ -47,27 +41,27 @@ const links = [
     icon: UserGroupIcon,
     subLinks: [
       { name: "Introduction", href: "/dashboard/help/clients/introduction" },
-      { name: "Crear Informes", href: "/dashboard/help/clients/create" },
+      { name: "Crear Clientes", href: "/dashboard/help/clients/create" },
     ],
   },
   {
     name: "Clientes Potenciales",
-    href: "/dashboard/help/potential-clients/introduction",
+    href: "",
     icon: UserGroupIcon,
     subLinks: [
       {
         name: "Introduction",
-        href: "/dashboard/help/potential-clients/introduction",
+        href: "/dashboard/help/potential-customers/introduction",
       },
       {
-        name: "Crear Informes",
-        href: "/dashboard/help/potential-clients/create",
+        name: "Crear Clientes Potenciales",
+        href: "/dashboard/help/potential-customers/create",
       },
     ],
   },
   {
     name: "Usuarios",
-    href: "/dashboard/help/users/introduction",
+    href: "",
     icon: UserGroupIcon,
     subLinks: [
       {
@@ -75,7 +69,7 @@ const links = [
         href: "/dashboard/help/users/introduction",
       },
       {
-        name: "Crear Informes",
+        name: "Crear Usuarios",
         href: "/dashboard/help/users/create",
       },
     ],
@@ -84,21 +78,22 @@ const links = [
 
 export default function NavLinksDocs() {
   const pathname = usePathname();
-  const [openSubMenu, setOpenSubMenu] = useState(false);
 
-  const handleSubMenu = (e) => {
-    console.log("click");
-    // setOpenSubMenu(!openSubMenu);
-    const target = e.target.closest(".parent-menu");
-    target.classList.toggle("active");
-    console.log(target);
+  const handleSubMenu = (e: React.MouseEvent<HTMLElement>) => {
+    const target = (e.target as HTMLElement).closest(".parent-menu");
+    const menuChild = (e.target as HTMLElement).closest(".menu-child");
+    if (menuChild) return;
+    if (target) {
+      target.classList.toggle("active");
+    }
   };
 
   return (
     <>
-      {links.map((link) => (
-        <>
-          {!link.hasOwnProperty("subLinks") ? (
+      {links.map((link) => {
+        const property = "subLinks" in link;
+        {
+          return !property ? (
             <Link
               key={link.name}
               href={link.href}
@@ -109,7 +104,6 @@ export default function NavLinksDocs() {
                 }
               )}
             >
-              {/* <LinkIcon className="w-6" /> */}
               <p className="hidden md:block">{link.name}</p>
             </Link>
           ) : (
@@ -139,16 +133,15 @@ export default function NavLinksDocs() {
                         }
                       )}
                     >
-                      {/* <LinkIcon className="w-6" /> */}
                       <p className="hidden md:block p-2">{sunlinks.name}</p>
                     </Link>
                   ))}
                 </div>
               </div>
             </>
-          )}
-        </>
-      ))}
+          );
+        }
+      })}
     </>
   );
 }

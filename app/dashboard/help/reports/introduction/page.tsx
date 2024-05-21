@@ -1,5 +1,5 @@
 import Image from "next/image";
-import templateOver from "@/public/help/templates/template-over 1.png";
+import reportsOver from "@/public/help/reports/reports-over 1.png";
 import Link from "next/link";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
@@ -9,21 +9,24 @@ export default async function Page() {
       <div className="items-start mt-6 w-full flex flex-col px-5 gap-6">
         <div className="bg-white p-5 rounded-2xl lg:flex justify-between items-center w-full">
           <h3 className="text-title text-primary-text-500 font-medium">
-            Plantillas
+            Informes
           </h3>
         </div>
         <div className="relative h-max overflow-auto bg-white p-5 rounded-2xl w-full flex-grow flex flex-col">
           <div>
             <h3 className="text-[28px] font-semibold mb-6">Introducción</h3>
             <p className="text-[18px]">
-              Las plantillas de informes es el punto de partida para comenzar a
-              crear infomes SEO, podrás crear muchos informes a partir de una
-              plantilla previamente creada.
+              Los informes o auditorías SEO se conforman por una serie de datos
+              de determinada empresa, el cual puede incluir informes técnicos
+              detallados como el posicionamiento SEO de la empresa,
+              clasificaciones de las palabras clave del sitio web de la empresa,
+              tráfico de búsquedas, informes de palabras clave, análisis de la
+              competencia y más.
             </p>
           </div>
           <div className=" mt-10">
             <Image
-              src={templateOver}
+              src={reportsOver}
               alt=""
               width="0"
               height="0"
@@ -33,19 +36,19 @@ export default async function Page() {
           </div>
           <div className="mt-16 flex w-full justify-between">
             <Link
-              href="/dashboard/help/templates/introduction"
+              href="/dashboard/help/templates/create"
               className="flex items-center"
             >
               <div className="w-4">
                 <ChevronLeftIcon />
               </div>
-              <div className="text-[18px] font-semibold">Introducción</div>
+              <div className="text-[18px] font-semibold">Crear Plantillas</div>
             </Link>
             <Link
-              href="/dashboard/help/templates/create"
+              href="/dashboard/help/reports/create"
               className="flex items-center"
             >
-              <div className="text-[18px] font-semibold">Crear Plantillas</div>
+              <div className="text-[18px] font-semibold">Crear Informes</div>
               <div className="w-4">
                 <ChevronRightIcon />
               </div>{" "}

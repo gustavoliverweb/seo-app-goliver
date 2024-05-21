@@ -1,7 +1,10 @@
 import Link from "next/link";
 import NavLinks from "@/app/ui/dashboard/nav-links";
 import { GoLogoBlack } from "@/app/ui/lar-logo";
-import { ArrowLeftIcon, LinkIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowLeftIcon,
+  InformationCircleIcon,
+} from "@heroicons/react/24/outline";
 import { signOut } from "@/auth";
 import { Avatar } from "../avatar";
 import NavLinksDocs from "./nav-links-docs";
@@ -31,7 +34,7 @@ export default function SideNav() {
               "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium  md:flex-none md:justify-start md:p-2 md:px-3"
             }
           >
-            <LinkIcon className="w-6" />
+            <InformationCircleIcon className="w-6" />
             <p className="hidden md:block">Ayuda</p>
           </div>
           <div className="pl-8">
