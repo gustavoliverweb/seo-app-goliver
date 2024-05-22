@@ -98,13 +98,13 @@ export default function NavLinksDocs() {
               key={link.name}
               href={link.href}
               className={clsx(
-                "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100  md:flex-none md:justify-start md:p-2 md:px-3",
+                "flex h-[48px] grow items-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100  md:flex-none md:justify-start md:p-2 md:px-3",
                 {
                   "text-primary-button-500": pathname === link.href,
                 }
               )}
             >
-              <p className="hidden md:block">{link.name}</p>
+              <p className="">{link.name}</p>
             </Link>
           ) : (
             <>
@@ -114,7 +114,7 @@ export default function NavLinksDocs() {
                 data-parent={link.name}
               >
                 <div className="flex items-center">
-                  <p>{link.name}</p>
+                  <p className="">{link.name}</p>
                   {
                     <div className="w-4">
                       <ChevronDownIcon />
@@ -127,13 +127,13 @@ export default function NavLinksDocs() {
                       key={sunlinks.name}
                       href={sunlinks.href}
                       className={clsx(
-                        "flex  grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100  md:flex-none md:justify-start md:p-2 md:px-3",
+                        "flex  grow items-center  gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100  md:flex-none md:justify-start md:p-2 md:px-3",
                         {
                           "text-primary-button-500": pathname === sunlinks.href,
                         }
                       )}
                     >
-                      <p className="hidden md:block p-2">{sunlinks.name}</p>
+                      <p className=" p-2">{sunlinks.name}</p>
                     </Link>
                   ))}
                 </div>

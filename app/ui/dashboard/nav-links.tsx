@@ -6,6 +6,7 @@ import {
   UserGroupIcon,
   UserIcon,
   UsersIcon,
+  InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -27,6 +28,7 @@ const links = [
     icon: UsersIcon,
   },
   { name: "Usuarios", href: "/dashboard/users", icon: UserIcon },
+  { name: "Ayuda", href: "/dashboard/help", icon: InformationCircleIcon },
 ];
 
 export default function NavLinks() {
@@ -40,14 +42,14 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100  md:flex-none md:justify-start md:p-2 md:px-3",
+              "flex h-[48px] grow items-center  gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100  md:flex-none md:justify-start md:p-2 md:px-3",
               {
                 "text-primary-button-500": pathname === link.href,
               }
             )}
           >
             <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
+            <p className="">{link.name}</p>
           </Link>
         );
       })}

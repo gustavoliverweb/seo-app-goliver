@@ -1,20 +1,24 @@
 "use client";
 import Link from "next/link";
-import NavLinks from "@/app/ui/dashboard/nav-links";
 import { GoLogoBlack } from "@/app/ui/lar-logo";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Avatar } from "../avatar";
+import NavLinksDocs from "./nav-links-docs";
 import { useRef, useState } from "react";
 import clsx from "clsx";
 
-export default function SideNav({ children }: { children: React.ReactNode }) {
+export default function DocsSideNav({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const menuRef = useRef(null);
   const [openMenu, setOpenMenu] = useState(false);
 
   const handleMenu = () => {
     setOpenMenu(!openMenu);
+    console.log(menuRef.current);
   };
-
   return (
     <div className="flex h-full flex-col bg-white rounded-br-2xl">
       <div className="flex justify-between items-center">
@@ -55,7 +59,7 @@ export default function SideNav({ children }: { children: React.ReactNode }) {
         )}
       >
         <div>
-          <NavLinks />
+          <NavLinksDocs />
         </div>
         {children}
       </div>
