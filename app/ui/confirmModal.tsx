@@ -25,7 +25,7 @@ export default function ConfirmModal({
             </div>
             <Button
               type="submit"
-              className="bg-red-700 hover:bg-errors-warning-dark"
+              className="bg-red-700 hover:bg-errors-warning-dark min-w-fit"
             >
               Eliminar
             </Button>

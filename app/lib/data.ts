@@ -329,6 +329,22 @@ export async function fetchUsers() {
   }
 }
 
+export async function fetchUsersId(id: string) {
+  noStore();
+  try {
+    const data = await sql<UserType>`
+      SELECT
+       *
+      FROM users_go
+      WHERE  users_go.id = ${id}  
+    `;
+    // console.log(data.rows);
+    return data.rows[0];
+  } catch (error) {
+    console.error("Database Error:", error);
+  }
+}
+
 export async function fetchUsersPages() {
   noStore();
   try {

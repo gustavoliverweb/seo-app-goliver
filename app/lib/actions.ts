@@ -69,6 +69,19 @@ const UserSchema = z.object({
     size: z.number().min(0, { message: "Cargue un archivo de imagen" }),
   }),
 });
+const UserUpdateSchema = z.object({
+  id: z.string(),
+  name: z.string().min(1, { message: "El nombre debe tener al menos 1 letra" }),
+  email: z
+    .string()
+    .email({ message: "Introduzca un correo electrónico válido" }),
+  password: z.string().min(0, { message: "Introduzca una contraseña" }),
+  user_role: z.string().min(1, { message: "Introduzca un rol" }),
+  user_avatar: z.string().or(z.literal("")),
+  user_avatar_valid: z.object({
+    size: z.number().min(0, { message: "Cargue un archivo de imagen" }),
+  }),
+});
 
 // const PotentialCustomerSchema = z.object({
 //   name: z.string().min(1, { message: "El nombre debe tener al menos 1 letra" }),
@@ -81,6 +94,7 @@ const CreateAgencyTemplate = AgencyTemplateSchema.omit({ id: true });
 const CreateReports = ReportsSchema.omit({ report_id: true });
 const CreateAgencyClients = AgencyClientsSchema;
 const UserTemplate = UserSchema.omit({ id: true });
+const UserUpdateTemplate = UserUpdateSchema.omit({ id: true });
 
 export type StateAgencyTemplate = {
   errors?: {
@@ -453,6 +467,44 @@ export async function createUser(prevState: User, formData: FormData) {
     };
   }
   redirect("/dashboard/users");
+}
+
+export async function updateUser(prevState: User, formData: FormData) {
+  const userId = formData.get("id") as string;
+  console.log(userId);
+  noStore();
+  const validatedFields = UserUpdateTemplate.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+    user_role: formData.get("user_role"),
+    user_avatar: formData.get("user_avatar"),
+    user_avatar_valid: formData.get("user_avatar_valid"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Faltan campos. Error al crear el usuario",
+    };
+  }
+  const { name, email, password, user_role, user_avatar } =
+    validatedFields.data;
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  console.log(validatedFields.data);
+  try {
+    if (password) {
+      await sql`UPDATE users_go SET name = ${name}, email = ${email}, password = ${hashedPassword}, user_role = ${user_role}, user_avatar = ${user_avatar}
+      WHERE users_go.id = ${userId}`;
+      return { message: "Database Success: Update User." };
+    }
+    await sql`UPDATE users_go SET name = ${name}, email = ${email}, user_role = ${user_role}, user_avatar = ${user_avatar}
+    WHERE users_go.id = ${userId}`;
+    return { message: "El usuario fue actualizado" };
+  } catch {
+    return { message: "Error al actualizar el usuario" };
+  }
 }
 
 export async function deleteUser(id: string) {

@@ -1,6 +1,7 @@
 import { UserType } from "@/app/lib/definitions";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import { EditUser } from "../buttons";
 
 export function UsersCard({
   user,
@@ -38,10 +39,11 @@ export function UsersCard({
             <div className="text-[14px] capitalize">{user.user_role}</div>
           </div>
         </div>
-        {/* <div className="flex gap-2">
-          <div className="rounded-md border border-gray-200 p-2">Editar</div>
-          <div className="rounded-md border border-gray-200 p-2">Eliminar</div>
-        </div> */}
+        <div className="flex gap-2">
+          {/* <div className="rounded-md border border-gray-200 p-2">Editar</div> */}
+
+          <EditUser id={user?.id} />
+        </div>
         <div className="absolute top-[4px] right-[4px]">
           <div
             className="flex text-white items-center rounded-full p-1  bg-secondary-green-500 cursor-pointer hover:bg-green-600 transition-colors"

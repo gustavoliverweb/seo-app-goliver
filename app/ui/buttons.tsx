@@ -36,6 +36,17 @@ export function CreateUser() {
   );
 }
 
+export function EditUser({ id }: { id: string }) {
+  return (
+    <Link
+      href={`/dashboard/users/edit/${id}`}
+      className="flex  h-10 items-center mr-4 rounded-lg border border-gray-200 p-6 text-sm  transition-colors hover:bg-secondary-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+    >
+      <span className="text-base">Editar</span>{" "}
+    </Link>
+  );
+}
+
 export function SaveUser() {
   return (
     <Link
