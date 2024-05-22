@@ -19,7 +19,7 @@ export default async function WrapperAgency({
   }
   // console.log(agencys);
   return (
-    <div className="bg-white grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-rows-[auto,_auto] gap-4 mt-6">
+    <div className="bg-white grid place-items-center grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-rows-[auto,_auto] gap-4 mt-6">
       {agencys &&
         agencys.map((agency) => (
           <div key={agency.id}>
