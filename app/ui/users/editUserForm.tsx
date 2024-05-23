@@ -25,6 +25,9 @@ export default function EditUserForm({ user }: { user: UserType | undefined }) {
     if (message) {
       console.log(message);
       setShowModalSuccess(true);
+      setTimeout(() => {
+        setShowModalSuccess(false);
+      }, 2000);
     }
   }, [message]);
 

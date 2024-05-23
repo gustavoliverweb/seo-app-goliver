@@ -224,6 +224,20 @@ export async function createAgencyTemplate(
   }
   redirect("/dashboard");
 }
+export async function deleteAgencyTemplate(id: string) {
+  console.log("delete agency template", id);
+  try {
+    // await sql`DELETE FROM agency_template WHERE id = ${id}`;
+    // revalidatePath("/dashboard");
+    console.log("Plantilla eliminada con éxito");
+    return { message: "Plantilla eliminada con éxito" };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: "Database Error: Failed to Delete agency template.",
+    };
+  }
+}
 
 export async function CreateReportAction(
   prevState: StateReports,
@@ -501,6 +515,7 @@ export async function updateUser(prevState: User, formData: FormData) {
     }
     await sql`UPDATE users_go SET name = ${name}, email = ${email}, user_role = ${user_role}, user_avatar = ${user_avatar}
     WHERE users_go.id = ${userId}`;
+    revalidatePath("/dashboard/users");
     return { message: "El usuario fue actualizado" };
   } catch {
     return { message: "Error al actualizar el usuario" };

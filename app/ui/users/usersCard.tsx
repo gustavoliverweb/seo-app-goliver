@@ -40,8 +40,6 @@ export function UsersCard({
           </div>
         </div>
         <div className="flex gap-2">
-          {/* <div className="rounded-md border border-gray-200 p-2">Editar</div> */}
-
           <EditUser id={user?.id} />
         </div>
         <div className="absolute top-[4px] right-[4px]">

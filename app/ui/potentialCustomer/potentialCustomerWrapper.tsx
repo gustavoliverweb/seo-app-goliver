@@ -67,7 +67,7 @@ export default function PotentialCustomerWrapper({
             </h3>
             <Button
               onClick={() => setShowCreateClient(true)}
-              className="w-full lg:w-fit justify-center flex mt-3 h-10 items-center rounded-lg bg-primary-button-500 p-6 text-base  text-white transition-colors hover:bg-secondary-green-500 focus-visible:outline focus-visible:outline-2"
+              className="w-full lg:min-w-fit justify-center flex mt-3 h-10 items-center rounded-lg bg-primary-button-500 p-6 text-base  text-white transition-colors hover:bg-secondary-green-500 focus-visible:outline focus-visible:outline-2"
             >
               +
             </Button>
