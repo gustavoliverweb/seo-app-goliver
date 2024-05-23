@@ -5,6 +5,7 @@ import PotentialCustomerStatusWrapper from "./potentialCustomerStatusWrapper";
 import { Customer } from "@/app/lib/definitions";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useStore } from "@/app/lib/store";
+import clsx from "clsx";
 
 export default function EditPotentialCustomerForm({
   customers,
@@ -30,7 +31,8 @@ export default function EditPotentialCustomerForm({
     punctual: "Puntual",
   };
 
-  const { isSendForm, setSendForm, setCustomers, customersData } = useStore();
+  const { isSendForm, setSendForm, setCustomers, customersData, isDark } =
+    useStore();
 
   const [createClient, setCreateClient] = useState(customers);
 
@@ -106,12 +108,23 @@ export default function EditPotentialCustomerForm({
         <div className="flex flex-col gap-2">
           <div className="w-full">
             <input
-              className="w-full border border-gray-200 rounded-md text-ellipsis"
+              className={clsx(
+                "w-full border border-gray-200 rounded-md text-ellipsis",
+                {
+                  "bg-dark-dark-background-panels": isDark,
+                  "border-dark-dark-border": isDark,
+                  "text-dark-dark-text": isDark,
+                }
+              )}
               onChange={handleClientNameChange}
               value={createClient?.name}
             />
           </div>
-          <div className="text-[14px] flex gap-2 items-center">
+          <div
+            className={clsx("text-[14px] flex gap-2 items-center", {
+              "text-dark-dark-text": isDark,
+            })}
+          >
             <span>
               Pago/
               <span className="font-semibold">
@@ -125,7 +138,13 @@ export default function EditPotentialCustomerForm({
             <div className="w-20">
               <input
                 type="number"
-                className="w-full h-8 border border-gray-200 rounded-md"
+                className={clsx(
+                  "w-full h-8 border border-gray-200 rounded-md",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                    "border-dark-dark-border": isDark,
+                  }
+                )}
                 onChange={handlePaidAmount}
                 value={createClient?.paid_amount}
               />
@@ -148,11 +167,7 @@ export default function EditPotentialCustomerForm({
                 >
                   <option>Estado</option>
                   {stateClient.map((state) => (
-                    <option
-                      key={state.status}
-                      value={state.status}
-                      // selected={state.status === createClient.status}
-                    >
+                    <option key={state.status} value={state.status}>
                       {state.label}
                     </option>
                   ))}
@@ -171,11 +186,7 @@ export default function EditPotentialCustomerForm({
                 >
                   <option>Pago</option>
                   {paidTypeClient.map((type) => (
-                    <option
-                      key={type.type}
-                      value={type.type}
-                      // selected={type.type === createClient.paid_type}
-                    >
+                    <option key={type.type} value={type.type}>
                       {type.label}
                     </option>
                   ))}
@@ -186,10 +197,6 @@ export default function EditPotentialCustomerForm({
         </div>
       </div>
       <div className="absolute top-[4px] right-[4px]">
-        {/* <Button
-          className="px-1 py-1 rounded-full"
-          onClick={handleDeleteClient}
-        ></Button> */}
         <div
           className=" flex text-white items-center rounded-full p-1  bg-secondary-green-500 cursor-pointer hover:bg-green-600 transition-colors"
           onClick={handleDeletePotentialCustomer}

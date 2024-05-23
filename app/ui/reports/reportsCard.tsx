@@ -1,5 +1,7 @@
+import { useStore } from "@/app/lib/store";
 import { AttachReports } from "../buttons";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 
 type ReportsProps = {
   id: string;
@@ -16,28 +18,31 @@ export function ReportsCard({
   setReportId,
   setShowModal,
 }: ReportsProps) {
-  // console.log("id-attach", id);
+  const { isDark } = useStore();
   const handleDeleteReport = () => {
-    // console.log("Delete report", name);
     setReportId(id);
     setShowModal(true);
   };
   return (
     <>
-      <div className="relative">
-        <div className="rounded-md border border-gray-200 flex justify-between items-center p-6">
+      <div
+        className={clsx("relative rounded-md border border-gray-200 p-6", {
+          "bg-dark-dark-background-card": isDark,
+          "border-dark-dark-border": isDark,
+        })}
+      >
+        <div className="flex justify-between items-center">
           <div>
-            <div>
+            <div
+              className={clsx("font-medium", {
+                "text-dark-dark-text": isDark,
+              })}
+            >
               {name} - {templateName}
             </div>
           </div>
           <div className="flex gap-2 pr-2">
             <AttachReports id={id} name={name} />
-            {/* <div className="rounded-md border border-gray-200 p-2">Editar</div>
-            <div className="rounded-md border border-gray-200 p-2">
-              Descargar
-            </div> */}
-            {/* <DeleteReport id={name} /> */}
           </div>
         </div>
         <div className="absolute top-[4px] right-[4px]">

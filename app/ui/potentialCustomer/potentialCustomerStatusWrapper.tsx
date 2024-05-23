@@ -28,7 +28,7 @@ export default function PotentialCustomerStatusWrapper({
     }
   };
   return (
-    <div className="w-full bg-white flex justify-between mt-6 lg:mt-0 lg:gap-2">
+    <div className="w-full flex justify-between mt-6 lg:mt-0 lg:gap-2">
       {statusArray.map((data) => (
         <div key={data.status}>
           <PotentialCustomerStatusCard

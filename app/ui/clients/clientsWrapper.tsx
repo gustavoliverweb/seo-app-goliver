@@ -8,6 +8,10 @@ import { deleteClient } from "@/app/lib/actions";
 import { useSearchParams, useRouter } from "next/navigation";
 import ConfirmModal from "../confirmModal";
 import { sumSubTotalClients } from "@/app/lib/utils";
+import { CreateClient } from "../buttons";
+import Pagination from "../pagination";
+import { useStore } from "@/app/lib/store";
+import clsx from "clsx";
 
 interface Client {
   id: string;
@@ -30,12 +34,15 @@ type Data = {
 export default function ClientsWrapper({
   clients = [],
   currentPage,
+  clientsPages,
   query,
 }: {
   clients: Clients[];
   currentPage: number;
+  clientsPages: number;
   query: string;
 }) {
+  const { isDark } = useStore();
   const [clientsData, setClientsData] = useState([]);
   const [totalClients, setTotalClients] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -108,51 +115,91 @@ export default function ClientsWrapper({
 
   return (
     <>
-      <div className="flex flex-col gap-8">
-        {clientsData.length > 0 &&
-          clientsData.map((client) =>
-            Object.keys(client).map((agencyName) => (
-              <div key={agencyName}>
-                <div className="flex justify-between">
-                  <h3 className="font-semibold text-[20px]">{agencyName}</h3>
-                  <div className="font-semibold">
-                    {sumSubTotalClients(client, agencyName)} $
-                  </div>
-                </div>
-                <div className="bg-white grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-rows-[auto,_auto] gap-4  mt-6">
-                  {client[agencyName].map((client) => (
-                    <div key={client.name}>
-                      <ClientsCard
-                        client={client}
-                        showModal={showModal}
-                        setShowModal={setShowModal}
-                        setClientData={setClientData}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))
+      <div className="items-start mt-6 w-full flex flex-col gap-6 px-6">
+        <div
+          className={clsx(
+            "p-5 rounded-2xl lg:flex justify-between items-center w-full transition",
+            {
+              "bg-white": !isDark,
+              "bg-dark-dark-background-panels": isDark,
+            }
           )}
-      </div>
-      <div className="flex justify-between font-semibold text-[24px] my-6">
-        <div>Total:</div>
-        <div>
-          {totalClients.length > 0 &&
-            totalClients.reduce((acc, curr) => {
-              return acc + sumSubTotalClients(curr, Object.keys(curr)[0]);
-            }, 0)}
-          $
+        >
+          <h3
+            className={clsx(
+              "text-title font-medium text-primary-text-500 transition",
+              {
+                "text-primary-text-500": !isDark,
+                "text-white": isDark,
+              }
+            )}
+          >
+            Clientes
+          </h3>
+          <CreateClient />
+        </div>
+        <div
+          className={clsx(
+            "h-max overflow-auto bg-white p-5 rounded-2xl w-full flex-grow flex flex-col justify-between transition",
+            {
+              "bg-dark-dark-background-panels": isDark,
+              "text-dark-dark-text": isDark,
+            }
+          )}
+        >
+          <div className="flex flex-col gap-8">
+            {clientsData.length > 0 &&
+              clientsData.map((client) =>
+                Object.keys(client).map((agencyName) => (
+                  <div key={agencyName}>
+                    <div className="flex justify-between">
+                      <h3 className="font-semibold text-[20px]">
+                        {agencyName}
+                      </h3>
+                      <div className="font-semibold">
+                        {sumSubTotalClients(client, agencyName)} $
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-rows-[auto,_auto] gap-4  mt-6">
+                      {client[agencyName].map((client) => (
+                        <div key={client.name}>
+                          <ClientsCard
+                            client={client}
+                            showModal={showModal}
+                            setShowModal={setShowModal}
+                            setClientData={setClientData}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))
+              )}
+          </div>
+          <div className="flex justify-between font-semibold text-[24px] my-6">
+            <div>Total:</div>
+            <div>
+              {totalClients.length > 0 &&
+                totalClients.reduce((acc, curr) => {
+                  return acc + sumSubTotalClients(curr, Object.keys(curr)[0]);
+                }, 0)}
+              $
+            </div>
+          </div>
+          <ConfirmModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            handleSubmit={handleSubmit}
+          >
+            ¿Estas seguro de eliminar el cliente{" "}
+            <span className="font-medium">{clientData.name}</span> ?
+          </ConfirmModal>
+
+          <div className="mt-5 flex w-full ">
+            <Pagination totalPages={clientsPages} />
+          </div>
         </div>
       </div>
-      <ConfirmModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        handleSubmit={handleSubmit}
-      >
-        ¿Estas seguro de eliminar el cliente{" "}
-        <span className="font-medium">{clientData.name}</span> ?
-      </ConfirmModal>
     </>
   );
 }

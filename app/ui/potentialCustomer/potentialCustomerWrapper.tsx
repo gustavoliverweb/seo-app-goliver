@@ -11,6 +11,7 @@ import {
   sumTotalPotentialCustomer,
 } from "@/app/lib/utils";
 import { useStore } from "@/app/lib/store";
+import clsx from "clsx";
 
 export default function PotentialCustomerWrapper({
   customers = [],
@@ -23,13 +24,12 @@ export default function PotentialCustomerWrapper({
   query: string;
   currentPage: number;
 }) {
+  const { isDark } = useStore();
   const { showCreateClient, setShowCreateClient, customersData, setCustomers } =
     useStore();
   const uiArray = Object.assign([], customersData);
   const reverseArray = uiArray.reverse();
-  console.log(customersData);
   useEffect(() => {
-    console.log(customers);
     setCustomers(customers);
   }, [currentPage]);
 
@@ -63,8 +63,24 @@ export default function PotentialCustomerWrapper({
   return (
     <div className="pb-6 flex flex-grow">
       <div className="items-start justify-between mt-6 w-full flex flex-col px-5 gap-6">
-        <div className="bg-white p-5  rounded-2xl lg:flex justify-between items-center w-full">
-          <h3 className="text-title text-primary-text-500 font-medium">
+        <div
+          className={clsx(
+            "p-5 rounded-2xl lg:flex justify-between items-center w-full transition",
+            {
+              "bg-white": !isDark,
+              "bg-dark-dark-background-panels": isDark,
+            }
+          )}
+        >
+          <h3
+            className={clsx(
+              "text-title font-medium text-primary-text-500 transition",
+              {
+                "text-primary-text-500": !isDark,
+                "text-white": isDark,
+              }
+            )}
+          >
             Clientes potenciales
           </h3>
           <Button
@@ -83,7 +99,12 @@ export default function PotentialCustomerWrapper({
                 ? "space-between"
                 : "flex-end",
           }}
-          className="bg-white  p-4 md:p-6 rounded-2xl w-full flex-grow flex flex-col"
+          className={clsx(
+            "bg-white  p-4 md:p-6 rounded-2xl w-full flex-grow flex flex-col transition",
+            {
+              "bg-dark-dark-background-panels": isDark,
+            }
+          )}
         >
           <div className="flex flex-col gap-4">
             {showCreateClient ? <PotentialCustomerCardDefault /> : null}
@@ -93,7 +114,7 @@ export default function PotentialCustomerWrapper({
                 <PotentialCustomerCard key={customer.id} customers={customer} />
               ))}
           </div>
-          <div className="relative h-max overflow-auto mt-6 bg-white p-2  rounded-2xl w-full">
+          <div className="relative h-max overflow-auto mt-6 p-2  rounded-2xl w-full">
             <div className="flex justify-between">
               <div>
                 <div className="font-semibold text-[24px]">Total:</div>

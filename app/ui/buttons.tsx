@@ -1,5 +1,7 @@
 import { PencilIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useStore } from "../lib/store";
+import clsx from "clsx";
 
 export function CreateAgency() {
   return (
@@ -62,7 +64,7 @@ export function CreateReport() {
   return (
     <Link
       href="/dashboard/reports/create"
-      className="flex mt-3 h-10 items-center rounded-lg bg-primary-button-500 p-6 text-sm  text-white transition-colors hover:bg-secondary-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+      className="flex mt-3 md:mt-0 h-10 items-center rounded-lg bg-primary-button-500 p-6 text-sm  text-white transition-colors hover:bg-secondary-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
     >
       <span className="text-base">Nuevo informe</span>{" "}
       <PlusIcon className="h-5 md:ml-4" />
@@ -96,11 +98,17 @@ export async function deleteImageId({ id }: { id: string }) {
 }
 
 export function AttachReports({ id, name }: { id: string; name: string }) {
-  // console.log(name);
+  const { isDark } = useStore();
   return (
     <Link
       href={`/dashboard/reports/attach/${id}?report=${name}`}
-      className="flex items-center rounded-md border border-gray-200 p-2 text-sm  text-primary-text-500 transition-colors hover:bg-secondary-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+      className={clsx(
+        "flex items-center rounded-md border border-gray-200 p-2 text-sm  text-primary-text-500 transition-colors hover:bg-secondary-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600",
+        {
+          "text-dark-dark-text": isDark,
+          "border-dark-dark-border": isDark,
+        }
+      )}
     >
       <span className="text-base">Adjuntar</span>{" "}
     </Link>
