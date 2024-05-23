@@ -4,8 +4,8 @@ import { Customer } from "@/app/lib/definitions";
 import EditPotentialCustomerForm from "./editPotentialCustomerForm";
 import { useState } from "react";
 import { deletePotentialCustomer } from "@/app/lib/actions";
-import { useStore } from "./potentialCustomerWrapper";
 import ConfirmModal from "../confirmModal";
+import { useStore } from "@/app/lib/store";
 
 export function PotentialCustomerCard({ customers }: { customers: Customer }) {
   const [showModal, setShowModal] = useState(false);

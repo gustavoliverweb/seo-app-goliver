@@ -18,6 +18,13 @@ const config: Config = {
       },
 
       colors: {
+        dark: {
+          "dark-background": "#111111",
+          "dark-background-panels": "#171717",
+          "dark-background-card": "#1F1F1F",
+          "dark-text": "#FFFFFF",
+          "dark-border": "#8C95A6",
+        },
         blue: {
           400: "#2589FE",
           500: "#0070F3",

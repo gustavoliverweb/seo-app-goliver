@@ -1,21 +1,31 @@
 "use client";
 import { AgencyCard } from "./agencyCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ConfirmModal from "../confirmModal";
 import { AgencyTemplate } from "@/app/lib/definitions";
 import { deleteAgencyTemplate } from "@/app/lib/actions";
+import { CreateAgency } from "../buttons";
+import Pagination from "../pagination";
+import { useStore } from "@/app/lib/store";
+import clsx from "clsx";
 
 export default function WrapperAgency({
   agencys,
+  agencyPages,
 }: {
   agencys: AgencyTemplate[];
+  agencyPages: number;
 }) {
+  const { isDark } = useStore();
   const [showModal, setShowModal] = useState(false);
   const [agencyData, setAgencyData] = useState({
     id: "",
     name: "",
   });
   const deleteAgencyWithId = deleteAgencyTemplate.bind(null, agencyData.id);
+  useEffect(() => {
+    console.log(isDark);
+  }, [isDark]);
   if (!agencys?.length) {
     return (
       <div className="flex flex-grow justify-center items-center">
@@ -36,25 +46,63 @@ export default function WrapperAgency({
     // }
   };
   return (
-    <div className="bg-white grid place-items-center grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-rows-[auto,_auto] gap-4 mt-6">
-      {agencys &&
-        agencys.map((agency) => (
-          <div key={agency.id}>
-            <AgencyCard
-              agency={agency}
-              setShowModal={setShowModal}
-              setAgencyData={setAgencyData}
-            />
-          </div>
-        ))}
-      <ConfirmModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        handleSubmit={handleSubmit}
+    <div className="items-start mt-6 w-full flex flex-col px-5 gap-6">
+      <div
+        className={clsx(
+          "p-5 rounded-2xl lg:flex justify-between items-center w-full transition",
+          {
+            "bg-white": !isDark,
+            "bg-dark-dark-background-panels": isDark,
+          }
+        )}
       >
-        ¿Estas seguro de eliminar la plantilla{" "}
-        <span className="font-medium">{agencyData.name}</span> ?
-      </ConfirmModal>
+        <h3
+          className={clsx(
+            "text-title font-medium text-primary-text-500 transition",
+            {
+              "text-primary-text-500": !isDark,
+              "text-white": isDark,
+            }
+          )}
+        >
+          Plantillas de informes
+        </h3>
+        <CreateAgency />
+      </div>
+      <div
+        className={clsx(
+          "relative h-max overflow-auto p-5 rounded-2xl w-full flex-grow flex flex-col justify-between transition",
+          {
+            "bg-white": !isDark,
+            "bg-dark-dark-background-panels": isDark,
+          }
+        )}
+      >
+        <div className="grid place-items-center grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-rows-[auto,_auto] gap-4 mt-6">
+          {agencys &&
+            agencys.map((agency) => (
+              <div key={agency.id}>
+                <AgencyCard
+                  agency={agency}
+                  setShowModal={setShowModal}
+                  setAgencyData={setAgencyData}
+                />
+              </div>
+            ))}
+          <ConfirmModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            handleSubmit={handleSubmit}
+          >
+            ¿Estas seguro de eliminar la plantilla{" "}
+            <span className="font-medium">{agencyData.name}</span> ?
+          </ConfirmModal>
+        </div>
+
+        <div className="mt-5 flex w-full ">
+          <Pagination totalPages={agencyPages} />
+        </div>
+      </div>
     </div>
   );
 }

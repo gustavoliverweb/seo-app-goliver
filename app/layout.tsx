@@ -1,6 +1,6 @@
 import "@/app/ui/global.css";
-import { inter } from "@/app/ui/fonts";
 import { Metadata, Viewport } from "next";
+import LayoutClient from "./ui/layoutClient";
 
 export const metadata: Metadata = {
   manifest: "/manifest.json",
@@ -24,12 +24,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      {/* <link rel="icon" href="/images/icon.png" sizes="any" /> */}
-      <body className={`${inter.className} antialiased bg-[#F0F1F3]`}>
-        {children}
-      </body>
-    </html>
-  );
+  return <LayoutClient children={children} />;
 }

@@ -5,7 +5,7 @@ export function CreateAgency() {
   return (
     <Link
       href="/dashboard/agency/create"
-      className="flex mt-3 h-10 items-center rounded-lg bg-primary-button-500 p-6 text-sm  text-white transition-colors hover:bg-secondary-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+      className="flex mt-3 md:mt-0 h-10 items-center rounded-lg bg-primary-button-500 p-6 text-sm  text-white transition-colors hover:bg-secondary-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
     >
       <span className="text-base">Nueva agencia</span>{" "}
       <PlusIcon className="h-5 md:ml-4" />

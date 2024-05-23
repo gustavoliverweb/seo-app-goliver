@@ -1,5 +1,5 @@
 import { signOut } from "@/auth";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import LogoutButtonUi from "./logoutButtonUi";
 
 export async function LogoutButton() {
   return (
@@ -9,10 +9,7 @@ export async function LogoutButton() {
         await signOut();
       }}
     >
-      <button className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100  md:flex-none md:justify-start md:p-2 md:px-3">
-        <ArrowLeftIcon className="w-6" />
-        <div className="hidden md:block">Cerrar sesión</div>
-      </button>
+      <LogoutButtonUi />
     </form>
   );
 }

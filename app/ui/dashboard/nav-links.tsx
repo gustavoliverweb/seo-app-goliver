@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { useStore } from "@/app/lib/store";
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -33,6 +34,7 @@ const links = [
 
 export default function NavLinks() {
   const pathname = usePathname();
+  const { isDark } = useStore();
   return (
     <>
       {links.map((link) => {
@@ -42,9 +44,14 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              "flex h-[48px] grow items-center  gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100  md:flex-none md:justify-start md:p-2 md:px-3",
+              "flex h-[48px] grow items-center  gap-2 rounded-mdp-3 text-sm font-medium hover:bg-green-100  md:flex-none md:justify-start md:p-2 md:px-3 transition",
               {
                 "text-primary-button-500": pathname === link.href,
+                "bg-gray-50": !isDark,
+                "bg-dark-dark-background-panels": isDark,
+                "text-white": isDark && pathname !== link.href,
+                "hover:text-dark-dark-background-panels":
+                  isDark && pathname !== link.href,
               }
             )}
           >

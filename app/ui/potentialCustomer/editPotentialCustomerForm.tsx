@@ -2,9 +2,9 @@
 import { createPotentialCustomer } from "@/app/lib/actions";
 import { useEffect, useState } from "react";
 import PotentialCustomerStatusWrapper from "./potentialCustomerStatusWrapper";
-import { useStore } from "./potentialCustomerWrapper";
 import { Customer } from "@/app/lib/definitions";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useStore } from "@/app/lib/store";
 
 export default function EditPotentialCustomerForm({
   customers,

@@ -1,6 +1,6 @@
 import SideNav from "@/app/ui/dashboard/sidenav";
-import Search from "@/app/ui/search";
 import { LogoutButton } from "@/app/ui/logoutButton";
+import TopNav from "./topNav";
 
 export default function LayoutComponent({
   children,
@@ -15,9 +15,7 @@ export default function LayoutComponent({
         </SideNav>
       </div>
       <div className="flex-grow  md:overflow-y-auto flex flex-col">
-        <div className=" flex flex-col items-center justify-between gap-2  md:flex-row bg-white p-5">
-          <Search />
-        </div>
+        <TopNav />
         {children}
       </div>
     </div>

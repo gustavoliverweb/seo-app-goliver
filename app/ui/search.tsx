@@ -3,6 +3,8 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
+import { useStore } from "../lib/store";
+import clsx from "clsx";
 
 export default function Search() {
   const searchParams = useSearchParams();
@@ -11,6 +13,7 @@ export default function Search() {
   const sliceUrl = pathname.split("/");
   const route = sliceUrl[sliceUrl.length - 1];
   const attachRoute = pathname.includes("attach");
+  const { isDark } = useStore();
   const addLabel = () => {
     switch (route) {
       case "dashboard":
@@ -47,7 +50,15 @@ export default function Search() {
         Search
       </label>
       <input
-        className="peer  block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+        className={clsx(
+          "peer block w-full rounded-md border py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 transition",
+          {
+            "bg-white": !isDark,
+            "bg-dark-dark-background-panels": isDark,
+            "border-gray-200": !isDark,
+            "border-dark-dark-border": isDark,
+          }
+        )}
         placeholder={`Buscar ${addLabel()}`}
         onChange={(e) => handleSearch(e.target.value)}
         defaultValue={searchParams.get("query")?.toString()}

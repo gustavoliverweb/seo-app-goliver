@@ -3,8 +3,8 @@
 import { createPotentialCustomer } from "@/app/lib/actions";
 import { useEffect, useState } from "react";
 import PotentialCustomerStatusWrapper from "./potentialCustomerStatusWrapper";
-import { useStore } from "./potentialCustomerWrapper";
 import { ramdomSecureId } from "@/app/lib/utils";
+import { useStore } from "@/app/lib/store";
 
 export default function CreatePotentialCustomerForm() {
   const initialState = {

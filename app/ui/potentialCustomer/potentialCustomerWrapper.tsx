@@ -5,36 +5,12 @@ import { Button } from "../button";
 // import Pagination from "../pagination";
 import { PotentialCustomerCard } from "./potentialCustomerCard";
 import { PotentialCustomerCardDefault } from "./potentialCustomerCardDefault";
-import { create } from "zustand";
 import { useEffect } from "react";
 import {
   sumSubTotalPotentialCustomer,
   sumTotalPotentialCustomer,
 } from "@/app/lib/utils";
-
-type Store = {
-  customersData: Customer[];
-  isSendForm: boolean;
-  showCreateClient: boolean;
-  setSendForm: (sendForm: boolean) => void;
-  setShowCreateClient: (showCreateClient: boolean) => void;
-  setCustomers: (customer: Customer[]) => void;
-};
-
-export const useStore = create<Store>()((set) => ({
-  customersData: [],
-  // idsToDelete: [],
-  isSendForm: false,
-  showCreateClient: false,
-  setSendForm: (sendForm) => set({ isSendForm: sendForm }),
-  setShowCreateClient: (showCreateClient) =>
-    set({ showCreateClient: showCreateClient }),
-  setCustomers: (customer) => set(() => ({ customersData: customer })),
-  // setIdsToDelete: (id) =>
-  //   set((state) => ({ idsToDelete: [...state.idsToDelete, id] })),
-  // arrayShow: [],
-  // setArrayShow: (array) => set({ arrayShow: array }),
-}));
+import { useStore } from "@/app/lib/store";
 
 export default function PotentialCustomerWrapper({
   customers = [],

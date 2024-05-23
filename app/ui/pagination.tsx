@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { generatePagination } from "../lib/utils";
+import { useStore } from "../lib/store";
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
   // NOTE: comment in this code when you get to this point in the course
@@ -27,7 +28,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
         <PaginationArrow
           direction="left"
           href={createPageURL(currentPage - 1)}
-          // isDisabled={currentPage <= 1}
+          isDisabled={currentPage <= 1}
         />
         {/* <div>
           Pagina {currentPage} de {totalPages}
@@ -75,6 +76,7 @@ function PaginationNumber({
   position?: "first" | "last" | "middle" | "single";
   isActive: boolean;
 }) {
+  const { isDark } = useStore();
   const className = clsx(
     "flex h-10 w-10 items-center justify-center text-sm border",
     {
@@ -84,6 +86,10 @@ function PaginationNumber({
         isActive,
       "hover:bg-green-100": !isActive && position !== "middle",
       "text-gray-300": position === "middle",
+      "border-dark-dark-border": !isActive && position !== "middle" && isDark,
+      "text-white": !isActive && position !== "middle" && isDark,
+      "hover:text-dark-dark-background-panels":
+        !isActive && position !== "middle" && isDark,
     }
   );
 
@@ -105,6 +111,7 @@ function PaginationArrow({
   direction: "left" | "right";
   isDisabled?: boolean;
 }) {
+  const { isDark } = useStore();
   const className = clsx(
     "flex h-10 px-6 items-center justify-center rounded-md border",
     {
@@ -112,6 +119,9 @@ function PaginationArrow({
       "hover:bg-green-100": !isDisabled,
       "mr-2 md:mr-4": direction === "left",
       "ml-2 md:ml-4": direction === "right",
+      "text-dark-dark-border": isDisabled && isDark,
+      "text-dark-dark-text": !isDisabled && isDark,
+      "hover:text-dark-dark-background-panels": !isDisabled && isDark,
     }
   );
 
