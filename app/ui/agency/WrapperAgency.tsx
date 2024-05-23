@@ -5,15 +5,13 @@ import ConfirmModal from "../confirmModal";
 import { AgencyTemplate } from "@/app/lib/definitions";
 import { deleteAgencyTemplate } from "@/app/lib/actions";
 import { CreateAgency } from "../buttons";
-import Pagination from "../pagination";
 import { useStore } from "@/app/lib/store";
 import clsx from "clsx";
 
 export default function WrapperAgency({
   agencys,
-  agencyPages,
 }: {
-  agencys: AgencyTemplate[];
+  agencys: AgencyTemplate[] | undefined;
   agencyPages: number;
 }) {
   const { isDark } = useStore();
@@ -97,10 +95,6 @@ export default function WrapperAgency({
             ¿Estas seguro de eliminar la plantilla{" "}
             <span className="font-medium">{agencyData.name}</span> ?
           </ConfirmModal>
-        </div>
-
-        <div className="mt-5 flex w-full ">
-          <Pagination totalPages={agencyPages} />
         </div>
       </div>
     </div>

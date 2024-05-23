@@ -13,7 +13,6 @@ export default async function Page({
   const currentPage = Number(searchParams?.page) || 1;
   const query = searchParams?.query || "";
   const reports = await fetchFilteredReports(query, currentPage);
-  console.log(reports);
   return (
     <div className="relative pb-6 flex flex-grow">
       <div className="items-start mt-6 w-full flex flex-col gap-6 px-6">
