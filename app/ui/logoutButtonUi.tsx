@@ -8,12 +8,14 @@ export default function LogoutButtonUi() {
   return (
     <button
       className={clsx(
-        "flex w-full items-center justify-center gap-2  p-3 text-sm font-medium hover:bg-green-100  md:flex-none md:justify-start md:p-2 md:px-3 transition",
+        "flex w-full items-center justify-center gap-2  p-3 text-sm font-medium  md:flex-none md:justify-start md:p-2 md:px-3 transition",
         {
           "bg-white": !isDark,
           "bg-dark-dark-background-panels": isDark,
           "text-dark-dark-text": isDark,
-          "hover:text-dark-dark-background-panels": isDark,
+          "hover:bg-dark-dark-background-card": isDark,
+          "hover:text-dark-dark-text": isDark,
+          "hover:bg-green-100": !isDark,
         }
       )}
     >

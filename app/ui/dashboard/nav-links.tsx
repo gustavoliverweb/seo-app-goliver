@@ -47,7 +47,6 @@ export default function NavLinks() {
               "flex h-[48px] grow items-center  gap-2 rounded-mdp-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3 transition",
               {
                 "text-primary-button-500": pathname === link.href,
-                "bg-gray-50": !isDark,
                 "bg-dark-dark-background-panels": isDark,
                 "text-white": isDark && pathname !== link.href,
                 "hover:text-dark-dark-text": isDark && pathname !== link.href,

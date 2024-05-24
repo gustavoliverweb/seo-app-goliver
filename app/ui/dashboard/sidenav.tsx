@@ -55,7 +55,7 @@ export default function SideNav({ children }: { children: React.ReactNode }) {
       </div>
       <div
         className={clsx(
-          "md:flex grow justify-between flex-col md:space-x-0 md:space-y-2 overflow-auto",
+          "md:flex grow justify-between flex-col md:space-x-0 md:space-y-2 overflow-auto lg:rounded-br-2xl",
           {
             flex: openMenu,
             hidden: !openMenu,
