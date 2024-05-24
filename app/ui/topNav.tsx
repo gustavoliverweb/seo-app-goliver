@@ -9,7 +9,7 @@ export default function TopNav() {
   return (
     <div
       className={clsx(
-        "flex flex-col items-center justify-between gap-2  md:flex-row bg-white p-5 transition",
+        "flex flex-col items-center justify-between gap-2  md:flex-row p-5 transition",
         {
           "bg-dark-dark-background-panels": isDark,
           "bg-white": !isDark,

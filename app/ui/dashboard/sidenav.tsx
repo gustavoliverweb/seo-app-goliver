@@ -20,13 +20,10 @@ export default function SideNav({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className={clsx(
-        "flex h-full flex-col bg-white rounded-br-2xl transition",
-        {
-          "bg-white": !isDark,
-          "bg-dark-dark-background-panels": isDark,
-        }
-      )}
+      className={clsx("flex h-full flex-col rounded-br-2xl transition", {
+        "bg-white": !isDark,
+        "bg-dark-dark-background-panels": isDark,
+      })}
     >
       <div className="flex justify-between items-center">
         <Link

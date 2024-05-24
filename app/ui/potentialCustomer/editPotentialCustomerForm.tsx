@@ -109,7 +109,7 @@ export default function EditPotentialCustomerForm({
           <div className="w-full">
             <input
               className={clsx(
-                "w-full border border-gray-200 rounded-md text-ellipsis",
+                "w-full border border-gray-200 rounded-md text-ellipsis transition",
                 {
                   "bg-dark-dark-background-panels": isDark,
                   "border-dark-dark-border": isDark,
@@ -121,7 +121,7 @@ export default function EditPotentialCustomerForm({
             />
           </div>
           <div
-            className={clsx("text-[14px] flex gap-2 items-center", {
+            className={clsx("text-[14px] flex gap-2 items-center transition", {
               "text-dark-dark-text": isDark,
             })}
           >
@@ -139,7 +139,7 @@ export default function EditPotentialCustomerForm({
               <input
                 type="number"
                 className={clsx(
-                  "w-full h-8 border border-gray-200 rounded-md",
+                  "w-full h-8 border border-gray-200 rounded-md transition",
                   {
                     "bg-dark-dark-background-panels": isDark,
                     "border-dark-dark-border": isDark,
@@ -162,7 +162,14 @@ export default function EditPotentialCustomerForm({
                   onChange={handleChangeStatus}
                   name="select-template"
                   aria-describedby="select-template-error"
-                  className="w-full xl:w-fit rounded-md  border border-gray-200 pr-8 pl-4 py-2"
+                  className={clsx(
+                    "w-full xl:w-fit rounded-md  border border-gray-200 pl-4 pr-10 py-2 transition",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "border-dark-dark-border": isDark,
+                      "text-dark-dark-text": isDark,
+                    }
+                  )}
                   value={createClient.status}
                 >
                   <option>Estado</option>
@@ -181,7 +188,14 @@ export default function EditPotentialCustomerForm({
                   onChange={handleChangePaidType}
                   name="select-template"
                   aria-describedby="select-template-error"
-                  className="w-full xl:w-fit rounded-md  border border-gray-200 pl-4 pr-10 py-2"
+                  className={clsx(
+                    "w-full xl:w-fit rounded-md  border border-gray-200 pl-4 pr-10 py-2 transition",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "border-dark-dark-border": isDark,
+                      "text-dark-dark-text": isDark,
+                    }
+                  )}
                   value={createClient.paid_type}
                 >
                   <option>Pago</option>

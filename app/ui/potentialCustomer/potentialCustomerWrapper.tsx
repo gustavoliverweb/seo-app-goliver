@@ -91,18 +91,11 @@ export default function PotentialCustomerWrapper({
           </Button>
         </div>
         <div
-          style={{
-            justifyContent:
-              showCreateClient ||
-              reverseArray.length > 0 ||
-              customers.length > 0
-                ? "space-between"
-                : "flex-end",
-          }}
           className={clsx(
-            "bg-white  p-4 md:p-6 rounded-2xl w-full flex-grow flex flex-col transition",
+            " p-4 md:p-6 rounded-2xl w-full flex-grow flex flex-col transition",
             {
               "bg-dark-dark-background-panels": isDark,
+              "bg-white": !isDark,
             }
           )}
         >

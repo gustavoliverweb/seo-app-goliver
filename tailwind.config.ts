@@ -23,6 +23,7 @@ const config: Config = {
           "dark-background-panels": "#171717",
           "dark-background-card": "#1F1F1F",
           "dark-text": "#FFFFFF",
+          "text-potential-customer": "#FFFFFF",
           "dark-border": "#8C95A6",
         },
         blue: {

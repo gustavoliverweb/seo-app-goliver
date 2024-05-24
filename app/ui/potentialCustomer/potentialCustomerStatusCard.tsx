@@ -13,13 +13,16 @@ export default function PotentialCustomerStatusCard({
     <div
       style={{
         background: className,
-        // color: className ? "white" : "black",
         border: className ? "1px solid transparent" : "1px solid #D0D5DD",
       }}
-      className={clsx("w-fit rounded-full border border-gray-200 px-4 py-2", {
-        "text-dark-dark-text": isDark && className,
-        "text-black": !isDark && className,
-      })}
+      className={clsx(
+        "w-fit rounded-full border border-gray-200 px-4 py-2 transition",
+        {
+          "text-dark-dark-text": isDark && className,
+          "text-white": isDark && !className,
+          "text-dark-text-potential-customer": !isDark && className,
+        }
+      )}
     >
       <div className="text-[12px]">{label}</div>
     </div>
