@@ -6,6 +6,8 @@ import { Button } from "../button";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ColorPicker } from "../colorPicker";
+import { useStore } from "@/app/lib/store";
+import clsx from "clsx";
 
 type Agency = {
   agency_name: string;
@@ -23,6 +25,7 @@ export default function CreateClientForm({ agencys }: { agencys: Agency[] }) {
   const [showBackgroundCard, setShowBackgroundCard] = useState<boolean>(false);
   const [selectAgency, setSelectAgency] = useState<string[]>([]);
   const backGroudCardRef = useRef<HTMLInputElement>(null);
+  const { isDark } = useStore();
 
   useEffect(() => {
     const uniqueAgency = new Set(agencys);
@@ -88,7 +91,12 @@ export default function CreateClientForm({ agencys }: { agencys: Agency[] }) {
           <div className="w-fit relative mt-2 rounded-md">
             <div className="relative flex items-center">
               <select
-                className="w-[360px] rounded-md border border-gray-200"
+                className={clsx(
+                  "w-[360px] rounded-md border border-gray-200 transition",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                  }
+                )}
                 onChange={(e) => setAgencyName(e.target.value)}
               >
                 {selectAgency.map((agency) => (
@@ -104,7 +112,12 @@ export default function CreateClientForm({ agencys }: { agencys: Agency[] }) {
                 name="agency_name"
                 type="text"
                 placeholder="Introduce el nombre de la agencia"
-                className="form-input w-[320px] h-8 absolute left-1 block md:w-80 border-0 py-2 text-sm focus:outline-none placeholder:text-gray-500"
+                className={clsx(
+                  "form-input w-[320px] h-8 absolute left-1 block md:w-80 border-0 py-2 text-sm focus:outline-none placeholder:text-gray-500 transition",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                  }
+                )}
                 aria-describedby="agency_name-error"
                 value={agencyName}
               />
@@ -136,7 +149,12 @@ export default function CreateClientForm({ agencys }: { agencys: Agency[] }) {
                 name="client_name"
                 type="text"
                 placeholder="Introduce el nombre del cliente"
-                className="block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-1 placeholder:text-gray-500"
+                className={clsx(
+                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-1 placeholder:text-gray-500 transition",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                  }
+                )}
                 aria-describedby="client_name-error"
               />
             </div>
@@ -169,7 +187,12 @@ export default function CreateClientForm({ agencys }: { agencys: Agency[] }) {
                 name="monthly_payment"
                 type="number"
                 placeholder="Introduce un monto"
-                className="block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 placeholder:text-gray-500"
+                className={clsx(
+                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-1 placeholder:text-gray-500 transition",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                  }
+                )}
                 aria-describedby="monthly_payment-error"
               />
             </div>
@@ -194,7 +217,12 @@ export default function CreateClientForm({ agencys }: { agencys: Agency[] }) {
             <div className="relative w-fit">
               <label
                 htmlFor="logo_url_valid"
-                className="w-full md:w-80 rounded-md border border-gray-200 cursor-pointer py-10 flex justify-center items-center"
+                className={clsx(
+                  "w-full md:w-80 rounded-md border border-gray-200 cursor-pointer py-10 flex justify-center items-center",
+                  {
+                    "text-dark-dark-border": isDark,
+                  }
+                )}
               >
                 {loadingImage ? (
                   <span className="loader"></span>
