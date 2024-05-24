@@ -9,13 +9,15 @@ import { useState } from "react";
 import { AgencyTemplate, UserType } from "@/app/lib/definitions";
 import SuccessModal from "../successModal";
 import ErrorModal from "../errorModal";
+import clsx from "clsx";
+import { useStore } from "@/app/lib/store";
 
 export default function SendReportForm({
   templateData,
   users,
 }: {
-  templateData: AgencyTemplate[];
-  users: UserType[];
+  templateData: AgencyTemplate[] | undefined;
+  users: UserType[] | undefined;
 }) {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(CreateReportAction, initialState);
@@ -29,6 +31,7 @@ export default function SendReportForm({
   const [loadingSendMail, setLoadingSendMail] = useState<boolean>(false);
   const [showModalSuccess, setShowModalSuccess] = useState<boolean>(false);
   const [showModalError, setShowModalError] = useState<boolean>(false);
+  const { isDark } = useStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const target = e.target;
@@ -91,7 +94,15 @@ export default function SendReportForm({
 
   return (
     <>
-      <div className="fake-div rounded-br-2xl hidden lg:block col-start-2 bg-white"></div>
+      <div
+        className={clsx(
+          "fake-div rounded-br-2xl hidden lg:block col-start-2 mb-3 transition",
+          {
+            "bg-dark-dark-background-panels": isDark,
+            "bg-white": !isDark,
+          }
+        )}
+      ></div>
       <SuccessModal showModal={showModalSuccess}>
         <div>
           <div className="text-[24px] text-errors-success-dark font-medium">
@@ -114,9 +125,24 @@ export default function SendReportForm({
       </ErrorModal>
       <form
         action={dispatch}
-        className="form-grid-report bg-[#F0F1F3] lg:col-start-1 lg:row-start-1 lg:row-end-3 lg:grid lg:grid-cols-1 lg:grid-rows-2 lg:gap-y-6"
+        className={clsx(
+          "lg:col-start-1 lg:row-start-1 lg:row-end-3 lg:grid lg:grid-cols-1 lg:grid-rows-2 lg:gap-y-6 transition",
+          {
+            "bg-[#F0F1F3]": !isDark,
+            "bg-dark-dark-background": isDark,
+            "text-dark-dark-text": isDark,
+          }
+        )}
       >
-        <div className="rounded-bl-2xl rounded-br-2xl lg:rounded-br-[0px] p-4 md:p-6 text-primary-text-500 bg-[#FFFFFF]">
+        <div
+          className={clsx(
+            "rounded-bl-2xl rounded-br-2xl lg:rounded-br-[0px] p-4 md:p-6 transition",
+            {
+              "bg-white": !isDark,
+              "bg-dark-dark-background-panels": isDark,
+            }
+          )}
+        >
           <div className="text-[1.438rem]">Información del cliente</div>
           <div className="mt-8 mb-4">
             <label
@@ -139,7 +165,14 @@ export default function SendReportForm({
                   name="select_template"
                   defaultValue=""
                   aria-describedby="select_template-error"
-                  className="w-full md:w-80 rounded-md  border border-gray-200 px-4 py-2"
+                  className={clsx(
+                    "w-full md:w-80 rounded-md  border border-gray-200 px-4 py-2 text-dark-dark-border transition",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "text-dark-dark-border": isDark,
+                      "text-gray-500": !isDark,
+                    }
+                  )}
                 >
                   <option value="">Seleccionar plantilla</option>
                   {templateData &&
@@ -183,7 +216,14 @@ export default function SendReportForm({
                   name="name"
                   type="text"
                   placeholder="Introduce el nombre de la agencia"
-                  className="block w-full md:w-80 rounded-md border border-gray-200 px-4 py-2 text-sm outline-2 placeholder:text-gray-500"
+                  className={clsx(
+                    "block w-full md:w-80 rounded-md border border-gray-200 px-4 py-2 text-sm outline-2 transition",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "placeholder:text-dark-dark-border": isDark,
+                      "placeholder:text-gray-500": !isDark,
+                    }
+                  )}
                   aria-describedby="name-error"
                 />
               </div>
@@ -216,7 +256,14 @@ export default function SendReportForm({
                   name="url_site"
                   type="text"
                   placeholder="Introduce el nombre de la agencia"
-                  className="block w-full md:w-80 rounded-md border border-gray-200 px-4 py-2 text-sm outline-2 placeholder:text-gray-500"
+                  className={clsx(
+                    "block w-full md:w-80 rounded-md border border-gray-200 px-4 py-2 text-sm outline-2 transition",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "placeholder:text-dark-dark-border": isDark,
+                      "placeholder:text-gray-500": !isDark,
+                    }
+                  )}
                   aria-describedby="url_site-error"
                 />
               </div>
@@ -293,7 +340,15 @@ export default function SendReportForm({
             </div>
           </div>
         </div>
-        <div className="flex mt-6 lg:mt-0  lg:h-full rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-[0px] items-center justify-center text-primary-text-500 bg-[#FFFFFF]">
+        <div
+          className={clsx(
+            "flex mt-6 lg:mt-0  lg:h-full rounded-tl-2xl rounded-tr-2xl lg:rounded-tr-[0px] items-center justify-center transition",
+            {
+              "bg-dark-dark-background-panels": isDark,
+              "bg-white": !isDark,
+            }
+          )}
+        >
           <div className="flex justify-center">
             <div className="mt-6 flex justify-center w-full ">
               <Button
@@ -309,7 +364,14 @@ export default function SendReportForm({
       {/* /////send report */}
       <form
         onSubmit={handleSubmit}
-        className="form-grid-mail rounded-tr-0 pt-6 lg:mt-0 bg-white lg:col-start-2 lg:row-start-2"
+        className={clsx(
+          "rounded-tr-0 lg:rounded-tr-2xl pt-6 lg:mt-3 lg:col-start-2 lg:row-start-2 transition",
+          {
+            "bg-dark-dark-background-panels": isDark,
+            "bg-white": !isDark,
+            "text-dark-dark-text": isDark,
+          }
+        )}
       >
         <div className="w-full p-4 md:p-6">
           <div className="mt-6 mb-4">
@@ -328,7 +390,14 @@ export default function SendReportForm({
                   type="text"
                   value={selectedUser ? "" : emailValue}
                   placeholder="Introduce un correo"
-                  className="block w-full rounded-md border border-gray-200 px-4 py-2 text-sm outline-2 placeholder:text-opacity-500"
+                  className={clsx(
+                    "block w-full rounded-md border border-gray-200 px-4 py-2 text-sm outline-2 placeholder:text-opacity-500",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "placeholder:text-dark-dark-border": isDark,
+                      "placeholder:text-gray-500": !isDark,
+                    }
+                  )}
                   aria-describedby="email-error"
                   // readOnly
                 />
@@ -364,7 +433,14 @@ export default function SendReportForm({
                   onChange={handleChangeSelectedUser}
                   id="select_user"
                   name="select_user"
-                  className="block w-full  rounded-md border border-gray-200 px-4 py-2 text-sm outline-2 text-text-opacity-500"
+                  className={clsx(
+                    "block w-full rounded-md border border-gray-200 px-4 py-2 text-sm outline-2",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "text-dark-dark-border": isDark,
+                      "text-gray-500": !isDark,
+                    }
+                  )}
                   aria-describedby="select_user-error"
                   value={emailValue ? "" : selectedUser}
                 >
@@ -403,9 +479,14 @@ export default function SendReportForm({
                   id="subject"
                   name="subject"
                   value={`Nueva solicitud SEO - ${companyName}`}
-                  // type="text"
-                  // placeholder="Introduce el nombre de la agencia"
-                  className="block w-full  rounded-md border border-gray-200 px-4 py-2 text-sm outline-2"
+                  className={clsx(
+                    "block w-full  rounded-md border border-gray-200 px-4 py-2 text-sm outline-2",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "text-dark-dark-border": isDark,
+                      "text-gray-500": !isDark,
+                    }
+                  )}
                   aria-describedby="subject-error"
                   readOnly
                 />

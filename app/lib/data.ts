@@ -317,7 +317,7 @@ export async function fetchFilteredUsers(query: string, currentPage: number) {
 export async function fetchUsers() {
   noStore();
   try {
-    const data = await sql`
+    const data = await sql<UserType>`
       SELECT
        *
       FROM users_go

@@ -1,6 +1,6 @@
 "use client";
 import { AgencyCard } from "./agencyCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ConfirmModal from "../confirmModal";
 import { AgencyTemplate } from "@/app/lib/definitions";
 import { deleteAgencyTemplate } from "@/app/lib/actions";
@@ -21,9 +21,7 @@ export default function WrapperAgency({
     name: "",
   });
   const deleteAgencyWithId = deleteAgencyTemplate.bind(null, agencyData.id);
-  useEffect(() => {
-    console.log(isDark);
-  }, [isDark]);
+
   if (!agencys?.length) {
     return (
       <div className="flex flex-grow justify-center items-center">
