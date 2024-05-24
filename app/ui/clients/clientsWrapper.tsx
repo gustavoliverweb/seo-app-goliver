@@ -140,9 +140,10 @@ export default function ClientsWrapper({
         </div>
         <div
           className={clsx(
-            "h-max overflow-auto bg-white p-5 rounded-2xl w-full flex-grow flex flex-col justify-between transition",
+            "h-max overflow-auto p-5 rounded-2xl w-full flex-grow flex flex-col justify-between transition",
             {
               "bg-dark-dark-background-panels": isDark,
+              "bg-white": !isDark,
               "text-dark-dark-text": isDark,
             }
           )}

@@ -103,7 +103,7 @@ export function AttachReports({ id, name }: { id: string; name: string }) {
     <Link
       href={`/dashboard/reports/attach/${id}?report=${name}`}
       className={clsx(
-        "flex items-center rounded-md border border-gray-200 p-2 text-sm  text-primary-text-500 transition-colors hover:bg-secondary-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600",
+        "flex items-center rounded-md border border-gray-200 p-2 text-sm transition hover:bg-secondary-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ",
         {
           "text-dark-dark-text": isDark,
           "border-dark-dark-border": isDark,

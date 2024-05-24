@@ -26,10 +26,13 @@ export function ReportsCard({
   return (
     <>
       <div
-        className={clsx("relative rounded-md border border-gray-200 p-6", {
-          "bg-dark-dark-background-card": isDark,
-          "border-dark-dark-border": isDark,
-        })}
+        className={clsx(
+          "relative rounded-md border border-gray-200 p-6 transition",
+          {
+            "bg-dark-dark-background-card": isDark,
+            "border-dark-dark-border": isDark,
+          }
+        )}
       >
         <div className="flex justify-between items-center">
           <div>

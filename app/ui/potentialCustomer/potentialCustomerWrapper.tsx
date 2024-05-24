@@ -27,8 +27,6 @@ export default function PotentialCustomerWrapper({
   const { isDark } = useStore();
   const { showCreateClient, setShowCreateClient, customersData, setCustomers } =
     useStore();
-  const uiArray = Object.assign([], customersData);
-  const reverseArray = uiArray.reverse();
   useEffect(() => {
     setCustomers(customers);
   }, [currentPage]);

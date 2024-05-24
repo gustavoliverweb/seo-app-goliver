@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import PotentialCustomerStatusWrapper from "./potentialCustomerStatusWrapper";
 import { ramdomSecureId } from "@/app/lib/utils";
 import { useStore } from "@/app/lib/store";
+import clsx from "clsx";
 
 export default function CreatePotentialCustomerForm() {
   const initialState = {
@@ -35,6 +36,7 @@ export default function CreatePotentialCustomerForm() {
     setSendForm,
     setShowCreateClient,
     customersData,
+    isDark,
   } = useStore();
   const [createClient, setCreateClient] = useState(initialState);
 
@@ -99,18 +101,35 @@ export default function CreatePotentialCustomerForm() {
         <div className="flex flex-col gap-2">
           <div className="w-full">
             <input
-              className="w-full border border-gray-200 rounded-md"
+              className={clsx(
+                "w-full border border-gray-200 rounded-md text-ellipsis transition",
+                {
+                  "bg-dark-dark-background-panels": isDark,
+                  "border-dark-dark-border": isDark,
+                  "text-dark-dark-text": isDark,
+                }
+              )}
               onChange={handleClientNameChange}
               value={createClient?.name}
             />
           </div>
-          <div className="text-[14px] flex gap-2 items-center">
+          <div
+            className={clsx("text-[14px] flex gap-2 items-center transition", {
+              "text-dark-dark-text": isDark,
+            })}
+          >
             <span>Pago/{accessToPaidTypeObject(createClient.paid_type)}:</span>{" "}
             $
             <div className="w-16">
               <input
                 type="number"
-                className="w-full h-8 border border-gray-200 rounded-md"
+                className={clsx(
+                  "w-full h-8 border border-gray-200 rounded-md transition",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                    "border-dark-dark-border": isDark,
+                  }
+                )}
                 onChange={handlePaidAmount}
                 value={createClient?.paid_amount}
               />
@@ -128,7 +147,14 @@ export default function CreatePotentialCustomerForm() {
                   onChange={handleChangeStatus}
                   name="select-template"
                   aria-describedby="select-template-error"
-                  className="w-full xl:w-fit rounded-md  border border-gray-200 px-4 py-2"
+                  className={clsx(
+                    "w-full xl:w-fit rounded-md  border border-gray-200 pl-4 pr-10 py-2 transition",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "border-dark-dark-border": isDark,
+                      "text-dark-dark-text": isDark,
+                    }
+                  )}
                   defaultValue={createClient.status}
                 >
                   <option>Estado</option>
@@ -147,7 +173,14 @@ export default function CreatePotentialCustomerForm() {
                   onChange={handleChangePaidType}
                   name="select-template"
                   aria-describedby="select-template-error"
-                  className="w-full xl:w-fit rounded-md  border border-gray-200 pl-4 pr-10 py-2"
+                  className={clsx(
+                    "w-full xl:w-fit rounded-md  border border-gray-200 pl-4 pr-10 py-2 transition",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "border-dark-dark-border": isDark,
+                      "text-dark-dark-text": isDark,
+                    }
+                  )}
                   defaultValue={createClient.paid_type}
                 >
                   <option>Pago</option>
