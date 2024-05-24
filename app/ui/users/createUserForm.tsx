@@ -6,6 +6,8 @@ import { useFormState } from "react-dom";
 import { Button } from "../button";
 import { useState } from "react";
 import Image from "next/image";
+import { useStore } from "@/app/lib/store";
+import clsx from "clsx";
 
 const usersRoles = [{ rol: "SEO Manager" }, { rol: "Admin" }];
 
@@ -16,6 +18,7 @@ export default function CreateUserForm() {
   const [avatarImage, setAvatarImage] = useState<string>("");
   const [loadingImage, setLoadingImage] = useState<boolean>(false);
   const [userName, setUserName] = useState<string>("");
+  const { isDark } = useStore();
 
   const handleChangeAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoadingImage(true);
@@ -43,7 +46,11 @@ export default function CreateUserForm() {
   };
   return (
     <form action={dispatch}>
-      <div className="rounded-md  p-4 md:p-6">
+      <div
+        className={clsx("rounded-md p-4 md:p-6 transition", {
+          "text-dark-dark-text": isDark,
+        })}
+      >
         <div className="text-[1.3rem]">Información del usuario</div>
 
         <div className="mt-6 mb-4">
@@ -58,7 +65,14 @@ export default function CreateUserForm() {
                 name="name"
                 type="text"
                 placeholder="Introduce el nombre del usuario"
-                className="block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 placeholder:text-gray-500"
+                className={clsx(
+                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 transition",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                    "placeholder:text-gray-500": !isDark,
+                    "placeholder:text-dark-dark-border": isDark,
+                  }
+                )}
                 aria-describedby="name-error"
               />
             </div>
@@ -87,7 +101,14 @@ export default function CreateUserForm() {
                 name="email"
                 type="text"
                 placeholder="Introduce un correo"
-                className="block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 placeholder:text-gray-500"
+                className={clsx(
+                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 transition",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                    "placeholder:text-gray-500": !isDark,
+                    "placeholder:text-dark-dark-border": isDark,
+                  }
+                )}
                 aria-describedby="email-error"
               />
             </div>
@@ -116,7 +137,14 @@ export default function CreateUserForm() {
                 name="password"
                 type="password"
                 placeholder="Introduce una contraseña"
-                className="block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 placeholder:text-gray-500"
+                className={clsx(
+                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 transition",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                    "placeholder:text-gray-500": !isDark,
+                    "placeholder:text-dark-dark-border": isDark,
+                  }
+                )}
                 aria-describedby="password-error"
               />
             </div>
@@ -143,7 +171,13 @@ export default function CreateUserForm() {
               <select
                 name="user_role"
                 id="user_role"
-                className="w-full md:w-80 rounded-md  border border-gray-200 px-4 py-2"
+                className={clsx(
+                  "w-full md:w-80 rounded-md  border border-gray-200 px-4 py-2 transition",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                    "text-dark-dark-border": isDark,
+                  }
+                )}
               >
                 <option value="">Selecciona un rol</option>
                 {usersRoles.map((role) => (
@@ -173,7 +207,12 @@ export default function CreateUserForm() {
             <div className="relative">
               <label
                 htmlFor="user_avatar_valid"
-                className="w-full md:w-80 rounded-md border border-gray-200 cursor-pointer py-10 flex justify-center items-center"
+                className={clsx(
+                  "w-full md:w-80 rounded-md border border-gray-200 cursor-pointer py-10 flex justify-center items-center transition",
+                  {
+                    "text-dark-dark-border": isDark,
+                  }
+                )}
               >
                 {loadingImage ? (
                   <span className="loader"></span>
