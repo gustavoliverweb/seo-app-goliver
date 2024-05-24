@@ -6,6 +6,8 @@ import { Button } from "../button";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { WrapperColorPicker } from "../wrapperColorPicker";
+import { useStore } from "@/app/lib/store";
+import clsx from "clsx";
 
 export default function CreateAgencyForm() {
   const initialState = { message: null, errors: {} };
@@ -19,6 +21,8 @@ export default function CreateAgencyForm() {
   const [loadingLogoImage, setLoadingLogoImage] = useState<boolean>(false);
   const [loadingOpacityLogoImage, setLoadingOpacityLogoImage] =
     useState<boolean>(false);
+  const { isDark } = useStore();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     setAgencyName(e.target.value);
@@ -84,7 +88,11 @@ export default function CreateAgencyForm() {
         readOnly
         hidden
       />
-      <div className="rounded-md p-4 md:p-6">
+      <div
+        className={clsx("rounded-md p-4 md:p-6 transition", {
+          "text-dark-dark-text": isDark,
+        })}
+      >
         <div className="text-[1.3rem]">Información de la agencia</div>
         <div className="mt-6 mb-4">
           <label htmlFor="name" className="mb-2 block text-sm font-medium">
@@ -99,7 +107,14 @@ export default function CreateAgencyForm() {
                 name="name"
                 type="text"
                 placeholder="Introduce el nombre de la agencia"
-                className="block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 placeholder:text-gray-500"
+                className={clsx(
+                  "block w-full md:w-80 rounded-md border py-2 text-sm outline-2 placeholder:text-gray-500 transition",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                    "border-gray-200": !isDark,
+                    "border-dark-dark-border": isDark,
+                  }
+                )}
                 aria-describedby="name-error"
               />
             </div>
@@ -127,7 +142,14 @@ export default function CreateAgencyForm() {
             <div className="relative">
               <label
                 htmlFor="logo_url_valid"
-                className="w-full md:w-80 rounded-md border border-gray-200 cursor-pointer py-10 flex justify-center items-center"
+                className={clsx(
+                  "w-full md:w-80 rounded-md border cursor-pointer py-10 flex justify-center items-center",
+                  {
+                    "border-gray-200": !isDark,
+                    "border-dark-dark-border": isDark,
+                    "text-dark-dark-border": isDark,
+                  }
+                )}
               >
                 {loadingLogoImage ? (
                   <span className="loader"></span>
@@ -168,7 +190,14 @@ export default function CreateAgencyForm() {
             <div className="relative">
               <label
                 htmlFor="logo_opacity_url_valid"
-                className="w-full md:w-80 rounded-md border border-gray-200 cursor-pointer py-10  flex justify-center items-center"
+                className={clsx(
+                  "w-full md:w-80 rounded-md border cursor-pointer py-10 flex justify-center items-center",
+                  {
+                    "border-gray-200": !isDark,
+                    "border-dark-dark-border": isDark,
+                    "text-dark-dark-border": isDark,
+                  }
+                )}
               >
                 {loadingOpacityLogoImage ? (
                   <span className="loader"></span>
@@ -212,12 +241,6 @@ export default function CreateAgencyForm() {
         <WrapperColorPicker />
       </div>
       <div className="mt-6 flex justify-end gap-4">
-        {/* <Link
-          href="/dashboard"
-          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
-        >
-          Cancelar
-        </Link> */}
         <Button
           type="submit"
           className="flex mt-3 h-10 items-center rounded-lg bg-primary-button-500 p-6 text-base  text-white transition-colors hover:bg-secondary-green-500 focus-visible:outline focus-visible:outline-2"
