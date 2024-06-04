@@ -83,12 +83,12 @@ export default function Page() {
               visualizar clientes potenciales.{" "}
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-6 mt-10">
-            {helpRoutesLabel.map((route, index) => {
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
+            {helpRoutesLabel.map((route) => {
               const Icon = route.icon;
               return (
-                <Link href={route.href}>
-                  <IntroductionCard key={index} route={route.label}>
+                <Link href={route.href} key={route.label}>
+                  <IntroductionCard route={route.label}>
                     <div className="w-10">
                       <Icon />
                     </div>
