@@ -120,3 +120,7 @@ iframe {
 .parent-menu.active .menu-child {
   display: block;
 }
+
+.parent-menu.active .parent-icon-sub-menu {
+  transform: rotate(90deg);
+}

@@ -4,12 +4,13 @@ import {
   HomeIcon,
   ClipboardDocumentListIcon,
   UserGroupIcon,
-  ChevronDownIcon,
+  ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { useStore } from "@/app/lib/store";
+import { useState } from "react";
 
 const links = [
   {
@@ -80,7 +81,10 @@ const links = [
 export default function NavLinksDocs() {
   const pathname = usePathname();
   const { isDark } = useStore();
+  const [openSubMenu, setOpenSubMenu] = useState<boolean>(false);
+
   const handleSubMenu = (e: React.MouseEvent<HTMLElement>) => {
+    setOpenSubMenu(!openSubMenu);
     const target = (e.target as HTMLElement).closest(".parent-menu");
     const menuChild = (e.target as HTMLElement).closest(".menu-child");
     if (menuChild) return;
@@ -137,8 +141,8 @@ export default function NavLinksDocs() {
                 >
                   <p>{link.name}</p>
                   {
-                    <div className="w-4">
-                      <ChevronDownIcon />
+                    <div className="parent-icon-sub-menu w-4 transition">
+                      <ChevronRightIcon />
                     </div>
                   }
                 </div>

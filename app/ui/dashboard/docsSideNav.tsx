@@ -20,8 +20,8 @@ export default function DocsSideNav({
 
   const handleMenu = () => {
     setOpenMenu(!openMenu);
-    console.log(menuRef.current);
   };
+
   return (
     <div
       className={clsx("flex h-full flex-col rounded-br-2xl transition", {
