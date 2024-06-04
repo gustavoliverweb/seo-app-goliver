@@ -42,20 +42,29 @@ export default function SideNav({ children }: { children: React.ReactNode }) {
       <div
         ref={menuRef}
         onClick={handleMenu}
-        className="flex p-3 items-center gap-2 cursor-pointer "
+        className="flex p-4 items-center gap-2 cursor-pointer "
       >
         <div
           className={clsx("w-4 md:hidden transition", {
             "rotate-90": openMenu,
+            "text-dark-dark-text": isDark,
+            "text-primary-text-500": !isDark,
           })}
         >
           <ChevronRightIcon />
         </div>
-        <p className="text-[18px] font-medium md:hidden">Menu</p>
+        <p
+          className={clsx("text-[18px] font-medium md:hidden", {
+            "text-dark-dark-text": isDark,
+            "text-primary-text-500": !isDark,
+          })}
+        >
+          Menu
+        </p>
       </div>
       <div
         className={clsx(
-          "md:flex grow justify-between flex-col md:space-x-0 md:space-y-2 overflow-auto lg:rounded-br-2xl",
+          "md:flex grow justify-between px-4 md:px-0 flex-col md:space-x-0 md:space-y-2 overflow-auto lg:rounded-br-2xl",
           {
             flex: openMenu,
             hidden: !openMenu,
