@@ -50,13 +50,10 @@ export default function UsersWrapper({
         )}
       >
         <h3
-          className={clsx(
-            "text-title font-medium text-primary-text-500 transition",
-            {
-              "text-primary-text-500": !isDark,
-              "text-white": isDark,
-            }
-          )}
+          className={clsx("text-title font-medium transition", {
+            "text-primary-text-500": !isDark,
+            "text-white": isDark,
+          })}
         >
           Usuarios
         </h3>

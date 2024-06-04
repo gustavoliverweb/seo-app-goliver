@@ -9,11 +9,12 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { useStore } from "@/app/lib/store";
 
 const links = [
   {
     name: "Introducción",
-    href: "/dashboard/help/introduction",
+    href: "/dashboard/help",
     icon: HomeIcon,
   },
   {
@@ -78,7 +79,7 @@ const links = [
 
 export default function NavLinksDocs() {
   const pathname = usePathname();
-
+  const { isDark } = useStore();
   const handleSubMenu = (e: React.MouseEvent<HTMLElement>) => {
     const target = (e.target as HTMLElement).closest(".parent-menu");
     const menuChild = (e.target as HTMLElement).closest(".menu-child");
@@ -98,23 +99,43 @@ export default function NavLinksDocs() {
               key={link.name}
               href={link.href}
               className={clsx(
-                "flex h-[48px] grow items-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100  md:flex-none md:justify-start md:p-2 md:px-3",
+                "flex h-[48px] grow items-center  gap-2 rounded-mdp-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3 ",
                 {
                   "text-primary-button-500": pathname === link.href,
+                  "bg-dark-dark-background-panels": isDark,
+                  "text-white": isDark && pathname !== link.href,
+                  "hover:text-dark-dark-text": isDark && pathname !== link.href,
+                  "hover:bg-green-100": !isDark && pathname !== link.href,
+                  "hover:bg-dark-dark-background-card":
+                    isDark && pathname !== link.href,
                 }
               )}
             >
-              <p className="">{link.name}</p>
+              <p className={""}>{link.name}</p>
             </Link>
           ) : (
             <>
               <div
                 onClick={handleSubMenu}
-                className="parent-menu  py-2 px-3 gap-2 cursor-pointer"
+                className="parent-menu gap-2 cursor-pointer"
                 data-parent={link.name}
               >
-                <div className="flex items-center">
-                  <p className="">{link.name}</p>
+                <div
+                  className={clsx(
+                    "flex h-[48px] grow items-center gap-2 rounded-mdp-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3 ",
+                    {
+                      "text-primary-button-500": pathname === link.href,
+                      "bg-dark-dark-background-panels": isDark,
+                      "text-white": isDark && pathname !== link.href,
+                      "hover:text-dark-dark-text":
+                        isDark && pathname !== link.href,
+                      "hover:bg-green-100": !isDark && pathname !== link.href,
+                      "hover:bg-dark-dark-background-card":
+                        isDark && pathname !== link.href,
+                    }
+                  )}
+                >
+                  <p>{link.name}</p>
                   {
                     <div className="w-4">
                       <ChevronDownIcon />
@@ -127,9 +148,17 @@ export default function NavLinksDocs() {
                       key={sunlinks.name}
                       href={sunlinks.href}
                       className={clsx(
-                        "flex  grow items-center  gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-green-100  md:flex-none md:justify-start md:p-2 md:px-3",
+                        "flex h-[48px] grow items-center  gap-2 rounded-mdp-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3 ",
                         {
-                          "text-primary-button-500": pathname === sunlinks.href,
+                          "text-primary-button-500": pathname === link.href,
+                          "bg-dark-dark-background-panels": isDark,
+                          "text-white": isDark && pathname !== link.href,
+                          "hover:text-dark-dark-text":
+                            isDark && pathname !== link.href,
+                          "hover:bg-green-100":
+                            !isDark && pathname !== link.href,
+                          "hover:bg-dark-dark-background-card":
+                            isDark && pathname !== link.href,
                         }
                       )}
                     >

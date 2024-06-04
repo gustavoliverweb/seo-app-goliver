@@ -1,20 +1,47 @@
+"use client";
 import Image from "next/image";
 import reportCreateButton from "@/public/help/reports/report-create-button 1.png";
 import reportForm from "@/public/help/reports/report-create-form 1.png";
 import createReportSend from "@/public/help/reports/report-create-form-create-send 1.png";
 import Link from "next/link";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
+import { useStore } from "@/app/lib/store";
 
-export default async function Page() {
+export default function Page() {
+  const { isDark } = useStore();
   return (
     <div className="pb-6 flex flex-grow">
       <div className="items-start mt-6 w-full flex flex-col px-5 gap-6">
-        <div className="bg-white p-5 rounded-2xl lg:flex justify-between items-center w-full">
-          <h3 className="text-title text-primary-text-500 font-medium">
+        <div
+          className={clsx(
+            "p-5 rounded-2xl lg:flex justify-between items-center w-full",
+            {
+              "bg-dark-dark-background-panels": isDark,
+              "bg-white": !isDark,
+            }
+          )}
+        >
+          <h3
+            className={clsx("text-title font-medium transition", {
+              "text-primary-text-500": !isDark,
+              "text-white": isDark,
+            })}
+          >
             Informes
           </h3>
         </div>
-        <div className="relative h-max overflow-auto bg-white p-5 rounded-2xl w-full flex-grow flex flex-col">
+        <div
+          className={clsx(
+            "relative h-max overflow-auto p-5 rounded-2xl w-full flex-grow flex flex-col",
+            {
+              "bg-dark-dark-background-panels": isDark,
+              "bg-white": !isDark,
+              "text-primary-text-500": !isDark,
+              "text-white": isDark,
+            }
+          )}
+        >
           <div>
             <h3 className="text-[28px] font-semibold mb-6">
               Creación de informes

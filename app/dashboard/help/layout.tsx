@@ -1,6 +1,6 @@
 import { LogoutButton } from "@/app/ui/logoutButton";
-import Search from "../../ui/search";
 import DocsSideNav from "@/app/ui/dashboard/docsSideNav";
+import TopNav from "@/app/ui/topNav";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -11,9 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </DocsSideNav>
       </div>
       <div className="flex-grow  md:overflow-y-auto flex flex-col">
-        <div className=" flex flex-col items-center justify-between gap-2  md:flex-row bg-white p-5">
-          <Search />
-        </div>
+        <TopNav />
         {children}
       </div>
     </div>
