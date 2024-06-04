@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 // Loading animation
 const shimmer =
   "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent mt-4";
@@ -159,14 +161,30 @@ export function WrapperAgencySkeleton() {
   );
 }
 
-export function AgencyHomeSkeleton() {
+export function AgencyHomeSkeleton({ isDark }: { isDark: boolean }) {
   return (
     <div className="items-start justify-between  mt-6">
-      <div className="bg-white  p-5 md:mr-5 md:ml-5 h-16 rounded-2xl lg:flex justify-between items-center">
+      <div
+        className={clsx(
+          "p-5 md:mr-5 md:ml-5 h-16 rounded-2xl lg:flex justify-between items-center",
+          {
+            "bg-dark-dark-background-panels": isDark,
+            "bg-white": !isDark,
+          }
+        )}
+      >
         <h3 className="w-10 h-4 bg-gray-200"></h3>
         <div className="w-10 h-4 bg-gray-200"></div>
       </div>
-      <div className="relative h-max overflow-auto mt-6 bg-white p-5 md:mr-5 md:ml-5 rounded-2xl">
+      <div
+        className={clsx(
+          "relative h-max overflow-auto mt-6 p-5 md:mr-5 md:ml-5 rounded-2xl",
+          {
+            "bg-dark-dark-background-panels": isDark,
+            "bg-white": !isDark,
+          }
+        )}
+      >
         <div className="mt-5 flex w-full ">
           <WrapperAgencySkeleton />
         </div>
