@@ -363,6 +363,9 @@ export async function deleteClient(
   console.log(id, agencyId);
   try {
     await sql`DELETE FROM clients WHERE id = ${id}`;
+    await sql`DELETE FROM agency_client
+    WHERE agency_client.id NOT IN (SELECT agency_id FROM clients)
+    `;
     // console.log(agency);
     console.log("success delete client");
     // revalidatePath(`/dashboard/clients?page=${page}`);
@@ -380,24 +383,13 @@ export async function deleteClientTest(
   page: string | null,
   agencyId: string
 ) {
+  console.log("delete client test");
   console.log(id, agencyId);
   try {
     await sql`DELETE FROM c_test WHERE id = ${id}`;
-    const result = await sql`
-    SELECT * FROM a_c_test
-    WHERE EXISTS (
-      SELECT 1
-      FROM c_test
-      WHERE c_test.agency_id = ${agencyId}
-    );
+    await sql`DELETE FROM a_c_test
+    WHERE a_c_test.id NOT IN (SELECT agency_id FROM c_test)
     `;
-    console.log(result.rows);
-    if (result.rows.length === 0) {
-      await sql`
-      DELETE FROM a_c_test
-      WHERE id = ${agencyId}
-    `;
-    }
     console.log("success delete client");
     // revalidatePath(`/dashboard/clients?page=${page}`);
     return { message: "Cliente eliminado con éxito", success: true };
