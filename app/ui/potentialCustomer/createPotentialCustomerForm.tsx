@@ -165,10 +165,10 @@ export default function CreatePotentialCustomerForm() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col xl:flex-row gap-4 items-center">
+        <div className="flex flex-1 flex-col xl:flex-row gap-4 items-center justify-end">
           <PotentialCustomerStatusWrapper customer={createClient} />
 
-          <div className="w-full flex flex-row gap-2 justify-between lg:gap-2">
+          <div className="w-full xl:w-fit flex flex-row gap-2 justify-between lg:gap-2">
             <div className="w-full relative mt-2 lg:mt-0 rounded-md">
               <div className="relative">
                 <select
