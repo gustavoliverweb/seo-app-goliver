@@ -412,7 +412,7 @@ export async function createPotentialCustomer(data: Customer) {
     try {
       await sql`
         UPDATE potential_customer
-        SET name = ${data.name}, status = ${data.status}, paid_type = ${data.paid_type}, paid_amount = ${data.paid_amount}
+        SET name = ${data.name}, status = ${data.status}, paid_type = ${data.paid_type}, paid_amount = ${data.paid_amount}, probability = ${data.probability}
         WHERE id = ${data.id}
       `;
       console.log("success update potential customer");
@@ -426,8 +426,8 @@ export async function createPotentialCustomer(data: Customer) {
     // Create new customer
     try {
       await sql`
-        INSERT INTO potential_customer (id, name, status, paid_type, paid_amount)
-        VALUES (${data.id}, ${data.name}, ${data.status}, ${data.paid_type}, ${data.paid_amount})
+        INSERT INTO potential_customer (id, name, status, paid_type, paid_amount, probability)
+        VALUES (${data.id}, ${data.name}, ${data.status}, ${data.paid_type}, ${data.paid_amount}, ${data.probability})
       `;
       console.log("success insert potential customer");
     } catch (error) {

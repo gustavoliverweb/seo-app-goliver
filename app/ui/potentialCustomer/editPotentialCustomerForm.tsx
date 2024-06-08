@@ -41,7 +41,7 @@ export default function EditPotentialCustomerForm({
   } = useStore();
 
   const [createClient, setCreateClient] = useState(customers);
-
+  console.log(customers);
   const handleClientNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isSendForm) setSendForm(false);
     setCreateClient((prev) => ({ ...prev, name: e.target.value }));
@@ -82,6 +82,13 @@ export default function EditPotentialCustomerForm({
     setShowModal(true);
     setPotentialCustomerId(customers.id);
     setIsModalDeleteShow(true);
+  };
+
+  const handleProbability = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    if (isSendForm) setSendForm(false);
+    setCreateClient((prev) => ({ ...prev, probability: e.target.value }));
+    setSendForm(true);
   };
 
   useEffect(() => {
@@ -155,6 +162,34 @@ export default function EditPotentialCustomerForm({
                 onChange={handlePaidAmount}
                 value={createClient?.paid_amount}
               />
+            </div>
+          </div>
+          <div
+            className={clsx("text-[14px] flex gap-2 items-center transition", {
+              "text-dark-dark-text": isDark,
+            })}
+          >
+            <span>Probabilidad:</span>
+            <div className="w-[60px]">
+              <input
+                type="number"
+                className={clsx(
+                  "w-full h-8 border border-gray-200 rounded-md transition px-2 text-center",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                    "border-dark-dark-border": isDark,
+                  }
+                )}
+                onChange={handleProbability}
+                value={createClient?.probability}
+              />
+            </div>
+            <span>%</span>
+            <div className="w-[100px] overflow-hidden h-8 border border-gray-200 rounded-md transition">
+              <span
+                style={{ width: `${createClient?.probability}%` }}
+                className="block h-full bg-primary-button-500 transition"
+              ></span>
             </div>
           </div>
         </div>

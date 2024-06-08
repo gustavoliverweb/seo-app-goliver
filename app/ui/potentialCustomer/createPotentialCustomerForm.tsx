@@ -14,6 +14,7 @@ export default function CreatePotentialCustomerForm() {
     status: "open",
     paid_amount: 0,
     paid_type: "monthly" as "monthly" | "punctual",
+    probability: "",
   };
   const stateClient = [
     { status: "open", label: "Abierto" },
@@ -133,6 +134,34 @@ export default function CreatePotentialCustomerForm() {
                 onChange={handlePaidAmount}
                 value={createClient?.paid_amount}
               />
+            </div>
+          </div>
+          <div
+            className={clsx("text-[14px] flex gap-2 items-center transition", {
+              "text-dark-dark-text": isDark,
+            })}
+          >
+            <span>Probabilidad:</span>
+            <div className="w-[60px]">
+              <input
+                type="number"
+                className={clsx(
+                  "w-full h-8 border border-gray-200 rounded-md transition px-2 text-center",
+                  {
+                    "bg-dark-dark-background-panels": isDark,
+                    "border-dark-dark-border": isDark,
+                  }
+                )}
+                // onChange={handleProbability}
+                // value={createClient?.probability}
+              />
+            </div>
+            <span>%</span>
+            <div className="w-[100px] overflow-hidden h-8 border border-gray-200 rounded-md transition">
+              <span
+                // style={{ width: `${createClient?.probability}%` }}
+                className="block h-full w-0 bg-primary-button-500 transition"
+              ></span>
             </div>
           </div>
         </div>

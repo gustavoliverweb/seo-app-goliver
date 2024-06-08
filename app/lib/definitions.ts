@@ -100,6 +100,7 @@ export type Customer = {
   paid_amount: number;
   status: string;
   paid_type: string;
+  probability: string;
 };
 
 export type UserType = {
