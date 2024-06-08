@@ -105,7 +105,15 @@ export default function PotentialCustomerWrapper({
                 <PotentialCustomerCard key={customer.id} customers={customer} />
               ))}
           </div>
-          <div className="relative h-max overflow-auto mt-6 p-2  rounded-2xl w-full">
+          <div
+            className={clsx(
+              "relative h-max overflow-auto mt-6 p-2  rounded-2xl w-full",
+              {
+                "text-dark-dark-text": isDark,
+                "text-primary-text-500": !isDark,
+              }
+            )}
+          >
             <div className="flex justify-between">
               <div>
                 <div className="font-semibold text-[24px]">Total:</div>
