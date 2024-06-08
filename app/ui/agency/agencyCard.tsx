@@ -13,13 +13,14 @@ export function AgencyCard({
   setShowModal: (showModal: boolean) => void;
   setAgencyData: (agencyId: { id: string; name: string }) => void;
 }) {
-  const { isDark } = useStore();
+  const { isDark, setIsModalDeleteShow } = useStore();
   const handleDeleteAgency = () => {
     setAgencyData({
       id: agency.id,
       name: agency.name,
     });
     setShowModal(true);
+    setIsModalDeleteShow(true);
   };
   return (
     <>

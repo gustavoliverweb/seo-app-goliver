@@ -16,7 +16,7 @@ export default function UsersWrapper({
   users: UserType[];
   usersPages: number;
 }) {
-  const { isDark } = useStore();
+  const { isDark, setIsModalDeleteShow } = useStore();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>("");
   const name = users.find((user) => user.id === userId)?.name;
@@ -37,6 +37,7 @@ export default function UsersWrapper({
     });
     await deleteUserWithId();
     setShowModal(false);
+    setIsModalDeleteShow(false);
   };
   return (
     <div className="items-start mt-6 w-full flex flex-col px-5 gap-6">
@@ -61,7 +62,7 @@ export default function UsersWrapper({
       </div>
       <div
         className={clsx(
-          "relative h-max overflow-auto p-5 rounded-2xl w-full flex-grow flex flex-col justify-between transition",
+          " h-max overflow-auto p-5 rounded-2xl w-full flex-grow flex flex-col justify-between transition",
           {
             "bg-white": !isDark,
             "bg-dark-dark-background-panels": isDark,

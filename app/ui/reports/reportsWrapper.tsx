@@ -19,7 +19,7 @@ export default function ReportsWrapper({
   query: string;
   reportsPages: number;
 }) {
-  const { isDark } = useStore();
+  const { isDark, setIsModalDeleteShow } = useStore();
   const [showModal, setShowModal] = useState(false);
   const [reportId, setReportId] = useState("");
   const name = reports.find((report) => report.id === reportId)?.name;
@@ -48,6 +48,7 @@ export default function ReportsWrapper({
     });
     await deleteReportWithId();
     setShowModal(false);
+    setIsModalDeleteShow(false);
   };
   return (
     <>

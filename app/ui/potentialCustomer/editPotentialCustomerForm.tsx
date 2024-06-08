@@ -31,8 +31,14 @@ export default function EditPotentialCustomerForm({
     punctual: "Puntual",
   };
 
-  const { isSendForm, setSendForm, setCustomers, customersData, isDark } =
-    useStore();
+  const {
+    isSendForm,
+    setSendForm,
+    setCustomers,
+    customersData,
+    isDark,
+    setIsModalDeleteShow,
+  } = useStore();
 
   const [createClient, setCreateClient] = useState(customers);
 
@@ -75,6 +81,7 @@ export default function EditPotentialCustomerForm({
     console.log("Delete potential customer edit form", customers);
     setShowModal(true);
     setPotentialCustomerId(customers.id);
+    setIsModalDeleteShow(true);
   };
 
   useEffect(() => {

@@ -14,11 +14,12 @@ export function UsersCard({
   setUserId: (clientId: string) => void;
   setShowModal: (showModal: boolean) => void;
 }) {
-  const { isDark } = useStore();
+  const { isDark, setIsModalDeleteShow } = useStore();
   const handleDeleteUser = () => {
     // console.log("Delete report", name);
     setUserId(user.id);
     setShowModal(true);
+    setIsModalDeleteShow(true);
   };
 
   return (

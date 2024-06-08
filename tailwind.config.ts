@@ -46,6 +46,9 @@ const config: Config = {
         "border-opacity": {
           500: "D0D5DD",
         },
+        "hover-delete": {
+          800: "bg-red-800",
+        },
         errors: {
           "success-dark": "#124B14",
           "success-light": "#A4E5A6",

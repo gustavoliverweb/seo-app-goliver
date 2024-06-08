@@ -2,6 +2,7 @@ import { Clients } from "@/app/lib/definitions";
 import Image from "next/image";
 // import { Button } from "../button";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useStore } from "@/app/lib/store";
 
 export function ClientsCard({
   client,
@@ -16,6 +17,7 @@ export function ClientsCard({
     agencyId: string;
   }) => void;
 }) {
+  const { setIsModalDeleteShow } = useStore();
   const handleDeleteClient = () => {
     console.log("Delete client", client);
     setClientData({
@@ -24,6 +26,7 @@ export function ClientsCard({
       agencyId: client.agency_id,
     });
     setShowModal(true);
+    setIsModalDeleteShow(true);
   };
   return (
     <div className="relative">

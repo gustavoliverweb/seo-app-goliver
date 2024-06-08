@@ -11,7 +11,7 @@ export default async function Page({
   const query = searchParams?.query || "";
   const reports = await fetchFilteredReports(query, currentPage);
   return (
-    <div className="relative pb-6 flex flex-grow">
+    <div className="pb-6 flex flex-grow">
       <ReportsWrapper
         reports={reports}
         query={query}

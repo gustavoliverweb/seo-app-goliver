@@ -59,10 +59,8 @@ export default function ClientsWrapper({
     page,
     clientData.agencyId
   );
-  // const initialState = { message: null, errors: {} };
-  // const [state, dispatch] = useFormState(deleteClientWithId, initialState);
   const router = useRouter();
-
+  const { setIsModalDeleteShow } = useStore();
   useEffect(() => {
     const transformData = () => {
       const newData: Data = clients.reduce((acc, curr) => {
@@ -73,15 +71,12 @@ export default function ClientsWrapper({
         acc[agency_name].push(curr);
         return acc;
       }, {});
-      console.log(newData);
       const arrayOfObjects = Object.entries(newData).map(([key, value]) => {
         return {
           [key]: value,
         };
       });
-      console.log(arrayOfObjects);
       const totalClientPerPage = clientsPerPage(currentPage, arrayOfObjects);
-      console.log(totalClientPerPage);
       setTotalClients(arrayOfObjects);
       setClientsData(totalClientPerPage);
     };
@@ -100,6 +95,7 @@ export default function ClientsWrapper({
     if (result.success) {
       console.log(result);
       setShowModal(false);
+      setIsModalDeleteShow(false);
       router.push(`/dashboard/clients`);
       router.refresh();
     }
@@ -193,7 +189,7 @@ export default function ClientsWrapper({
             handleSubmit={handleSubmit}
           >
             ¿Estas seguro de eliminar el cliente{" "}
-            <span className="font-medium">{clientData.name}</span> ?
+            <span className="font-medium">{clientData.name}</span>?
           </ConfirmModal>
 
           <div className="mt-5 flex w-full ">

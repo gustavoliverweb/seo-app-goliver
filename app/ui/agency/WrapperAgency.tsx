@@ -67,7 +67,7 @@ export default function WrapperAgency({
       </div>
       <div
         className={clsx(
-          "relative h-max overflow-auto p-5 rounded-2xl w-full flex-grow flex flex-col justify-between transition",
+          " h-max overflow-auto p-5 rounded-2xl w-full flex-grow flex flex-col justify-between transition",
           {
             "bg-white": !isDark,
             "bg-dark-dark-background-panels": isDark,
@@ -91,7 +91,7 @@ export default function WrapperAgency({
             handleSubmit={handleSubmit}
           >
             ¿Estas seguro de eliminar la plantilla{" "}
-            <span className="font-medium">{agencyData.name}</span> ?
+            <span className="font-medium">{agencyData.name}</span>?
           </ConfirmModal>
         </div>
       </div>

@@ -14,7 +14,7 @@ export function PotentialCustomerCard({ customers }: { customers: Customer }) {
     null,
     customerId
   );
-  const { setCustomers, customersData } = useStore();
+  const { setCustomers, customersData, setIsModalDeleteShow } = useStore();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,6 +27,7 @@ export function PotentialCustomerCard({ customers }: { customers: Customer }) {
     setCustomers(deleteCustomer);
 
     setShowModal(false);
+    setIsModalDeleteShow(false);
   };
 
   return (
@@ -43,7 +44,7 @@ export function PotentialCustomerCard({ customers }: { customers: Customer }) {
         setShowModal={setShowModal}
         handleSubmit={handleSubmit}
       >
-        ¿Estás seguro de eliminar el cliente potencial {customers?.name} ?
+        ¿Estás seguro de eliminar el cliente potencial {customers?.name}?
       </ConfirmModal>
     </>
   );

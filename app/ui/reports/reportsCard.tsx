@@ -18,10 +18,11 @@ export function ReportsCard({
   setReportId,
   setShowModal,
 }: ReportsProps) {
-  const { isDark } = useStore();
+  const { isDark, setIsModalDeleteShow } = useStore();
   const handleDeleteReport = () => {
     setReportId(id);
     setShowModal(true);
+    setIsModalDeleteShow(true);
   };
   return (
     <>
