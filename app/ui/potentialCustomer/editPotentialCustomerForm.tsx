@@ -227,7 +227,7 @@ export default function EditPotentialCustomerForm({
                   name="select-template"
                   aria-describedby="select-template-error"
                   className={clsx(
-                    "select-state w-full cursor-pointer xl:w-[150px] h-[42px] rounded-md  border border-gray-200 p-0 pr-8 text-center transition ",
+                    "select-state w-full cursor-pointer xl:w-[150px] h-[42px] rounded-md  border border-gray-200 p-0 pr-8 text-center transition",
                     {
                       "bg-dark-dark-background-panels": isDark,
                       "border-dark-dark-border": isDark,
@@ -236,12 +236,12 @@ export default function EditPotentialCustomerForm({
                   )}
                   value={createClient.status}
                 >
-                  <option className="text-[18px]">Estado</option>
+                  <option>Estado</option>
                   {stateClient.map((state) => (
                     <option
                       key={state.status}
                       value={state.status}
-                      className={`${state.color} text-white p-2 text-[18px]`}
+                      className={`${state.color} text-white `}
                     >
                       {state.label}
                     </option>
@@ -266,9 +266,9 @@ export default function EditPotentialCustomerForm({
                   )}
                   value={createClient.paid_type}
                 >
-                  <option>Pago</option>
+                  <option>Tipo de pago</option>
                   {paidTypeClient.map((type) => (
-                    <option key={type.type} value={type.type}>
+                    <option key={type.type} value={type.type} className="">
                       {type.label}
                     </option>
                   ))}

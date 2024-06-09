@@ -11,17 +11,17 @@ export default function CreatePotentialCustomerForm() {
   const initialState = {
     id: "",
     name: "Cliente",
-    status: "open",
+    status: "",
     paid_amount: 0,
     paid_type: "monthly" as "monthly" | "punctual",
     probability: "",
     comment: "",
   };
   const stateClient = [
-    { status: "open", label: "Abierto" },
-    { status: "proposal", label: "Propuesta" },
-    { status: "lost", label: "Perdido" },
-    { status: "won", label: "Ganado" },
+    { status: "open", label: "Abierto", color: "bg-[#e667dc]" },
+    { status: "proposal", label: "Propuesta", color: "bg-[#7c7cd3]" },
+    { status: "lost", label: "Perdido", color: "bg-[#6F1313]" },
+    { status: "won", label: "Ganado", color: "bg-[#4CD88A]" },
   ];
   const paidTypeClient = [
     { type: "monthly", label: "Mensual" },
@@ -178,14 +178,13 @@ export default function CreatePotentialCustomerForm() {
                   name="select-template"
                   aria-describedby="select-template-error"
                   className={clsx(
-                    "w-full xl:w-fit rounded-md  border border-gray-200 pl-4 pr-10 py-2 transition",
+                    "select-state w-full cursor-pointer xl:w-[150px] h-[42px] rounded-md  border border-gray-200 p-0 pr-8 text-center transition",
                     {
                       "bg-dark-dark-background-panels": isDark,
                       "border-dark-dark-border": isDark,
                       "text-dark-dark-text": isDark,
                     }
                   )}
-                  defaultValue={createClient.status}
                 >
                   <option>Estado</option>
                   {stateClient.map((state) => (
@@ -204,16 +203,15 @@ export default function CreatePotentialCustomerForm() {
                   name="select-template"
                   aria-describedby="select-template-error"
                   className={clsx(
-                    "w-full xl:w-fit rounded-md  border border-gray-200 pl-4 pr-10 py-2 transition",
+                    "w-full cursor-pointer xl:w-[150px] h-[42px] rounded-md border border-gray-200 p-0 pr-8 text-center transition",
                     {
                       "bg-dark-dark-background-panels": isDark,
                       "border-dark-dark-border": isDark,
                       "text-dark-dark-text": isDark,
                     }
                   )}
-                  defaultValue={createClient.paid_type}
                 >
-                  <option>Pago</option>
+                  <option>Tipo de pago</option>
                   {paidTypeClient.map((type) => (
                     <option key={type.type} value={type.type}>
                       {type.label}
