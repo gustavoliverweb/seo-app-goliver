@@ -23,7 +23,7 @@ const links = [
     href: "",
     icon: ClipboardDocumentListIcon,
     subLinks: [
-      { name: "Introduction", href: "/dashboard/help/templates/introduction" },
+      { name: "Introducción", href: "/dashboard/help/templates/introduction" },
       { name: "Crear Plantillas", href: "/dashboard/help/templates/create" },
     ],
   },
@@ -32,7 +32,7 @@ const links = [
     href: "",
     icon: UserGroupIcon,
     subLinks: [
-      { name: "Introduction", href: "/dashboard/help/reports/introduction" },
+      { name: "Introducción", href: "/dashboard/help/reports/introduction" },
       { name: "Crear Informes", href: "/dashboard/help/reports/create" },
       { name: "Adjuntar Reportes", href: "/dashboard/help/reports/attach" },
     ],
@@ -42,7 +42,7 @@ const links = [
     href: "",
     icon: UserGroupIcon,
     subLinks: [
-      { name: "Introduction", href: "/dashboard/help/clients/introduction" },
+      { name: "Introducción", href: "/dashboard/help/clients/introduction" },
       { name: "Crear Clientes", href: "/dashboard/help/clients/create" },
     ],
   },
@@ -52,7 +52,7 @@ const links = [
     icon: UserGroupIcon,
     subLinks: [
       {
-        name: "Introduction",
+        name: "Introducción",
         href: "/dashboard/help/potential-customers/introduction",
       },
       {
@@ -67,7 +67,7 @@ const links = [
     icon: UserGroupIcon,
     subLinks: [
       {
-        name: "Introduction",
+        name: "Introducción",
         href: "/dashboard/help/users/introduction",
       },
       {

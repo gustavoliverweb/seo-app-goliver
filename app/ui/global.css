@@ -128,3 +128,12 @@ iframe {
 .wrapper-comment.active textarea {
   display: block;
 }
+
+.select-state {
+  appearance: none;
+}
+
+.select-state option {
+  white-space: normal;
+  height: 6rem;
+}

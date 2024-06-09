@@ -20,10 +20,10 @@ export default function EditPotentialCustomerForm({
   setPotentialCustomerId: (clientId: string) => void;
 }) {
   const stateClient = [
-    { status: "open", label: "Abierto" },
-    { status: "proposal", label: "Propuesta" },
-    { status: "lost", label: "Perdido" },
-    { status: "won", label: "Ganado" },
+    { status: "open", label: "Abierto", color: "bg-[#e667dc]" },
+    { status: "proposal", label: "Propuesta", color: "bg-[#7c7cd3]" },
+    { status: "lost", label: "Perdido", color: "bg-[#6F1313]" },
+    { status: "won", label: "Ganado", color: "bg-[#4CD88A]" },
   ];
   const paidTypeClient = [
     { type: "monthly", label: "Mensual" },
@@ -223,12 +223,11 @@ export default function EditPotentialCustomerForm({
             <div className="w-full relative mt-2 lg:mt-0 rounded-md">
               <div className="relative">
                 <select
-                  id="select-template"
                   onChange={handleChangeStatus}
                   name="select-template"
                   aria-describedby="select-template-error"
                   className={clsx(
-                    "w-full xl:w-fit rounded-md  border border-gray-200 pl-4 pr-10 py-2 transition",
+                    "select-state w-full cursor-pointer xl:w-[150px] h-[42px] rounded-md  border border-gray-200 p-0 pr-8 text-center transition ",
                     {
                       "bg-dark-dark-background-panels": isDark,
                       "border-dark-dark-border": isDark,
@@ -237,9 +236,13 @@ export default function EditPotentialCustomerForm({
                   )}
                   value={createClient.status}
                 >
-                  <option>Estado</option>
+                  <option className="text-[18px]">Estado</option>
                   {stateClient.map((state) => (
-                    <option key={state.status} value={state.status}>
+                    <option
+                      key={state.status}
+                      value={state.status}
+                      className={`${state.color} text-white p-2 text-[18px]`}
+                    >
                       {state.label}
                     </option>
                   ))}
@@ -254,7 +257,7 @@ export default function EditPotentialCustomerForm({
                   name="select-template"
                   aria-describedby="select-template-error"
                   className={clsx(
-                    "w-full xl:w-fit rounded-md  border border-gray-200 pl-4 pr-10 py-2 transition",
+                    "w-full cursor-pointer xl:w-[150px] h-[42px] rounded-md border border-gray-200 p-0 pr-8 text-center transition",
                     {
                       "bg-dark-dark-background-panels": isDark,
                       "border-dark-dark-border": isDark,

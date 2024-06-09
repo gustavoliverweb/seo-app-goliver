@@ -32,7 +32,7 @@ export function ClientsCard({
     <div className="relative">
       <div
         style={{ background: client.color_card }}
-        className={`w-full h-auto rounded-lg flex justify-center items-center aspect-square`}
+        className="w-full h-auto rounded-lg flex justify-center items-center aspect-square p-4"
       >
         <Image
           className="object-scale-down h-full w-full"
