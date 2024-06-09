@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useStore } from "../lib/store";
 import { Button } from "./button";
 
@@ -12,7 +13,7 @@ export default function ConfirmModal({
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   children: React.ReactNode;
 }) {
-  const { setIsModalDeleteShow } = useStore();
+  const { setIsModalDeleteShow, isDark } = useStore();
   const handleClick = () => {
     setIsModalDeleteShow(false);
     setShowModal(false);
@@ -20,7 +21,17 @@ export default function ConfirmModal({
   return (
     <div>
       {showModal && (
-        <div className="absolute rounded-2xl shadow-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 bg-white z-50">
+        <div
+          className={clsx(
+            "absolute rounded-2xl shadow-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 z-50",
+            {
+              "bg-dark-dark-background-panels": isDark,
+              "bg-white": !isDark,
+              "text-dark-dark-text": isDark,
+              "text-primary-text-500": !isDark,
+            }
+          )}
+        >
           <div className="text-[20px]">{children}</div>
           <form
             onSubmit={handleSubmit}
@@ -28,7 +39,15 @@ export default function ConfirmModal({
           >
             <div
               onClick={handleClick}
-              className="bg-transparent rounded-lg flex items-center px-4 text-errors-warning-dark  cursor-pointer hover:bg-gray-200 hover:text-black hover:border-transparent transition-colors"
+              className={clsx(
+                "bg-transparent rounded-lg flex items-center px-4 cursor-pointer hover:border-transparent transition-colors",
+                {
+                  "text-dark-dark-text": isDark,
+                  "text-primary-text-500": !isDark,
+                  "hover:bg-dark-dark-background-card": isDark,
+                  "hover:bg-gray-200": !isDark,
+                }
+              )}
             >
               Cancelar
             </div>
