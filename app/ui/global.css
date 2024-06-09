@@ -124,3 +124,7 @@ iframe {
 .parent-menu.active .parent-icon-sub-menu {
   transform: rotate(90deg);
 }
+
+.wrapper-comment.active textarea {
+  display: block;
+}

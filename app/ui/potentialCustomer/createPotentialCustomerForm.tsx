@@ -15,6 +15,7 @@ export default function CreatePotentialCustomerForm() {
     paid_amount: 0,
     paid_type: "monthly" as "monthly" | "punctual",
     probability: "",
+    comment: "",
   };
   const stateClient = [
     { status: "open", label: "Abierto" },

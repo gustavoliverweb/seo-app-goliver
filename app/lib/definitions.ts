@@ -101,6 +101,7 @@ export type Customer = {
   status: string;
   paid_type: string;
   probability: string;
+  comment: string;
 };
 
 export type UserType = {

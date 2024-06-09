@@ -3,7 +3,10 @@ import { createPotentialCustomer } from "@/app/lib/actions";
 import { useEffect, useState } from "react";
 import PotentialCustomerStatusWrapper from "./potentialCustomerStatusWrapper";
 import { Customer } from "@/app/lib/definitions";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  ChatBubbleOvalLeftEllipsisIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { useStore } from "@/app/lib/store";
 import clsx from "clsx";
 
@@ -91,6 +94,17 @@ export default function EditPotentialCustomerForm({
     setSendForm(true);
   };
 
+  const handleClickComment = (e: React.MouseEvent<HTMLElement>) => {
+    const target = (e.target as HTMLElement).closest(".wrapper-comment");
+    target?.classList.toggle("active");
+  };
+
+  const handleComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (isSendForm) setSendForm(false);
+    setCreateClient((prev) => ({ ...prev, comment: e.target.value }));
+    setSendForm(true);
+  };
+
   useEffect(() => {
     if (isSendForm) {
       const delaySendData = setTimeout(() => {
@@ -118,9 +132,9 @@ export default function EditPotentialCustomerForm({
 
   return (
     <form>
-      <div className="w-full flex flex-col lg:flex-row justify-between">
+      <div className="w-full flex flex-col lg:flex-row justify-between mt-4 lg:mt-0">
         <div className="flex flex-col gap-2">
-          <div className="w-full">
+          <div className="wrapper-comment w-full flex items-center gap-2 relative">
             <input
               className={clsx(
                 "w-full border border-gray-200 rounded-md text-ellipsis transition",
@@ -133,6 +147,15 @@ export default function EditPotentialCustomerForm({
               onChange={handleClientNameChange}
               value={createClient?.name}
             />
+            <textarea
+              rows={4}
+              className="hidden w-full absolute top-11 left-0 border border-gray-200 rounded-md"
+              onChange={handleComment}
+              value={customers?.comment}
+            ></textarea>
+            <div onClick={handleClickComment} className="w-8 cursor-pointer">
+              <ChatBubbleOvalLeftEllipsisIcon className="text-gray-600" />
+            </div>
           </div>
           <div
             className={clsx("text-[14px] flex gap-2 items-center transition", {
