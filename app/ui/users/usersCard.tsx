@@ -33,13 +33,15 @@ export function UsersCard({
     >
       <div className="flex items-center gap-4">
         {user.user_avatar ? (
-          <Image
-            src={user.user_avatar}
-            width={50}
-            height={50}
-            alt="Avatar"
-            className="rounded-full"
-          />
+          <div className="w-[50px] h-[50px]">
+            <Image
+              src={user.user_avatar}
+              width={50}
+              height={50}
+              alt="Avatar"
+              className="rounded-full w-[50px] h-[50px]"
+            />
+          </div>
         ) : (
           <div className="empty-avatar">{user.name[0].toUpperCase()}</div>
         )}
