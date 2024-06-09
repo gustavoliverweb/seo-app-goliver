@@ -151,7 +151,7 @@ export default function EditPotentialCustomerForm({
               rows={4}
               className="hidden w-full absolute top-11 left-0 border border-gray-200 rounded-md"
               onChange={handleComment}
-              value={customers?.comment}
+              value={createClient?.comment}
             ></textarea>
             <div onClick={handleClickComment} className="w-8 cursor-pointer">
               <ChatBubbleOvalLeftEllipsisIcon className="text-gray-600" />
