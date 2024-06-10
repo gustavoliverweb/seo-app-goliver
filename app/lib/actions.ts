@@ -227,14 +227,15 @@ export async function createAgencyTemplate(
 export async function deleteAgencyTemplate(id: string) {
   console.log("delete agency template", id);
   try {
-    // await sql`DELETE FROM agency_template WHERE id = ${id}`;
+    await sql`DELETE FROM agency_template WHERE id = ${id}`;
     // revalidatePath("/dashboard");
     console.log("Plantilla eliminada con éxito");
-    return { message: "Plantilla eliminada con éxito" };
+    return { message: "Plantilla eliminada con éxito", success: true };
   } catch (error) {
     console.log(error);
     return {
       message: "Database Error: Failed to Delete agency template.",
+      success: false,
     };
   }
 }

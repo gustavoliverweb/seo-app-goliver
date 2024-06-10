@@ -23,7 +23,7 @@ export default function ConfirmModal({
       {showModal && (
         <div
           className={clsx(
-            "absolute rounded-2xl shadow-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 z-50",
+            "min-w-[500px] absolute rounded-2xl shadow-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 z-50",
             {
               "bg-dark-dark-background-panels": isDark,
               "bg-white": !isDark,

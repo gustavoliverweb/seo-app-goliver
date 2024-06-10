@@ -32,6 +32,30 @@ export async function fetchAgencyTemplate() {
   }
 }
 
+export async function fetchIsExistReports(id: string) {
+  noStore();
+  try {
+    const data = await sql`
+      SELECT * FROM agency_template 
+      WHERE EXISTS (
+        SELECT 1
+        FROM reports 
+        WHERE reports.agency_id = ${id}
+      )
+      `;
+    if (data.rows.length > 0) {
+      return { message: "tiene reportes asociados" };
+    } else {
+      return { message: "no tiene reportes asociados" };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      message: "Database Error: Failed to Delete agency template.",
+    };
+  }
+}
+
 export async function fetchAgencyPages() {
   noStore();
   try {
