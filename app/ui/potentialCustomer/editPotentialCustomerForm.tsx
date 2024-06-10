@@ -44,7 +44,7 @@ export default function EditPotentialCustomerForm({
   } = useStore();
 
   const [createClient, setCreateClient] = useState(customers);
-  console.log(customers);
+
   const handleClientNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isSendForm) setSendForm(false);
     setCreateClient((prev) => ({ ...prev, name: e.target.value }));
@@ -65,7 +65,8 @@ export default function EditPotentialCustomerForm({
   const handleChangeStatus = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (isSendForm) setSendForm(false);
     setCreateClient((prev) => ({ ...prev, status: e.target.value }));
-    setSendForm(true);
+    // setSendForm(true);
+    console.log(e.target);
   };
 
   const handleChangePaidType = async (
