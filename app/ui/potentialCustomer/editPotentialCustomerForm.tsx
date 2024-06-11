@@ -93,7 +93,10 @@ export default function EditPotentialCustomerForm({
   const handleProbability = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     if (isSendForm) setSendForm(false);
-    setCreateClient((prev) => ({ ...prev, probability: e.target.value }));
+    setCreateClient((prev) => ({
+      ...prev,
+      probability: Number(e.target.value),
+    }));
     setSendForm(true);
   };
 

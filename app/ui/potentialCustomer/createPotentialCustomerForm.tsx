@@ -16,14 +16,14 @@ export default function CreatePotentialCustomerForm() {
     status: "",
     paid_amount: 0,
     paid_type: "monthly" as "monthly" | "punctual",
-    probability: "",
+    probability: 0,
     comment: "",
   };
   const stateClient = [
-    { status: "open", label: "Abierto", color: "bg-[#e667dc]" },
-    { status: "proposal", label: "Propuesta", color: "bg-[#7c7cd3]" },
-    { status: "lost", label: "Perdido", color: "bg-[#6F1313]" },
-    { status: "won", label: "Ganado", color: "bg-[#4CD88A]" },
+    { status: "open", label: "Abierto", color: "#e667dc" },
+    { status: "proposal", label: "Propuesta", color: "#7c7cd3" },
+    { status: "lost", label: "Perdido", color: "#6F1313" },
+    { status: "won", label: "Ganado", color: "#4CD88A" },
   ];
   const paidTypeClient = [
     { type: "monthly", label: "Mensual" },
@@ -77,6 +77,15 @@ export default function CreatePotentialCustomerForm() {
   //   }));
   //   setSendForm(true);
   // };
+  const handleProbability = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    if (isSendForm) setSendForm(false);
+    setCreateClient((prev) => ({
+      ...prev,
+      probability: Number(e.target.value),
+    }));
+    setSendForm(true);
+  };
 
   const accessToPaidTypeObject = (str: keyof typeof labelPaidType) => {
     return labelPaidType[str];
@@ -155,8 +164,8 @@ export default function CreatePotentialCustomerForm() {
                     "border-dark-dark-border": isDark,
                   }
                 )}
-                // onChange={handleProbability}
-                // value={createClient?.probability}
+                onChange={handleProbability}
+                value={createClient?.probability}
               />
             </div>
             <span>%</span>
@@ -201,7 +210,7 @@ export default function CreatePotentialCustomerForm() {
                     setCreateClient={setCreateClient}
                     isSendForm={isSendForm}
                     setSendForm={setSendForm}
-                    value={""}
+                    value={createClient.status}
                   />
                 </div>
               </div>

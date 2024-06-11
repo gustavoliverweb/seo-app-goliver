@@ -410,6 +410,7 @@ export async function createPotentialCustomer(data: Customer) {
   `;
   if (existingCustomer?.rows.length > 0) {
     // Update existing customer
+
     try {
       await sql`
         UPDATE potential_customer
@@ -432,6 +433,7 @@ export async function createPotentialCustomer(data: Customer) {
       `;
       console.log("success insert potential customer");
     } catch (error) {
+      console.log(error);
       console.log("error insert potential customer");
       return {
         message: `Database Error: Failed to Create Potential Customer. ${error}`,
