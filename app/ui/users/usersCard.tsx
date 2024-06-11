@@ -39,7 +39,7 @@ export function UsersCard({
               width={50}
               height={50}
               alt="Avatar"
-              className="rounded-full w-[50px] h-[50px]"
+              className="rounded-full w-[50px] h-[50px] object-cover"
             />
           </div>
         ) : (
