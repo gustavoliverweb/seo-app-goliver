@@ -6,6 +6,8 @@ import PotentialCustomerStatusWrapper from "./potentialCustomerStatusWrapper";
 import { ramdomSecureId } from "@/app/lib/utils";
 import { useStore } from "@/app/lib/store";
 import clsx from "clsx";
+import SelectPaidType from "./selectPaidType";
+import SelectComponent from "./select";
 
 export default function CreatePotentialCustomerForm() {
   const initialState = {
@@ -59,22 +61,22 @@ export default function CreatePotentialCustomerForm() {
     setSendForm(true);
   };
 
-  const handleChangeStatus = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (isSendForm) setSendForm(false);
-    setCreateClient((prev) => ({ ...prev, status: e.target.value }));
-    setSendForm(true);
-  };
+  // const handleChangeStatus = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   if (isSendForm) setSendForm(false);
+  //   setCreateClient((prev) => ({ ...prev, status: e.target.value }));
+  //   setSendForm(true);
+  // };
 
-  const handleChangePaidType = async (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    if (isSendForm) setSendForm(false);
-    setCreateClient((prev) => ({
-      ...prev,
-      paid_type: e.target.value as "monthly" | "punctual",
-    }));
-    setSendForm(true);
-  };
+  // const handleChangePaidType = async (
+  //   e: React.ChangeEvent<HTMLSelectElement>
+  // ) => {
+  //   if (isSendForm) setSendForm(false);
+  //   setCreateClient((prev) => ({
+  //     ...prev,
+  //     paid_type: e.target.value as "monthly" | "punctual",
+  //   }));
+  //   setSendForm(true);
+  // };
 
   const accessToPaidTypeObject = (str: keyof typeof labelPaidType) => {
     return labelPaidType[str];
@@ -172,7 +174,7 @@ export default function CreatePotentialCustomerForm() {
           <div className="w-full xl:w-fit flex flex-row gap-2 justify-between lg:gap-2">
             <div className="w-full relative mt-2 lg:mt-0 rounded-md">
               <div className="relative">
-                <select
+                {/* <select
                   id="select-template"
                   onChange={handleChangeStatus}
                   name="select-template"
@@ -192,12 +194,21 @@ export default function CreatePotentialCustomerForm() {
                       {state.label}
                     </option>
                   ))}
-                </select>
+                </select> */}
+                <div className="w-full xl:w-[150px] h-[42px]">
+                  <SelectComponent
+                    stateClient={stateClient}
+                    setCreateClient={setCreateClient}
+                    isSendForm={isSendForm}
+                    setSendForm={setSendForm}
+                    value={""}
+                  />
+                </div>
               </div>
             </div>
             <div className="w-full relative mt-2 lg:mt-0 rounded-md">
               <div className="relative">
-                <select
+                {/* <select
                   id="select-template"
                   onChange={handleChangePaidType}
                   name="select-template"
@@ -217,7 +228,16 @@ export default function CreatePotentialCustomerForm() {
                       {type.label}
                     </option>
                   ))}
-                </select>
+                </select> */}
+                <div className="w-full xl:w-[150px] h-[42px]">
+                  <SelectPaidType
+                    paidType={paidTypeClient}
+                    setCreateClient={setCreateClient}
+                    isSendForm={isSendForm}
+                    setSendForm={setSendForm}
+                    value={""}
+                  />
+                </div>
               </div>
             </div>
           </div>
