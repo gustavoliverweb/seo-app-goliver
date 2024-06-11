@@ -112,3 +112,9 @@ export type UserType = {
   user_role: string;
   user_avatar: string;
 };
+
+export type StatePotentialCustomer = {
+  status: string;
+  label: string;
+  color: string;
+};

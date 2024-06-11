@@ -10,6 +10,8 @@
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.0.0",
     "@heroicons/react": "^2.0.18",
+    "@nextui-org/react": "^2.4.1",
+    "@nextui-org/select": "^2.2.1",
     "@react-email/components": "0.0.17",
     "@react-pdf/renderer": "^3.3.8",
     "@tailwindcss/forms": "^0.5.6",
@@ -22,6 +24,7 @@
     "cloudinary": "^2.0.3",
     "clsx": "^2.0.0",
     "eslint-config-next": "^14.1.4",
+    "framer-motion": "^11.2.10",
     "jsonwebtoken": "^9.0.2",
     "next": "^14.1.4",
     "next-auth": "^5.0.0-beta.3",

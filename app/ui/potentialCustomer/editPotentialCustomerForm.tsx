@@ -9,6 +9,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { useStore } from "@/app/lib/store";
 import clsx from "clsx";
+import SelectComponent from "./select";
+import SelectPaidType from "./selectPaidType";
 
 export default function EditPotentialCustomerForm({
   customers,
@@ -20,10 +22,10 @@ export default function EditPotentialCustomerForm({
   setPotentialCustomerId: (clientId: string) => void;
 }) {
   const stateClient = [
-    { status: "open", label: "Abierto", color: "bg-[#e667dc]" },
-    { status: "proposal", label: "Propuesta", color: "bg-[#7c7cd3]" },
-    { status: "lost", label: "Perdido", color: "bg-[#6F1313]" },
-    { status: "won", label: "Ganado", color: "bg-[#4CD88A]" },
+    { status: "open", label: "Abierto", color: "#e667dc" },
+    { status: "proposal", label: "Propuesta", color: "#7c7cd3" },
+    { status: "lost", label: "Perdido", color: "#6F1313" },
+    { status: "won", label: "Ganado", color: "#4CD88A" },
   ];
   const paidTypeClient = [
     { type: "monthly", label: "Mensual" },
@@ -62,20 +64,20 @@ export default function EditPotentialCustomerForm({
     setSendForm(true);
   };
 
-  const handleChangeStatus = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (isSendForm) setSendForm(false);
-    setCreateClient((prev) => ({ ...prev, status: e.target.value }));
-    // setSendForm(true);
-    console.log(e.target);
-  };
+  // const handleChangeStatus = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   if (isSendForm) setSendForm(false);
+  //   setCreateClient((prev) => ({ ...prev, status: e.target.value }));
+  //   // setSendForm(true);
+  //   console.log(e.target);
+  // };
 
-  const handleChangePaidType = async (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    if (isSendForm) setSendForm(false);
-    setCreateClient((prev) => ({ ...prev, paid_type: e.target.value }));
-    setSendForm(true);
-  };
+  // const handleChangePaidType = async (
+  //   e: React.ChangeEvent<HTMLSelectElement>
+  // ) => {
+  //   if (isSendForm) setSendForm(false);
+  //   setCreateClient((prev) => ({ ...prev, paid_type: e.target.value }));
+  //   setSendForm(true);
+  // };
 
   const accessToPaidTypeObject = (str: keyof typeof labelPaidType) => {
     return labelPaidType[str];
@@ -105,6 +107,9 @@ export default function EditPotentialCustomerForm({
     setCreateClient((prev) => ({ ...prev, comment: e.target.value }));
     setSendForm(true);
   };
+  // useEffect(() => {
+  //   console.log(createClient);
+  // }, [createClient]);
 
   useEffect(() => {
     if (isSendForm) {
@@ -124,7 +129,7 @@ export default function EditPotentialCustomerForm({
             return customer;
           }
         });
-        console.log(newCustomersData);
+        // console.log(newCustomersData);
         setCustomers(newCustomersData);
       }, 500);
       return () => clearTimeout(delaySendData);
@@ -152,7 +157,7 @@ export default function EditPotentialCustomerForm({
               rows={4}
               className="hidden w-full absolute top-11 left-0 border border-gray-200 rounded-md"
               onChange={handleComment}
-              value={createClient?.comment}
+              value={createClient?.comment || ""}
             ></textarea>
             <div onClick={handleClickComment} className="w-8 cursor-pointer">
               <ChatBubbleOvalLeftEllipsisIcon className="text-gray-600" />
@@ -223,7 +228,7 @@ export default function EditPotentialCustomerForm({
           <div className="w-full xl:w-fit flex flex-row gap-2 justify-between lg:gap-2">
             <div className="w-full relative mt-2 lg:mt-0 rounded-md">
               <div className="relative">
-                <select
+                {/* <select
                   onChange={handleChangeStatus}
                   name="select-template"
                   aria-describedby="select-template-error"
@@ -247,12 +252,30 @@ export default function EditPotentialCustomerForm({
                       {state.label}
                     </option>
                   ))}
-                </select>
+                </select> */}
+                <div className="w-full xl:w-[150px] h-[42px]">
+                  <SelectComponent
+                    stateClient={stateClient}
+                    setCreateClient={setCreateClient}
+                    isSendForm={isSendForm}
+                    setSendForm={setSendForm}
+                    value={createClient.status}
+                  />
+                </div>
               </div>
             </div>
             <div className="w-full relative mt-2 lg:mt-0 rounded-md">
               <div className="relative">
-                <select
+                <div className="w-full xl:w-[150px] h-[42px]">
+                  <SelectPaidType
+                    paidType={paidTypeClient}
+                    setCreateClient={setCreateClient}
+                    isSendForm={isSendForm}
+                    setSendForm={setSendForm}
+                    value={createClient.paid_type}
+                  />
+                </div>
+                {/* <select
                   id="select-template"
                   onChange={handleChangePaidType}
                   name="select-template"
@@ -273,7 +296,7 @@ export default function EditPotentialCustomerForm({
                       {type.label}
                     </option>
                   ))}
-                </select>
+                </select> */}
               </div>
             </div>
           </div>

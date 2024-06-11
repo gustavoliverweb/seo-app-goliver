@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { nextui } from "@nextui-org/theme";
 
 // bg-prymary-button-500
 const config: Config = {
@@ -6,6 +7,7 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     fontSize: {
@@ -68,6 +70,7 @@ const config: Config = {
     },
   },
 
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [require("@tailwindcss/forms"), nextui()],
 };
+
 export default config;
