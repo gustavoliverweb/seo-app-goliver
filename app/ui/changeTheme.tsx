@@ -3,7 +3,8 @@ import clsx from "clsx";
 import { useStore } from "../lib/store";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 
-export default function ChangeTheme() {
+export default function ChangeTheme({ className }: { className: string }) {
+  console.log(className);
   const { setIsDark, isDark } = useStore();
   const handleThemeChange = () => {
     setIsDark(!isDark);
@@ -11,7 +12,10 @@ export default function ChangeTheme() {
   return (
     <div
       onClick={handleThemeChange}
-      className="flex justify-start border border-gray-200 w-[58px] p-1 rounded-full cursor-pointer"
+      className={clsx(
+        "justify-start border border-gray-200 w-[58px] p-1 rounded-full cursor-pointer",
+        className
+      )}
     >
       <div
         className={clsx("w-6 h-6 rounded-full transition", {

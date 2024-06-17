@@ -4,10 +4,10 @@ import NavLinks from "@/app/ui/dashboard/nav-links";
 import { GoLogoBlack } from "@/app/ui/lar-logo";
 import { GoLogoWhite } from "@/app/ui/lar-logo";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import { Avatar } from "../avatar";
 import { useRef, useState } from "react";
 import clsx from "clsx";
 import { useStore } from "@/app/lib/store";
+import ChangeTheme from "../changeTheme";
 
 export default function SideNav({ children }: { children: React.ReactNode }) {
   const menuRef = useRef(null);
@@ -25,11 +25,8 @@ export default function SideNav({ children }: { children: React.ReactNode }) {
         "bg-dark-dark-background-panels": isDark,
       })}
     >
-      <div className="flex justify-between items-center">
-        <Link
-          className="flex justify-start rounded-md px-4 py-2 md:h-40"
-          href="/"
-        >
+      <div className="flex justify-between items-center p-5">
+        <Link className="flex justify-start rounded-md md:h-40" href="/">
           <div className="w-40 text-text-opacity-500  md:w-40">
             {isDark ? <GoLogoWhite /> : <GoLogoBlack />}
             <div className="text-[0.875rem] text-center">
@@ -37,7 +34,7 @@ export default function SideNav({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </Link>
-        <Avatar />
+        <ChangeTheme className="flex md:hidden" />
       </div>
       <div
         ref={menuRef}

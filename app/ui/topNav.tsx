@@ -17,7 +17,7 @@ export default function TopNav() {
       )}
     >
       <Search />
-      <ChangeTheme />
+      <ChangeTheme className="hidden md:flex" />
     </div>
   );
 }

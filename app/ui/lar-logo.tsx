@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function GoLogoBlack() {
   return (
-    <div className={`p-1 flex flex-row items-center leading-none`}>
+    <div className={`flex flex-row items-center leading-none`}>
       <div className="relative">
         <Image
           src={gustavoLogoBlack}
@@ -21,7 +21,7 @@ export function GoLogoBlack() {
 
 export function GoLogoWhite() {
   return (
-    <div className={`p-1 flex flex-row items-center leading-none`}>
+    <div className={` flex flex-row items-center leading-none`}>
       <div className="relative">
         <Image
           src={gustavoLogoWhite}
