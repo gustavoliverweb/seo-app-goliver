@@ -51,19 +51,26 @@ export default function Search() {
       </label>
       <input
         className={clsx(
-          "peer block w-full rounded-md border py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 transition",
+          "peer block w-full rounded-md border py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 transition focus:ring-[#794BD8] focus:border-[#794BD8]",
           {
             "bg-white": !isDark,
             "bg-dark-dark-background-panels": isDark,
             "border-gray-200": !isDark,
             "border-dark-dark-border": isDark,
+            "text-dark-dark-text": isDark,
           }
         )}
         placeholder={`Buscar ${addLabel()}`}
         onChange={(e) => handleSearch(e.target.value)}
         defaultValue={searchParams.get("query")?.toString()}
       />
-      <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+      <div className="">
+        <MagnifyingGlassIcon
+          className={clsx(
+            "absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"
+          )}
+        />
+      </div>
     </div>
   );
 }
