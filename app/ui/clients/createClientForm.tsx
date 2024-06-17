@@ -92,7 +92,7 @@ export default function CreateClientForm({ agencys }: { agencys: Agency[] }) {
             <div className="relative flex items-center">
               <select
                 className={clsx(
-                  "w-[360px] rounded-md border border-gray-200 transition",
+                  "w-[360px] rounded-md border border-gray-200 transition focus:ring-[#794BD8] focus:border-[#794BD8] ",
                   {
                     "bg-dark-dark-background-panels": isDark,
                   }
@@ -113,7 +113,7 @@ export default function CreateClientForm({ agencys }: { agencys: Agency[] }) {
                 type="text"
                 placeholder="Introduce el nombre de la agencia"
                 className={clsx(
-                  "form-input w-[320px] h-8 absolute left-1 block md:w-80 border-0 py-2 text-sm focus:outline-none placeholder:text-gray-500 transition",
+                  "form-input w-[320px] h-8 absolute left-1 block md:w-80 border-0 py-2 text-sm focus:outline-none placeholder:text-gray-500 transition ",
                   {
                     "bg-dark-dark-background-panels": isDark,
                   }
@@ -150,7 +150,7 @@ export default function CreateClientForm({ agencys }: { agencys: Agency[] }) {
                 type="text"
                 placeholder="Introduce el nombre del cliente"
                 className={clsx(
-                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-1 placeholder:text-gray-500 transition",
+                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-1 placeholder:text-gray-500 transition focus:ring-[#794BD8] focus:border-[#794BD8]",
                   {
                     "bg-dark-dark-background-panels": isDark,
                   }
@@ -188,7 +188,7 @@ export default function CreateClientForm({ agencys }: { agencys: Agency[] }) {
                 type="number"
                 placeholder="Introduce un monto"
                 className={clsx(
-                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-1 placeholder:text-gray-500 transition",
+                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-1 placeholder:text-gray-500 transition focus:ring-[#794BD8] focus:border-[#794BD8]",
                   {
                     "bg-dark-dark-background-panels": isDark,
                   }

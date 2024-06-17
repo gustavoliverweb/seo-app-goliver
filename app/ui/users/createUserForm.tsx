@@ -66,7 +66,7 @@ export default function CreateUserForm() {
                 type="text"
                 placeholder="Introduce el nombre del usuario"
                 className={clsx(
-                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 transition",
+                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 transition focus:ring-[#794BD8] focus:border-[#794BD8]",
                   {
                     "bg-dark-dark-background-panels": isDark,
                     "placeholder:text-gray-500": !isDark,
@@ -102,7 +102,7 @@ export default function CreateUserForm() {
                 type="text"
                 placeholder="Introduce un correo"
                 className={clsx(
-                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 transition",
+                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 transition focus:ring-[#794BD8] focus:border-[#794BD8]",
                   {
                     "bg-dark-dark-background-panels": isDark,
                     "placeholder:text-gray-500": !isDark,
@@ -138,7 +138,7 @@ export default function CreateUserForm() {
                 type="password"
                 placeholder="Introduce una contraseña"
                 className={clsx(
-                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 transition",
+                  "block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 transition focus:ring-[#794BD8] focus:border-[#794BD8]",
                   {
                     "bg-dark-dark-background-panels": isDark,
                     "placeholder:text-gray-500": !isDark,
@@ -172,7 +172,7 @@ export default function CreateUserForm() {
                 name="user_role"
                 id="user_role"
                 className={clsx(
-                  "w-full md:w-80 rounded-md  border border-gray-200 px-4 py-2 transition",
+                  "w-full md:w-80 rounded-md  border border-gray-200 px-4 py-2 transition focus:ring-[#794BD8] focus:border-[#794BD8]",
                   {
                     "bg-dark-dark-background-panels": isDark,
                     "text-dark-dark-border": isDark,

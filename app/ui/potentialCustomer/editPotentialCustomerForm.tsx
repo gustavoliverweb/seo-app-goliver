@@ -146,7 +146,7 @@ export default function EditPotentialCustomerForm({
           <div className="wrapper-comment w-full flex items-center gap-2 relative">
             <input
               className={clsx(
-                "w-full border border-gray-200 rounded-md text-ellipsis transition",
+                "w-full border border-gray-200 rounded-md text-ellipsis transition focus:ring-[#794BD8] focus:border-[#794BD8]",
                 {
                   "bg-dark-dark-background-panels": isDark,
                   "border-dark-dark-border": isDark,
@@ -185,7 +185,7 @@ export default function EditPotentialCustomerForm({
               <input
                 type="number"
                 className={clsx(
-                  "w-full h-8 border border-gray-200 rounded-md transition",
+                  "w-full h-8 border border-gray-200 rounded-md transition focus:ring-[#794BD8] focus:border-[#794BD8]",
                   {
                     "bg-dark-dark-background-panels": isDark,
                     "border-dark-dark-border": isDark,
@@ -206,7 +206,7 @@ export default function EditPotentialCustomerForm({
               <input
                 type="number"
                 className={clsx(
-                  "w-full h-8 border border-gray-200 rounded-md transition px-2 text-center",
+                  "w-full h-8 border border-gray-200 rounded-md transition px-2 text-center focus:ring-[#794BD8] focus:border-[#794BD8]",
                   {
                     "bg-dark-dark-background-panels": isDark,
                     "border-dark-dark-border": isDark,

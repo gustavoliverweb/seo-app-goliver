@@ -137,3 +137,15 @@ iframe {
   white-space: normal;
   height: 6rem;
 }
+
+input[type="radio"]:checked:focus {
+  background-color: #794bd8;
+}
+
+input[type="radio"]:checked {
+  background-color: #794bd8;
+}
+
+input[type="radio"]:checked:hover {
+  background-color: #794bd8;
+}

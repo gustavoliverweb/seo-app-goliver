@@ -108,7 +108,7 @@ export default function CreateAgencyForm() {
                 type="text"
                 placeholder="Introduce el nombre de la agencia"
                 className={clsx(
-                  "block w-full md:w-80 rounded-md border py-2 text-sm outline-2 placeholder:text-gray-500 transition",
+                  "block w-full md:w-80 rounded-md border py-2 text-sm outline-2 placeholder:text-gray-500 transition focus:ring-[#794BD8] focus:border-[#794BD8]",
                   {
                     "bg-dark-dark-background-panels": isDark,
                     "border-gray-200": !isDark,
