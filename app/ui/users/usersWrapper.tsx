@@ -5,7 +5,6 @@ import { useState } from "react";
 import { deleteUser } from "@/app/lib/actions";
 import { UserType } from "@/app/lib/definitions";
 import { CreateUser } from "../buttons";
-import Pagination from "../pagination";
 import clsx from "clsx";
 import { useStore } from "@/app/lib/store";
 
