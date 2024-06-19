@@ -89,7 +89,7 @@ export default function CreateAgencyForm() {
         hidden
       />
       <div
-        className={clsx("rounded-md p-4 md:p-6 transition", {
+        className={clsx("rounded-md  transition", {
           "text-dark-dark-text": isDark,
         })}
       >

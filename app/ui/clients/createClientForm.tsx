@@ -79,7 +79,7 @@ export default function CreateClientForm({ agencys }: { agencys: Agency[] }) {
   return (
     <form action={dispatch}>
       <input type="text" name="logo_url" value={imageUrl} readOnly hidden />
-      <div className="rounded-md p-4 md:p-6">
+      <div className="rounded-md ">
         <div className="text-[1.3rem]">Información de la agencia</div>
         <div className="mt-6 mb-4">
           <label
