@@ -350,6 +350,7 @@ export async function fetchUsers() {
     return data.rows;
   } catch (error) {
     console.error("Database Error:", error);
+    throw new Error("Failed to fetch users.");
   }
 }
 

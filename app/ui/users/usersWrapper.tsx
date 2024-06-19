@@ -9,13 +9,7 @@ import Pagination from "../pagination";
 import clsx from "clsx";
 import { useStore } from "@/app/lib/store";
 
-export default function UsersWrapper({
-  users,
-  usersPages,
-}: {
-  users: UserType[];
-  usersPages: number;
-}) {
+export default function UsersWrapper({ users }: { users: UserType[] }) {
   const { isDark, setIsModalDeleteShow } = useStore();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>("");
@@ -88,9 +82,6 @@ export default function UsersWrapper({
         >
           ¿Estás seguro de eliminar el usuario?
         </ConfirmModal>
-        <div className="mt-5 flex w-full ">
-          <Pagination totalPages={usersPages} />
-        </div>
       </div>
     </div>
   );
