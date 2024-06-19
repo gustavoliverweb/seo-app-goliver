@@ -84,8 +84,11 @@ export function sumSubTotalPotentialCustomer(array: Customer[]) {
 }
 
 export function sumSubTotalClients(client: Clients, agencyName: string) {
+  console.log("fire");
   const amount = client[agencyName].reduce((acc, curr) => {
-    return acc + Number(curr.monthly_payment);
+    const isPaused = curr.paused;
+    const payment = isPaused ? 0 : Number(curr.monthly_payment);
+    return acc + Number(payment);
   }, 0);
   return amount;
 }

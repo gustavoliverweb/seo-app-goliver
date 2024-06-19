@@ -379,6 +379,25 @@ export async function deleteClient(
   }
 }
 
+export async function updateClient(id: string, isPaused: boolean) {
+  console.log(id, isPaused);
+  try {
+    await sql`UPDATE clients
+    SET paused = ${isPaused}
+    WHERE id = ${id}
+    `;
+    revalidatePath("/dashboard/clients");
+    // console.
+    return { message: "Cliente actualizado con éxito", success: true };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: "Database Error: Error al actualizar el cliente",
+      success: false,
+    };
+  }
+}
+
 export async function deleteClientTest(
   id: string,
   page: string | null,

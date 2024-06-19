@@ -4,7 +4,6 @@ import { useStore } from "../lib/store";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 
 export default function ChangeTheme({ className }: { className: string }) {
-  console.log(className);
   const { setIsDark, isDark } = useStore();
   const handleThemeChange = () => {
     setIsDark(!isDark);

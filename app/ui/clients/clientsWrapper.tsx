@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import { ClientsCard } from "./clientsCard";
 import { Clients } from "@/app/lib/definitions";
-import { deleteClient } from "@/app/lib/actions";
+import { deleteClient, updateClient } from "@/app/lib/actions";
 import { useSearchParams, useRouter } from "next/navigation";
 import ConfirmModal from "../confirmModal";
 import { sumSubTotalClients } from "@/app/lib/utils";
@@ -51,6 +51,7 @@ export default function ClientsWrapper({
     name: "",
     agencyId: "",
   });
+  const [testUpdate, setTestUpdate] = useState(false);
   const params = useSearchParams();
   const page = params.get("page");
   const deleteClientWithId = deleteClient.bind(
@@ -61,7 +62,9 @@ export default function ClientsWrapper({
   );
   const router = useRouter();
   const { setIsModalDeleteShow } = useStore();
+  // console.log(clientsData);
   useEffect(() => {
+    console.log("effect", clients);
     const transformData = () => {
       const newData: Data = clients.reduce((acc, curr) => {
         const { agency_name } = curr;
@@ -77,11 +80,12 @@ export default function ClientsWrapper({
         };
       });
       const totalClientPerPage = clientsPerPage(currentPage, arrayOfObjects);
+      console.log(arrayOfObjects);
       setTotalClients(arrayOfObjects);
       setClientsData(totalClientPerPage);
     };
     transformData();
-  }, [currentPage, query]);
+  }, [currentPage, query, clients]);
 
   const clientsPerPage = (page: number, array) => {
     const starIndex = (page - 1) * 3;
@@ -162,7 +166,7 @@ export default function ClientsWrapper({
                         <div key={client.name}>
                           <ClientsCard
                             client={client}
-                            showModal={showModal}
+                            // showModal={showModal}
                             setShowModal={setShowModal}
                             setClientData={setClientData}
                           />

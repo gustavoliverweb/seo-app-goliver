@@ -194,7 +194,7 @@ export async function fetchFilteredClients(query: string) {
     ON agency_client.id = clients.agency_id
     WHERE
     agency_client.agency_name ILIKE ${`%${query}%`}
-
+    ORDER BY clients.order_c
     `;
     // console.log(clients.rows);
     return clients.rows;

@@ -83,6 +83,7 @@ export type Clients = {
   color_card: string;
   monthly_payment: string;
   agency_id: string;
+  paused: boolean;
 };
 // id: '64cdd2ca-15d6-4d19-9ada-3370f75c5659',
 //       agency_name: 'Dinkbit',
