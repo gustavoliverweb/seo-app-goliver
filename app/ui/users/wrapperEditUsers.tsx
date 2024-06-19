@@ -33,7 +33,7 @@ export default function WrapperEditUsers({ user }: { user: UserType }) {
         </div>
         <div
           className={clsx(
-            " h-max overflow-auto p-5 rounded-2xl w-full flex-grow flex flex-col justify-between transition",
+            " h-max overflow-auto p-5 mb-6 rounded-2xl w-full flex-grow flex flex-col justify-between transition",
             {
               "bg-white": !isDark,
               "bg-dark-dark-background-panels": isDark,
