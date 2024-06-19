@@ -2,7 +2,7 @@ import { Clients } from "@/app/lib/definitions";
 import Image from "next/image";
 import { PauseIcon, PlayIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useStore } from "@/app/lib/store";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 import { updateClient } from "@/app/lib/actions";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
@@ -23,7 +23,6 @@ export function ClientsCard({
   const { setIsModalDeleteShow } = useStore();
   const [isClientPaused, setIsClientPaused] = useState<boolean>(client.paused);
   const [clientId, setClientId] = useState<undefined | string>();
-  const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const handleDeleteClient = () => {
     console.log("Delete client", client);
@@ -118,8 +117,6 @@ export function ClientsCard({
       >
         <div className="text-[18px] font-semibold text-white">Pausado</div>
       </div>
-      {/* {isClientPaused && (
-      )} */}
     </div>
   );
 }
