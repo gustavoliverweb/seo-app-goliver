@@ -31,6 +31,7 @@ export default function SendReportForm({
   const [loadingSendMail, setLoadingSendMail] = useState<boolean>(false);
   const [showModalSuccess, setShowModalSuccess] = useState<boolean>(false);
   const [showModalError, setShowModalError] = useState<boolean>(false);
+  const [subjectReport, setSubjectReport] = useState("Nueva solicitud SEO");
   const { isDark } = useStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -103,7 +104,7 @@ export default function SendReportForm({
           }
         )}
       ></div>
-      <SuccessModal showModal={showModalSuccess}>
+      <SuccessModal showModal={showModalSuccess} top={"top-1/2"}>
         <div>
           <div className="text-[24px] text-errors-success-dark font-medium">
             Éxito
@@ -480,7 +481,9 @@ export default function SendReportForm({
                 <textarea
                   id="subject"
                   name="subject"
-                  value={`Nueva solicitud SEO - ${companyName}`}
+                  onChange={(e) => setSubjectReport(e.target.value)}
+                  // value={`Nueva solicitud SEO - ${companyName}`}
+                  value={`${subjectReport}`}
                   className={clsx(
                     "block w-full  rounded-md border border-gray-200 px-4 py-2 text-sm outline-2 focus:ring-[#794BD8] focus:border-[#794BD8]",
                     {
@@ -490,7 +493,7 @@ export default function SendReportForm({
                     }
                   )}
                   aria-describedby="subject-error"
-                  readOnly
+                  // readOnly
                 />
               </div>
               {state.errors?.subject ? (

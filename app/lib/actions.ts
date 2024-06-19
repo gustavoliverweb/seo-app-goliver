@@ -248,8 +248,8 @@ export async function CreateReportAction(
   // console.log("formData", formData.get("select_template"));
   // console.log("formData", formData.get("name"));
   // console.log("formData", formData.get("url_site"));
-  console.log("formData", formData.get("yes_radio"));
-  console.log("formData", formData.get("no_radio"));
+  // console.log("formData", formData.get("yes_radio"));
+  // console.log("formData", formData.get("no_radio"));
   const validatedFields = CreateReports.safeParse({
     agency_id: formData.get("agency_id"),
     select_template: formData.get("select_template"),

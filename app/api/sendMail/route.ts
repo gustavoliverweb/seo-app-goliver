@@ -14,14 +14,13 @@ export async function POST(request: NextRequest) {
   const companyName = formData.get("company_name") as string;
   const companyUrl = formData.get("company_url") as string;
   const kitDigital = formData.get("kit_digital") as string;
-  // console.log(formData);
-  console.log("subject", subject);
-  console.log(companyUrl);
+  const subjectReport = `${subject} - ${companyName}`;
+
   try {
     const data = await resend.emails.send({
       from: "Gustavoliver.com <app@gustavoliver.com>",
       to: [email],
-      subject: subject,
+      subject: subjectReport,
       react: EmailTemplate({
         companyName: companyName,
         companyUrl: companyUrl,

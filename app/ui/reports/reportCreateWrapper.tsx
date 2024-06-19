@@ -39,7 +39,7 @@ export default function ReportCreateWrapper({
       </div>
       <div
         className={clsx(
-          "w-full grid grid-cols-1 lg:grid-cols-2 grid-rows-2 relative h-max overflow-auto  rounded-2xl transition",
+          "w-full grid grid-cols-1 lg:grid-cols-2 grid-rows-2  h-max overflow-auto  rounded-2xl transition",
           {
             "bg-[#f0f1f3]": !isDark,
             "bg-dark-dark-background": isDark,
