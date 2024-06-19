@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import { ClientsCard } from "./clientsCard";
 import { Clients } from "@/app/lib/definitions";
-import { deleteClient, updateClient } from "@/app/lib/actions";
+import { deleteClient } from "@/app/lib/actions";
 import { useSearchParams, useRouter } from "next/navigation";
 import ConfirmModal from "../confirmModal";
 import { sumSubTotalClients } from "@/app/lib/utils";
@@ -51,7 +51,6 @@ export default function ClientsWrapper({
     name: "",
     agencyId: "",
   });
-  const [testUpdate, setTestUpdate] = useState(false);
   const params = useSearchParams();
   const page = params.get("page");
   const deleteClientWithId = deleteClient.bind(

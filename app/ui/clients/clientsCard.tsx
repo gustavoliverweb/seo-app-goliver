@@ -1,13 +1,11 @@
 import { Clients } from "@/app/lib/definitions";
 import Image from "next/image";
-// import { Button } from "../button";
 import { PauseIcon, PlayIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useStore } from "@/app/lib/store";
-import { useCallback, useEffect, useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { updateClient } from "@/app/lib/actions";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
 
 export function ClientsCard({
   client,
