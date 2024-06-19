@@ -62,7 +62,7 @@ export default function UsersWrapper({ users }: { users: UserType[] }) {
           }
         )}
       >
-        <div className="flex flex-col gap-4  mt-6">
+        <div className="flex flex-col gap-4">
           {users &&
             users.map((user) => (
               <div key={user.id}>

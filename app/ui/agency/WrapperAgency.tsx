@@ -90,7 +90,7 @@ export default function WrapperAgency({
           }
         )}
       >
-        <div className="grid place-items-center grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-rows-[auto,_auto] gap-4 mt-6">
+        <div className="grid place-items-center grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-rows-[auto,_auto] gap-4 ">
           {agencys &&
             agencys.map((agency) => (
               <div key={agency.id}>
