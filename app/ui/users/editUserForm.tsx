@@ -71,7 +71,7 @@ export default function EditUserForm({ user }: { user: UserType | undefined }) {
       <form action={dispatch}>
         <input type="hidden" name="id" value={user?.id} />
         <div
-          className={clsx("rounded-md p-4 md:p-6 transition", {
+          className={clsx("rounded-md transition", {
             "text-dark-dark-text": isDark,
           })}
         >
