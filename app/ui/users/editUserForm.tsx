@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { UserType } from "@/app/lib/definitions";
 import SuccessModal from "../successModal";
+import clsx from "clsx";
+import { useStore } from "@/app/lib/store";
 
 const usersRoles = [{ rol: "SEO Manager" }, { rol: "Admin" }];
 
@@ -19,7 +21,7 @@ export default function EditUserForm({ user }: { user: UserType | undefined }) {
   const [userName, setUserName] = useState<string>("");
   const [showModalSuccess, setShowModalSuccess] = useState<boolean>(false);
   const { message } = state;
-  console.log(state);
+  const { isDark } = useStore();
 
   useEffect(() => {
     if (message) {
@@ -37,7 +39,6 @@ export default function EditUserForm({ user }: { user: UserType | undefined }) {
     console.log(file);
     if (!file) return;
     const reader = new FileReader();
-    // const name = agencyName.trim().replace(" ", "");
     reader.onload = async (e: ProgressEvent<FileReader>) => {
       const base64String = e.target?.result as string;
       const upLoadImage = await fetch(
@@ -69,7 +70,11 @@ export default function EditUserForm({ user }: { user: UserType | undefined }) {
       </SuccessModal>
       <form action={dispatch}>
         <input type="hidden" name="id" value={user?.id} />
-        <div className="rounded-md  p-4 md:p-6">
+        <div
+          className={clsx("rounded-md p-4 md:p-6 transition", {
+            "text-dark-dark-text": isDark,
+          })}
+        >
           <div className="text-[1.3rem]">Información del usuario</div>
 
           <div className="mt-6 mb-4">
@@ -85,7 +90,14 @@ export default function EditUserForm({ user }: { user: UserType | undefined }) {
                   name="name"
                   type="text"
                   placeholder="Introduce el nombre del usuario"
-                  className="block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 placeholder:text-gray-500"
+                  className={clsx(
+                    "block w-full md:w-80 rounded-md border py-2 text-sm outline-2 placeholder:text-gray-500 transition focus:ring-[#794BD8] focus:border-[#794BD8]",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "border-gray-200": !isDark,
+                      "border-dark-dark-border": isDark,
+                    }
+                  )}
                   aria-describedby="name-error"
                 />
               </div>
@@ -115,7 +127,14 @@ export default function EditUserForm({ user }: { user: UserType | undefined }) {
                   defaultValue={user?.email}
                   type="text"
                   placeholder="Introduce un correo"
-                  className="block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 placeholder:text-gray-500"
+                  className={clsx(
+                    "block w-full md:w-80 rounded-md border py-2 text-sm outline-2 placeholder:text-gray-500 transition focus:ring-[#794BD8] focus:border-[#794BD8]",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "border-gray-200": !isDark,
+                      "border-dark-dark-border": isDark,
+                    }
+                  )}
                   aria-describedby="email-error"
                 />
               </div>
@@ -147,7 +166,14 @@ export default function EditUserForm({ user }: { user: UserType | undefined }) {
                   name="password"
                   type="password"
                   placeholder="Introduce una contraseña"
-                  className="block w-full md:w-80 rounded-md border border-gray-200 py-2 text-sm outline-2 placeholder:text-gray-500"
+                  className={clsx(
+                    "block w-full md:w-80 rounded-md border py-2 text-sm outline-2 placeholder:text-gray-500 transition focus:ring-[#794BD8] focus:border-[#794BD8]",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "border-gray-200": !isDark,
+                      "border-dark-dark-border": isDark,
+                    }
+                  )}
                   aria-describedby="password-error"
                 />
               </div>
@@ -177,15 +203,17 @@ export default function EditUserForm({ user }: { user: UserType | undefined }) {
                 <select
                   name="user_role"
                   id="user_role"
-                  className="w-full md:w-80 rounded-md  border border-gray-200 px-4 py-2"
+                  className={clsx(
+                    "block w-full md:w-80 rounded-md border py-2 text-sm outline-2 placeholder:text-gray-500 transition focus:ring-[#794BD8] focus:border-[#794BD8]",
+                    {
+                      "bg-dark-dark-background-panels": isDark,
+                      "border-gray-200": !isDark,
+                      "border-dark-dark-border": isDark,
+                    }
+                  )}
                 >
-                  {/* <option value="">Selecciona un rol</option> */}
                   {usersRoles.map((role) => (
-                    <option
-                      // selected={role.rol === user?.user_role}
-                      key={role.rol}
-                      defaultValue={user?.user_role}
-                    >
+                    <option key={role.rol} defaultValue={user?.user_role}>
                       {role.rol}
                     </option>
                   ))}
@@ -238,32 +266,19 @@ export default function EditUserForm({ user }: { user: UserType | undefined }) {
                   ) : (
                     "Subir imagen"
                   )}
-                  {/* {loadingImage ? (
-                  <span className="loader"></span>
-                ) : avatarImage ? (
-                  <Image
-                    src={user?.user_avatar ? user?.user_avatar : avatarImage}
-                    width={320}
-                    height={106}
-                    alt="logo"
-                  />
-                ) : (
-                  "Subir imagen"
-                )} */}
                 </label>
                 <input
                   id="user_avatar_valid"
                   onChange={handleChangeAvatar}
                   name="user_avatar_valid"
                   type="file"
-                  className="border-none outline-0 opacity-0 absolute top-0 w-full h-full "
+                  className="border-none outline-0 opacity-0 absolute top-0 w-fit h-full "
                   aria-describedby="user_avatar_valid-error"
                 />
                 <input
                   type="text"
                   name="user_avatar"
                   value={avatarUrl ? avatarUrl : user?.user_avatar}
-                  // defaultValue={user?.user_avatar}
                   readOnly
                   hidden
                 />

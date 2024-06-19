@@ -367,6 +367,7 @@ export async function fetchUsersId(id: string) {
     return data.rows[0];
   } catch (error) {
     console.error("Database Error:", error);
+    throw new Error("Failed to fetch user.");
   }
 }
 
