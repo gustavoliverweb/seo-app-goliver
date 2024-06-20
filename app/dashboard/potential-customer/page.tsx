@@ -14,7 +14,6 @@ export default async function Page({
   const currentPage = Number(searchParams?.page) || 1;
   const query = searchParams?.query || "";
   const customers = await fetchFilteredPotentialCustomers(query, currentPage);
-  console.log("customers", customers);
   const potentialCustomersPages = await fetchPotentialCustomersPages();
   return <PotentialCustomerWrapper customers={customers} query={query} />;
 }

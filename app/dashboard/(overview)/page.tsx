@@ -14,7 +14,6 @@ export default async function Page({
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
   const agencys = await fetchFilteredAgency(query, currentPage);
-  console.log(searchParams);
   return (
     <div className="pb-6 flex flex-grow">
       <WrapperAgency

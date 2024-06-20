@@ -61,7 +61,7 @@ export default function WrapperAgency({
           )}
         >
           <div className="flex flex-1 justify-center items-center text-[24px] ">
-            No hay coincidencias
+            No hay coincidencias con la búsqueda: {query}
           </div>
         </div>
       </div>

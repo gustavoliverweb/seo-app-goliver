@@ -10,7 +10,7 @@ export default async function Page({
   const users = await fetchFilteredUsers(query);
   return (
     <div className="pb-6 flex flex-grow">
-      <UsersWrapper users={users} />
+      <UsersWrapper users={users} query={query} />
     </div>
   );
 }

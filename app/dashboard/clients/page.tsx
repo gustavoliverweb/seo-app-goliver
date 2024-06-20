@@ -11,12 +11,7 @@ export default async function Page({
   const query = searchParams?.query || "";
   const clients = await fetchFilteredClients(query);
   const clientsPages = await fetchClientsPages(query);
-  // console.log("clients backend");
-  // clients.map((client) => {
-  //   if (client.name === "Studex") {
-  //     console.log(client);
-  //   }
-  // });
+
   return (
     <div className="pb-6 flex flex-grow ">
       <ClientsWrapper
