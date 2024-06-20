@@ -75,16 +75,13 @@ export async function fetchAgencyPages() {
 
 export async function fetchFilteredAgency(query: string, currentPage: number) {
   noStore();
-  const offset = (currentPage - 1) * AGENCY_ITEMS_PER_PAGE;
   try {
     const agency = await sql<AgencyTemplate>`
     SELECT 
     *
     FROM agency_template
     WHERE
-    agency_template.name ILIKE ${`%${query}%`} 
-    LIMIT ${AGENCY_ITEMS_PER_PAGE} OFFSET ${offset}
-   
+    agency_template.name ILIKE ${`%${query}%`}    
     `;
     return agency.rows;
   } catch (error) {
