@@ -8,7 +8,6 @@ export default async function Page({
 }) {
   const agencyPages = await fetchAgencyPages();
   const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
   const agencys = await fetchFilteredAgency(query);
   return (
     <div className="pb-6 flex flex-grow">
