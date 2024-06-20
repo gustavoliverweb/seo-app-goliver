@@ -265,16 +265,13 @@ export async function fetchFilteredPotentialCustomers(
   currentPage: number
 ) {
   noStore();
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
   try {
     const customers = await sql<Customer>`
     SELECT 
     *
     FROM potential_customer
     WHERE
-    potential_customer.name ILIKE ${`%${query}%`} 
-    LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
-   
+    potential_customer.name ILIKE ${`%${query}%`}    
     `;
     console.log("items", customers.rows);
     return customers.rows;
