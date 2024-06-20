@@ -17,7 +17,11 @@ export default async function Page({
   console.log(searchParams);
   return (
     <div className="pb-6 flex flex-grow">
-      <WrapperAgency agencys={agencys} agencyPages={agencyPages} />
+      <WrapperAgency
+        agencys={agencys}
+        agencyPages={agencyPages}
+        query={query}
+      />
     </div>
   );
 }

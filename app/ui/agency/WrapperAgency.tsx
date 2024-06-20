@@ -11,9 +11,11 @@ import { useRouter } from "next/navigation";
 
 export default function WrapperAgency({
   agencys,
+  query,
 }: {
   agencys: AgencyTemplate[] | undefined;
   agencyPages: number;
+  query: string | undefined;
 }) {
   const { isDark, setIsModalDeleteShow } = useStore();
   const [showModal, setShowModal] = useState(false);
@@ -23,24 +25,87 @@ export default function WrapperAgency({
   });
   const router = useRouter();
   const deleteAgencyWithId = deleteAgencyTemplate.bind(null, agencyData.id);
-  // const [deleteMessage, setDeleteMessage] = useState<string>("");
-  // useEffect(() => {
-  //   if (showModal) {
-  //     (async () => {
-  //       const response = await fetch(
-  //         `/api/checkIfReportExist?id=${agencyData.id}`
-  //       );
-  //       const data = await response.json();
-  //       console.log(data);
-  //       setDeleteMessage(data.message);
-  //     })();
-  //   }
-  // }, [showModal]);
+
+  if (query && !agencys?.length) {
+    return (
+      <div className="items-start mt-6 w-full flex flex-col px-5 gap-6">
+        <div
+          className={clsx(
+            "p-5 rounded-2xl lg:flex justify-between items-center w-full transition",
+            {
+              "bg-white": !isDark,
+              "bg-dark-dark-background-panels": isDark,
+            }
+          )}
+        >
+          <h3
+            className={clsx(
+              "text-title font-medium text-primary-text-500 transition",
+              {
+                "text-primary-text-500": !isDark,
+                "text-white": isDark,
+              }
+            )}
+          >
+            Plantillas de informes
+          </h3>
+          <CreateAgency />
+        </div>
+        <div
+          className={clsx(
+            " h-max overflow-auto p-5 rounded-2xl w-full flex-grow flex flex-col justify-between transition",
+            {
+              "bg-white": !isDark,
+              "bg-dark-dark-background-panels": isDark,
+            }
+          )}
+        >
+          <div className="flex flex-1 justify-center items-center text-[24px] ">
+            No hay coincidencias
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!agencys?.length) {
     return (
-      <div className="flex flex-grow justify-center items-center">
-        No hay plantillas creadas
+      <div className="items-start mt-6 w-full flex flex-col px-5 gap-6">
+        <div
+          className={clsx(
+            "p-5 rounded-2xl lg:flex justify-between items-center w-full transition",
+            {
+              "bg-white": !isDark,
+              "bg-dark-dark-background-panels": isDark,
+            }
+          )}
+        >
+          <h3
+            className={clsx(
+              "text-title font-medium text-primary-text-500 transition",
+              {
+                "text-primary-text-500": !isDark,
+                "text-white": isDark,
+              }
+            )}
+          >
+            Plantillas de informes
+          </h3>
+          <CreateAgency />
+        </div>
+        <div
+          className={clsx(
+            " h-max overflow-auto p-5 rounded-2xl w-full flex-grow flex flex-col justify-between transition",
+            {
+              "bg-white": !isDark,
+              "bg-dark-dark-background-panels": isDark,
+            }
+          )}
+        >
+          <div className="grid place-items-center grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] grid-rows-[auto,_auto] gap-4 ">
+            No hay plantillas creadas
+          </div>
+        </div>
       </div>
     );
   }
