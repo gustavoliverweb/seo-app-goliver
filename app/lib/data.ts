@@ -73,7 +73,7 @@ export async function fetchAgencyPages() {
   }
 }
 
-export async function fetchFilteredAgency(query: string, currentPage: number) {
+export async function fetchFilteredAgency(query: string) {
   noStore();
   try {
     const agency = await sql<AgencyTemplate>`
@@ -180,8 +180,7 @@ export async function fetchClients() {
 
 export async function fetchFilteredClients(query: string) {
   noStore();
-  // const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-  // console.log(query, currentPage);
+
   try {
     const clients = await sql<Clients>`
     SELECT
@@ -193,7 +192,6 @@ export async function fetchFilteredClients(query: string) {
     agency_client.agency_name ILIKE ${`%${query}%`}
     ORDER BY clients.order_c
     `;
-    // console.log(clients.rows);
     return clients.rows;
   } catch (error) {
     console.error("Database Error:", error);
@@ -203,8 +201,7 @@ export async function fetchFilteredClients(query: string) {
 
 export async function fetchFilteredClientsTest(query: string) {
   noStore();
-  // const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-  // console.log(query, currentPage);
+
   try {
     const clients = await sql<Clients>`
     SELECT
@@ -214,9 +211,7 @@ export async function fetchFilteredClientsTest(query: string) {
     ON a_c_test.id = c_test.agency_id
     WHERE
     a_c_test.agency_name ILIKE ${`%${query}%`}
-
     `;
-    // console.log(clients.rows);
     return clients.rows;
   } catch (error) {
     console.error("Database Error:", error);
@@ -260,10 +255,7 @@ export async function fetchClientsPagesTest(query: string) {
   }
 }
 
-export async function fetchFilteredPotentialCustomers(
-  query: string,
-  currentPage: number
-) {
+export async function fetchFilteredPotentialCustomers(query: string) {
   noStore();
   try {
     const customers = await sql<Customer>`
@@ -273,7 +265,6 @@ export async function fetchFilteredPotentialCustomers(
     WHERE
     potential_customer.name ILIKE ${`%${query}%`}    
     `;
-    console.log("items", customers.rows);
     return customers.rows;
   } catch (error) {
     console.error("Database Error:", error);

@@ -1,9 +1,5 @@
 import WrapperAgency from "@/app/ui/agency/WrapperAgency";
-import {
-  fetchAgencyPages,
-  fetchAgencyTemplate,
-  fetchFilteredAgency,
-} from "@/app/lib/data";
+import { fetchAgencyPages, fetchFilteredAgency } from "@/app/lib/data";
 
 export default async function Page({
   searchParams,

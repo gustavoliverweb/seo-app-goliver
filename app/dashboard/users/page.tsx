@@ -1,5 +1,5 @@
 import UsersWrapper from "@/app/ui/users/usersWrapper";
-import { fetchFilteredUsers, fetchUsers } from "@/app/lib/data";
+import { fetchFilteredUsers } from "@/app/lib/data";
 
 export default async function Page({
   searchParams,

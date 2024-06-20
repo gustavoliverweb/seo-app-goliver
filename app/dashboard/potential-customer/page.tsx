@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import PotentialCustomerWrapper from "@/app/ui/potentialCustomer/potentialCustomerWrapper";
-import {
-  fetchFilteredPotentialCustomers,
-  fetchPotentialCustomers,
-  fetchPotentialCustomersPages,
-} from "@/app/lib/data";
+import { fetchFilteredPotentialCustomers } from "@/app/lib/data";
 //server component
 export default async function Page({
   searchParams,
@@ -14,6 +10,5 @@ export default async function Page({
   const currentPage = Number(searchParams?.page) || 1;
   const query = searchParams?.query || "";
   const customers = await fetchFilteredPotentialCustomers(query, currentPage);
-  const potentialCustomersPages = await fetchPotentialCustomersPages();
   return <PotentialCustomerWrapper customers={customers} query={query} />;
 }
