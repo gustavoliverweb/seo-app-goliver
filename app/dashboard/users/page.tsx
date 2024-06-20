@@ -1,8 +1,13 @@
 import UsersWrapper from "@/app/ui/users/usersWrapper";
-import { fetchUsers } from "@/app/lib/data";
+import { fetchFilteredUsers, fetchUsers } from "@/app/lib/data";
 
-export default async function Page() {
-  const users = await fetchUsers();
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { query: string };
+}) {
+  const query = searchParams?.query || "";
+  const users = await fetchFilteredUsers(query);
   return (
     <div className="pb-6 flex flex-grow">
       <UsersWrapper users={users} />

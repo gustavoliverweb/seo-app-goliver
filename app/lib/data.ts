@@ -313,16 +313,14 @@ export async function fetchPotentialCustomers() {
   }
 }
 
-export async function fetchFilteredUsers(query: string, currentPage: number) {
+export async function fetchFilteredUsers(query: string) {
   noStore();
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
   try {
     const data = await sql<UserType>`
       SELECT
        *
       FROM users_go
       WHERE  users_go.name ILIKE ${`%${query}%`} 
-      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
     // console.log(data.rows);
     return data.rows;
