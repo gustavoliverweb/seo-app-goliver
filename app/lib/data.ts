@@ -263,7 +263,8 @@ export async function fetchFilteredPotentialCustomers(query: string) {
     *
     FROM potential_customer
     WHERE
-    potential_customer.name ILIKE ${`%${query}%`}    
+    potential_customer.name ILIKE ${`%${query}%`}
+    ORDER BY potential_customer.position   
     `;
     return customers.rows;
   } catch (error) {
