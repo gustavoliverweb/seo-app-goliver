@@ -2,8 +2,6 @@
 "use client";
 import { Customer } from "@/app/lib/definitions";
 import { Button } from "../button";
-// import Pagination from "../pagination";
-import { PotentialCustomerCard } from "./potentialCustomerCard";
 import { PotentialCustomerCardDefault } from "./potentialCustomerCardDefault";
 import { useEffect } from "react";
 import {
@@ -12,6 +10,7 @@ import {
 } from "@/app/lib/utils";
 import { useStore } from "@/app/lib/store";
 import clsx from "clsx";
+import WrapperSortable from "./wrapperSortable";
 
 export default function PotentialCustomerWrapper({
   customers = [],
@@ -214,11 +213,7 @@ export default function PotentialCustomerWrapper({
         >
           <div className="flex flex-col gap-4 flex-1">
             {showCreateClient ? <PotentialCustomerCardDefault /> : null}
-
-            {customersData.length > 0 &&
-              customersData.map((customer: Customer) => (
-                <PotentialCustomerCard key={customer.id} customers={customer} />
-              ))}
+            <WrapperSortable itemsData={customersData} />
           </div>
           <div
             className={clsx(

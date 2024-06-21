@@ -24,12 +24,6 @@ import { useRouter } from "next/navigation";
 
 let oldIndexSet = 0;
 let newIndexSet = 0;
-const fakeObjectData = Array.from({ length: 10 }).map((_, index) => ({
-  id: `fake-${index}`,
-  name: `fake item ${index + 1}`,
-  position: index + 1,
-}));
-// console.log(fakeObjectData);
 export default function WrapperSortable({
   itemsData,
 }: {
