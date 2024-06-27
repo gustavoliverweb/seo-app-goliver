@@ -17,6 +17,7 @@ import { unstable_noStore as noStore } from "next/cache";
 
 const ITEMS_PER_PAGE = 3;
 const AGENCY_ITEMS_PER_PAGE = 6;
+const REPORTS_PER_PAGE = 20;
 
 export async function fetchAgencyTemplate() {
   noStore();
@@ -133,7 +134,9 @@ export async function fetchReportsPages() {
     FROM reports
   `;
 
-    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(
+      Number(count.rows[0].count) / REPORTS_PER_PAGE
+    );
     return totalPages;
   } catch (error) {
     console.error("Database Error:", error);
@@ -143,7 +146,7 @@ export async function fetchReportsPages() {
 
 export async function fetchFilteredReports(query: string, currentPage: number) {
   noStore();
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  const offset = (currentPage - 1) * REPORTS_PER_PAGE;
   // console.log("query", `${`%${query}%`}`);
   try {
     const reports = await sql<ReportsCardType>`
@@ -152,7 +155,8 @@ export async function fetchFilteredReports(query: string, currentPage: number) {
     FROM reports
     WHERE
     reports.name ILIKE ${`%${query}%`} 
-    LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    ORDER BY date_creation DESC, time_creation DESC
+    LIMIT ${REPORTS_PER_PAGE} OFFSET ${offset}
     `;
     return reports.rows;
   } catch (error) {
