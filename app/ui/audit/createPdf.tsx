@@ -1175,9 +1175,9 @@ export const MyDocument = ({ report }) => (
                   alignItems: "center",
                 }}
               >
-                {report?.semrush?.length > 0 && (
+                {report?.semrush_images.urls.length > 0 && (
                   <Image
-                    src={report?.semrush[0]}
+                    src={report?.semrush_images.urls[0].url}
                     style={{
                       width: "400px",
                       height: "200px",
@@ -1206,9 +1206,9 @@ export const MyDocument = ({ report }) => (
                   alignItems: "center",
                 }}
               >
-                {report?.semrush?.length > 0 && (
+                {report?.semrush_images.urls.length > 0 && (
                   <Image
-                    src={report?.semrush[1]}
+                    src={report?.semrush_images.urls[1].url}
                     style={{
                       width: "400px",
                       height: "200px",
@@ -1283,9 +1283,9 @@ export const MyDocument = ({ report }) => (
                   alignItems: "center",
                 }}
               >
-                {report?.semrush?.length > 0 && (
+                {report?.semrush_images.urls.length > 0 && (
                   <Image
-                    src={report?.semrush[2]}
+                    src={report?.semrush_images.urls[2].url}
                     style={{
                       width: "400px",
                       height: "200px",
@@ -1314,9 +1314,9 @@ export const MyDocument = ({ report }) => (
                   alignItems: "center",
                 }}
               >
-                {report?.semrush?.length > 0 && (
+                {report?.semrush_images.urls.length > 0 && (
                   <Image
-                    src={report?.semrush[3]}
+                    src={report?.semrush_images.urls[3].url}
                     style={{
                       width: "400px",
                       height: "200px",

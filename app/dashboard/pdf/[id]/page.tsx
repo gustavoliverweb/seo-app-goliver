@@ -64,27 +64,28 @@ export default function Page({ params }: { params: { id: string } }) {
         keywords: [] as string[],
         semrush: [] as string[],
       };
-      const reportName = report?.name?.trim().replace(" ", "");
+      // const reportName = report?.name?.trim().replace(" ", "");
       const whitespaceRemoved = report?.name?.replace(/\s/g, "");
       const agencyName = report?.select_template?.trim().replace(" ", "");
-      console.log(reportName);
+      // console.log(reportName);
       const resLogosImages = await fetch(
         `/api/getLogoImages?agency=${agencyName}`
       );
       const resReportsImages = await fetch(
         `/api/getAllImages?report=${whitespaceRemoved}`
       );
+
       const allImages = Promise.all([resLogosImages, resReportsImages]);
       const result = await allImages;
+
       if (result[0].ok) {
         const wordToSearch = {
           cover: "cover",
           tecnical: "tecnical",
           keywords: "keywords",
-          semrush: "semrush",
         };
         const reportImages: CloudinaryData = await result[1].json();
-        console.log(reportImages);
+
         const replaceImageFormat = (image: string) => {
           return image.replace(/\.(png|jpeg|jpg|gif)/i, ".png");
         };
@@ -98,9 +99,6 @@ export default function Page({ params }: { params: { id: string } }) {
           }
           if (image.folder.includes(wordToSearch.keywords)) {
             reportData.keywords.unshift(replaceImageFormat(image.secure_url));
-          }
-          if (image.folder.includes(wordToSearch.semrush)) {
-            reportData.semrush.push(replaceImageFormat(image.secure_url));
           }
         });
       }
