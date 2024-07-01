@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
           <div>
             <h3 className="mb-4 text-[1.438rem]">Semrush</h3>
-            <SemrushCard folderPath={report?.name} />
+            <SemrushCard folderPath={report?.name} reportId={report?.id} />
           </div>
         </div>
         <div className="relative h-max overflow-auto mt-6 bg-white p-12 md:mr-5 md:ml-5 rounded-2xl">

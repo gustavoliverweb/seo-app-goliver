@@ -24,7 +24,7 @@ export default function ReportsWrapper({
   const [reportId, setReportId] = useState("");
   const name = reports.find((report) => report.id === reportId)?.name;
   const deleteReportWithId = deleteReport.bind(null, reportId);
-
+  console.log(reports);
   if (query && reports.length === 0) {
     return (
       <div className="items-start mt-6 w-full flex flex-col px-5 gap-6">

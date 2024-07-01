@@ -119,3 +119,10 @@ export type StatePotentialCustomer = {
   label: string;
   color: string;
 };
+
+export type SemrushImages = {
+  id: string;
+  name: string;
+  url: string;
+  position: number;
+};
